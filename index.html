@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Splendid London Walks</title>
+<meta name="description" content="A private audio walking guide to go with your copy of the book.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#232B5C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Splendid Walks">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<style>
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/playfair-display-latin-500-italic.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:600;font-display:swap;src:url(fonts/playfair-display-latin-600-italic.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:700;font-display:swap;src:url(fonts/playfair-display-latin-700-italic.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/playfair-display-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Lora";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/lora-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Lora";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/lora-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Lora";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/lora-latin-600-normal.woff2) format("woff2")}
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: Rather Splendid field guide. Navy skyline banner + search row + Map|Steps switch on top; map and stop card; step bar at the bottom. */
+:root{
+  --tilefilter:sepia(.22) saturate(.85);
+  --navy:#232B5C; --navy-2:#2E3770; --navy-line:#3A4373; --on-navy:#F3EEE3; --on-navy-muted:#B9BCD3;
+  --red:#A8322D; --red-ink:#F7F1E6; --gold:#B8975A; --gold-soft:#D9C39A; --salmon:#E9A99A; --salmon-ink:#1D2240;
+  --bg:#F3EEE3; --surface:#FBF8F1; --surface-2:#EFE7D8; --ink:#1D2240; --muted:#6A6577; --line:#DED4C1;
+  --street:#FBF8F1; --block:#E9E1D0; --park:#CFD9C0; --water:#C9D5DE; --label:#8A8170; --route:#232B5C;
+  --ok:#2E6B45; --warn:#8A5A12; --focus:#A8322D; --sky-op:.42; --gold-text:#85652A; --switch-on:#3A4382; --field:#151A3E; --field-ink:#F3EEE3; --field-hint:#A9ACC8; --field-line:var(--gold);
+  --display:"Playfair Display", "Bodoni 72", Didot, Georgia, serif;
+  --body:Lora, Georgia, "Times New Roman", serif;
+  --gutter-l:max(16px, env(safe-area-inset-left,0px)); --gutter-r:max(16px, env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --tilefilter:sepia(.15) hue-rotate(-8deg) brightness(1.05);
+  --navy:#0B0E1E; --navy-2:#161A33; --navy-line:#2A3052; --on-navy:#ECE6D8; --on-navy-muted:#8E93B3;
+  --red:#D2483F; --red-ink:#120E10; --gold:#C9A96A; --gold-soft:#8C7848; --salmon:#E9A99A; --salmon-ink:#121528;
+  --bg:#121528; --surface:#1A1E36; --surface-2:#22274A; --ink:#ECE6D8; --muted:#9A9DB8; --line:#2E3458;
+  --street:#2C3354; --block:#1A1E36; --park:#1E2E28; --water:#14253A; --label:#7F86AE; --route:#C9A96A;
+  --ok:#7CC492; --warn:#E3B565; --focus:#E9A99A; --sky-op:.32; --gold-text:#C9A96A; --switch-on:#2B3266; --field:#121528; --field-ink:#ECE6D8; --field-hint:#9A9DB8; --field-line:var(--gold); color-scheme:dark }}
+:root[data-theme="dark"]{ --tilefilter:sepia(.15) hue-rotate(-8deg) brightness(1.05);
+  --navy:#0B0E1E; --navy-2:#161A33; --navy-line:#2A3052; --on-navy:#ECE6D8; --on-navy-muted:#8E93B3;
+  --red:#D2483F; --red-ink:#120E10; --gold:#C9A96A; --gold-soft:#8C7848; --salmon:#E9A99A; --salmon-ink:#121528;
+  --bg:#121528; --surface:#1A1E36; --surface-2:#22274A; --ink:#ECE6D8; --muted:#9A9DB8; --line:#2E3458;
+  --street:#2C3354; --block:#1A1E36; --park:#1E2E28; --water:#14253A; --label:#7F86AE; --route:#C9A96A;
+  --ok:#7CC492; --warn:#E3B565; --focus:#E9A99A; --sky-op:.32; --gold-text:#C9A96A; --switch-on:#2B3266; --field:#121528; --field-ink:#ECE6D8; --field-hint:#9A9DB8; --field-line:var(--gold); color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--body);font-size:15px;line-height:1.55;padding-block:0 32px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+svg.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1100px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+
+/* Header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--navy);color:var(--on-navy);box-shadow:0 4px 14px rgba(15,18,40,.18)}
+header.top .wrap{padding-block:8px 10px;display:grid;gap:8px}
+.banner{position:relative;height:clamp(82px, 22vw, 104px);border:3px solid var(--red);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 clamp(12px,3.5vw,24px)}
+.banner svg.sky{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;min-width:100%;aspect-ratio:400/60}
+.banner svg.sky rect{fill:var(--gold);opacity:var(--sky-op)}
+.banner h1{position:relative;margin:0;padding-bottom:2px;font:italic 700 clamp(21px, 6.3vw, 40px)/1.15 var(--display);letter-spacing:.04em;word-spacing:.18em;text-align:center;white-space:nowrap;text-shadow:0 1px 8px var(--navy)}
+.banner .titlewrap{position:relative;display:inline-grid;justify-items:stretch}
+.banner .rule{position:relative;height:2px;background:var(--gold);margin-top:clamp(5px,1.6vw,9px)}
+@media (min-width:720px){.banner h1{letter-spacing:.06em}}
+.row{display:flex;gap:8px;align-items:center}
+.banner{cursor:pointer}
+.banner:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.banner .titlewrap{justify-items:center}
+.banner .kick{position:relative;display:flex;align-items:center;gap:7px;margin-bottom:4px;font:700 clamp(11px,3.1vw,13px)/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#F3EEE3;text-shadow:0 1px 3px rgba(10,12,30,.9),0 0 8px rgba(10,12,30,.7)}
+.banner .kick .chev{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--red);color:#F3EEE3;border:1px solid #F3EEE3;font-size:11px;letter-spacing:0;text-shadow:none}
+.banner h1#btitle{font-size:clamp(18px,5.2vw,34px);letter-spacing:.02em;word-spacing:.1em;white-space:normal;text-wrap:balance}
+.banner .rule{justify-self:stretch}
+.north{position:absolute;left:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--gold);display:grid;place-items:center;pointer-events:none;box-shadow:0 1px 4px rgba(15,18,40,.15)}
+.north svg{position:absolute;top:2px;width:18px;height:18px}
+.north svg path{fill:var(--red)}
+.north b{position:absolute;bottom:3px;font:700 .62rem var(--body);color:var(--ink)}
+.wl{display:grid;gap:8px}
+.wl .wk{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:6px}
+.wl .wk b{font:italic 700 1.1rem var(--display)}
+.wl .wk small{color:var(--muted);font-size:.8rem;margin-top:-4px}
+.wl .pt{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--gold);border-radius:10px;background:var(--bg);color:var(--ink);text-align:left;cursor:pointer;font:inherit;min-height:48px}
+.wl .pt.on{background:var(--switch-on);color:#F3EEE3}
+.wl .pt .n{font:700 .7rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.wl .pt.on .n{color:var(--gold)}
+.wl .pt i{font:italic 600 1rem var(--display)}
+.wl .pt .m{font-size:.75rem;opacity:.8;white-space:nowrap}
+.wl .soon{color:var(--muted);font-style:italic;font-size:.9rem;border-top:1px solid var(--line);padding-top:10px}
+.search{flex:1 1 auto;position:relative;min-width:0}
+.search input{width:100%;padding:8px 38px 8px 14px;border:1px solid var(--field-line);border-radius:18px;background:var(--field);color:var(--field-ink);font-size:.92rem}
+.search input::placeholder{color:var(--field-hint)}
+.cupbtn{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:1rem;line-height:1;padding:6px;cursor:pointer;opacity:.4;filter:grayscale(.6);border-radius:6px;transition:opacity .15s}
+.cupbtn:hover,.cupbtn:focus-visible{opacity:.9;filter:none}
+.search:has(input:not(:placeholder-shown)) .cupbtn{display:none}
+.clearq{display:none;position:absolute;right:7px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--field-ink);font:600 1rem/1 var(--body);cursor:pointer;place-items:center;padding:0}
+.search:has(input:not(:placeholder-shown)) .clearq{display:grid}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.walksel{position:relative;flex:none}
+.walksel select{appearance:none;-webkit-appearance:none;background:var(--field);color:var(--on-navy);border:1px solid var(--field-line);border-radius:18px;padding:6px 28px 6px 12px;font-size:.88rem;max-width:30vw;cursor:pointer}
+.walksel select option{color:#1D2240;background:#FBF8F1}
+.walksel::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:6px;border-right:1.6px solid var(--on-navy);border-bottom:1.6px solid var(--on-navy);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.guidebtn{position:relative;flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--field-line);background:var(--field);color:var(--on-navy);display:grid;place-items:center;cursor:pointer}
+.guidebtn .dot{position:absolute;top:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--salmon);border:2px solid var(--navy)}
+.switch{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--field-line);border-radius:20px;overflow:hidden}
+@media (min-width:720px){.switch{max-width:420px}}
+.switch button + button{border-left:1px solid var(--field-line)}
+.switch svg.ic{stroke:var(--red)}
+.switch button{border:0;background:var(--field);color:var(--on-navy);padding:8px 0;font:600 .95rem var(--body);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.switch button[aria-selected="true"]{background:var(--switch-on);color:var(--field-ink)}
+.switch button[aria-selected="true"] svg.ic{stroke:var(--red)}
+.results{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;max-height:55vh;overflow:auto;box-shadow:0 10px 28px rgba(0,0,0,.2);z-index:7}
+.results button{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:9px 12px;cursor:pointer;align-items:flex-start}
+.results button:hover,.results button:focus-visible{background:var(--surface-2)}
+.results small{color:var(--muted);display:block}
+
+.badge{flex:none;display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:14px;background:var(--red);color:var(--red-ink);font:700 .8rem var(--body);font-variant-numeric:tabular-nums}
+.badge.pub{background:var(--salmon);color:var(--salmon-ink);border-radius:5px;font-style:italic;font-weight:600;border:1.5px solid var(--ink)}
+
+main{padding-block:14px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--muted);font-size:.82rem;margin-bottom:12px}
+.meta b{color:var(--ink);font:italic 600 .95rem var(--display)}
+.notice{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;color:var(--muted);font-size:.85rem}
+.sub{color:var(--muted);font-size:.84rem}
+a.coffeerow{display:flex;align-items:center;gap:9px;padding:7px 12px 7px 8px;border:1px solid var(--gold);border-radius:22px;background:var(--surface);color:var(--ink);text-decoration:none}
+a.coffeerow:hover{background:var(--surface-2)}
+a.coffeerow .cupdisc{width:26px;height:26px;border-radius:50%;background:var(--gold);display:grid;place-items:center;flex:none}
+a.coffeerow .cupdisc .ic{width:15px;height:15px;stroke:var(--navy)}
+a.coffeerow .ct{flex:1;min-width:0;font:italic 600 .98rem var(--display)}
+a.coffeerow small{color:var(--muted);font-size:.76rem}
+a.coffeerow .ic.out{width:14px;height:14px;stroke:var(--muted)}
+a.coffee{justify-self:start;font-size:.8rem;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--line)}
+a.coffee:hover{color:var(--ink)}
+
+/* Map */
+.mapgrid{display:grid;gap:16px;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+@media (max-width:820px){.mapgrid{grid-template-columns:minmax(0,1fr)}}
+.mapbox{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--block);touch-action:pan-y;aspect-ratio:4/3;max-width:100%;box-shadow:inset 0 0 0 4px var(--surface), inset 0 0 0 5px var(--gold-soft)}
+@media (max-width:820px){.mapbox{aspect-ratio:auto;height:min(34vh,290px)}.mapnote,#mapcard .cardtools{display:none}.mapgrid{gap:12px}}
+.mapbox svg#mapsvg{width:100%;height:100%;display:block;cursor:grab;user-select:none;touch-action:pan-y;-webkit-user-select:none}
+.tiles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.tiles img{position:absolute;left:0;top:0;max-width:none;transform-origin:0 0;opacity:0;transition:opacity .25s;filter:var(--tilefilter)}
+.tiles img.ok{opacity:1}
+.mapbox svg#mapsvg{position:relative}
+.mapbox.tiles-ok .sketch{display:none}
+#me .acc{fill:rgba(47,128,237,.14);stroke:rgba(47,128,237,.45);stroke-width:1;vector-effect:non-scaling-stroke}
+#me .halo{fill:#fff;opacity:.95}
+#me .core{fill:#2F80ED}
+.zoom button svg{width:20px;height:20px;fill:none;stroke:var(--red);stroke-width:2}
+#zme.on svg{stroke:#2F80ED}
+#zme.busy svg{animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.nearchip{position:absolute;left:10px;top:10px;max-width:calc(100% - 70px);border:1px solid var(--gold);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 12px;font:600 .82rem var(--body);box-shadow:0 1px 4px rgba(15,18,40,.18);cursor:pointer;text-align:left}
+.nearchip.on{background:var(--switch-on);color:#F3EEE3}
+.attrib{position:absolute;right:6px;bottom:4px;font-size:.62rem;color:var(--muted);background:color-mix(in srgb,var(--surface) 75%,transparent);padding:1px 5px;border-radius:4px}
+.attrib a{color:inherit}
+.maphint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(20,24,52,.82);color:#F3EEE3;padding:10px 16px;border-radius:20px;font-size:.9rem;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;max-width:calc(100% - 24px)}
+.maphint.on{opacity:1}
+.zoom{position:absolute;right:10px;top:10px;display:grid;gap:4px}
+.zoom button{width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);background:var(--surface);color:var(--ink);font:700 1rem var(--body);cursor:pointer;display:grid;place-items:center}
+.mapnote{font-size:.76rem;color:var(--muted);margin-top:6px;font-style:italic}
+.pin{cursor:pointer}
+.pin text{font:600 11px var(--body);pointer-events:none}
+.pin.dim{opacity:.22}
+.pin.sel circle.disc{stroke:var(--gold);stroke-width:3}
+.pin.sel rect.sign{stroke:var(--red);stroke-width:2.5}
+
+/* Stop card */
+.mapside{display:grid;gap:10px;align-content:start;min-width:0}
+.cardtools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--muted)}
+.toggle input{accent-color:var(--red)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.card h2{font:italic 700 1.5rem/1.15 var(--display);margin:0;text-wrap:balance}
+.card .head{display:flex;gap:10px;align-items:flex-start}
+.card .head .badge{margin-top:3px}
+/* How to get there: red outer frame + gold inner rule (echoes the header), directions link built in */
+.direction{border:1px solid var(--gold);outline:2px solid var(--red);outline-offset:3px;margin:4px;background:var(--bg);display:grid}
+.direction .t{padding:10px 12px;margin:0}
+.direction b{font:italic 600 1rem var(--display);color:var(--red);margin-right:4px}
+.dirlink{display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid var(--gold-soft);color:var(--ink);text-decoration:none}
+.dirlink:hover{background:var(--surface-2)}
+.dirlink .ic{stroke:var(--red);width:17px;height:17px}
+.dirlink span{flex:1;font:italic 600 .98rem var(--display)}
+.dirlink small{color:var(--muted);font-size:.76rem}
+.summary{margin:0;color:var(--ink)}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:20px;padding:8px 14px;cursor:pointer;font:600 .86rem var(--body);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.primary{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.btn.red{background:var(--switch-on);color:var(--field-ink);border-color:var(--gold)}
+.btn.small{padding:5px 12px;font-size:.8rem}
+.btn[disabled]{opacity:.4;cursor:default}
+.label{font:italic 600 .95rem var(--display);color:var(--ink)}
+textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:var(--ink);resize:vertical}
+.saved{font-size:.75rem;color:var(--ok)}
+.finish{text-align:center;font:italic 600 1.15rem var(--display);color:var(--red);margin:4px 0 0}
+/* Guide text box with Read / Listen built in (styled like the Map | Steps switch) */
+.guidebox{border:1px solid var(--gold);background:var(--bg);display:grid}
+.gbhead{display:flex;align-items:center;gap:10px;padding:9px 12px}
+.gbhead > .ic{stroke:var(--red);width:19px;height:19px}
+.gbtitle{flex:1;min-width:0}
+.gbtitle b{display:block;font:italic 600 1rem var(--display)}
+.gbtitle small{display:block;color:var(--muted);font-size:.76rem}
+.gbtitle small.live{color:var(--red)}
+.seg{display:flex;flex:none;border:1px solid var(--gold);border-radius:16px;overflow:hidden}
+.seg button{border:0;background:var(--field);color:var(--field-ink);padding:5px 11px;font:600 .8rem var(--body);display:flex;align-items:center;gap:5px;cursor:pointer}
+.seg button + button{border-left:1px solid var(--gold)}
+.seg button .ic{width:14px;height:14px;stroke:#D2483F}
+.seg button.on{background:var(--switch-on)}
+.gbbody{border-top:1px solid var(--gold-soft);padding:10px 12px;display:grid;gap:4px}
+.gbbody textarea{min-height:240px;background:var(--surface);line-height:1.6}
+.gbnote{font-size:.78rem;color:var(--muted);font-style:italic;padding:0 12px 9px;margin-top:-4px}
+
+/* Guide photos on cards */
+.bphotos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.bph{position:relative;margin:0;display:grid;gap:3px;min-width:0}
+.bph button.bphbtn{padding:0;border:0;background:var(--surface-2);cursor:zoom-in;border-radius:6px;overflow:hidden;display:block;width:100%;aspect-ratio:4/3;max-width:100%}
+.bph img{width:100%;height:100%;object-fit:cover;display:block}
+.bph figcaption{font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between;gap:6px;font-style:italic}
+.bph .rm{border:0;background:none;color:var(--muted);font-size:.72rem;cursor:pointer;padding:0;text-decoration:underline dotted}
+.light{position:fixed;inset:0;background:rgba(5,7,20,.9);display:grid;place-items:center;z-index:40;padding:max(20px,env(safe-area-inset-top,0px)) 16px max(20px,env(safe-area-inset-bottom,0px));cursor:zoom-out}
+.light img{max-height:88vh;max-width:100%;border-radius:6px}
+
+/* Steps */
+.continue{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.continue .sub{font-style:italic}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;max-width:760px}
+ol.steps li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:10px;padding:12px 10px 12px 6px;border-bottom:1px solid var(--line)}
+ol.steps li[data-act]{cursor:pointer}
+ol.steps li[data-act]:hover{background:var(--surface)}
+ol.steps li.current{background:var(--surface);box-shadow:inset 4px 0 0 var(--gold);padding-left:12px}
+.stepno{font:italic 600 1.05rem var(--display);color:var(--gold-text);font-variant-numeric:tabular-nums;padding-top:1px}
+.steps .stopline{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;row-gap:1px;align-items:center;margin-top:8px}
+.steps .stopline .cam{grid-column:2}
+.steps .stopline .stopname{font:italic 700 1.08rem var(--display)}
+.steps .gap{grid-column:1/-1;color:var(--muted);font-size:.82rem;font-style:italic}
+.cam{font-size:.75rem;color:var(--muted);font-style:italic}
+
+/* Step bar */
+.stepbar{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--navy);color:var(--on-navy);box-shadow:0 -6px 18px rgba(15,18,40,.22);
+  padding:8px var(--gutter-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gutter-l)}
+.stepbar .inner{max-width:1100px;margin:0 auto;display:grid;gap:6px}
+.track{position:relative;height:16px;margin-inline:10px}
+.track::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:var(--navy-line)}
+.track .fill{position:absolute;left:0;top:11px;height:2px;background:var(--gold);transition:width .3s}
+.track .walker{position:absolute;top:-3px;width:16px;height:18px;margin-left:-8px;color:var(--gold);transition:left .3s}
+.barrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center}
+.navbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--gold);border-radius:20px;padding:9px 16px;font:600 .95rem var(--body);cursor:pointer;min-height:42px}
+.navbtn .ic{width:17px;height:17px}
+.navbtn.back{background:var(--field);color:var(--field-ink)}
+.navbtn.back .ic{stroke:#D2483F}
+.navbtn.next{background:var(--switch-on);color:var(--field-ink);padding-inline:18px}
+.navbtn.next .ic{stroke:#D2483F}
+.navbtn[disabled]{opacity:.38;cursor:default}
+.barinfo{min-width:0;text-align:center;line-height:1.2;border:0;background:none;color:inherit;font:inherit;padding:4px 6px;border-radius:12px;cursor:pointer}
+.barinfo:hover{background:var(--navy-2)}
+.barinfo b .ic{width:15px;height:15px;stroke:#D2483F;vertical-align:-2px;margin-right:6px}
+.stepbar .barinfo b{width:fit-content;max-width:100%;margin:0 auto 3px;padding-bottom:3px;border-bottom:1.5px solid #D2483F}
+.barinfo b{display:block;font:italic 600 1.02rem var(--display)}
+.barinfo small{display:block;color:var(--on-navy-muted);font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:370px){.stepbar .wide{display:none}}
+body:has(#stepbar:not([hidden])){padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+body:has(#stepbar:not([hidden])) .toast{bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+
+/* Voice picker */
+.vlist{display:grid;gap:6px;max-height:42vh;overflow:auto}
+.vrow{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg);cursor:pointer}
+.vrow.on{border-color:var(--gold);box-shadow:inset 3px 0 0 var(--gold)}
+.vrow input{accent-color:var(--red);flex:none}
+.vrow .vn{flex:1;min-width:0}
+.vrow .vn b{display:block;font-weight:600}
+.vrow .vn small{color:var(--muted);font-size:.76rem}
+.vrow .tag{font-size:.7rem;border:1px solid var(--gold);border-radius:10px;padding:1px 7px;color:var(--gold-text);margin-left:6px;vertical-align:1px}
+.vprev{flex:none;border:1px solid var(--gold);border-radius:14px;background:var(--field);color:var(--field-ink);padding:4px 10px;font:600 .78rem var(--body);display:flex;align-items:center;gap:4px;cursor:pointer}
+.vprev .ic{width:12px;height:12px;stroke:#D2483F}
+.vspeed{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.vspeed input{accent-color:var(--red);width:100%}
+/* Audio guide box */
+.audiobox{border:1px solid var(--gold);background:var(--bg);padding:12px;display:grid;gap:8px;justify-items:center;text-align:center}
+.playbig{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gold);border-radius:28px;background:var(--field);color:var(--field-ink);padding:13px 18px;font:italic 700 1.15rem var(--display);cursor:pointer}
+.playbig .ic{width:22px;height:22px;stroke:#D2483F;fill:none}
+.playbig.on{background:var(--switch-on)}
+.playsub{font-size:.8rem;color:var(--muted)}
+.playsub.live{color:var(--red)}
+.showtext{font-size:.85rem;color:var(--ink)}
+.audiobox .gbbody{width:100%;text-align:left;border-top:1px solid var(--gold-soft);padding-top:10px;display:grid;gap:6px}
+.readtext{line-height:1.7;max-height:55vh;overflow:auto;padding-right:4px}
+.readtext span.now{background:color-mix(in srgb, var(--gold) 32%, transparent);border-radius:3px;box-shadow:0 0 0 2px color-mix(in srgb, var(--gold) 32%, transparent)}
+.editwrap textarea{min-height:240px;background:var(--surface);line-height:1.6}
+.pin .spk{display:none}
+.pin.speaking .spk{display:inline}
+ol.steps li.speaking .stopname::after{content:"  ♪";color:var(--red);font-style:normal}
+/* Now-playing strip */
+.nowbar{position:fixed;left:0;right:0;z-index:9;background:var(--navy-2);color:var(--on-navy);border-top:1px solid var(--gold);padding:6px var(--gutter-r) calc(6px + (var(--np-safe,0px))) var(--gutter-l)}
+.nowbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px}
+.nbinfo{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:0;background:none;color:inherit;text-align:left;cursor:pointer;padding:2px}
+.nbinfo .ic{width:18px;height:18px;stroke:#D2483F;flex:none}
+.nbinfo span{min-width:0}
+.nbinfo b{display:block;font:italic 600 .92rem var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nbinfo small{display:block;font-size:.72rem;color:var(--on-navy-muted)}
+.nbbtn{flex:none;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--gold);border-radius:16px;background:var(--field);color:var(--field-ink);padding:5px 11px;font:600 .8rem var(--body);cursor:pointer}
+.nbbtn .ic{width:13px;height:13px;stroke:#D2483F}
+body.has-now{padding-bottom:calc(160px + env(safe-area-inset-bottom,0px))}
+body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
+.linkbtn.mini{font-size:inherit;padding:0;color:var(--red);text-decoration:underline dotted}
+/* Your guide sheet */
+.sheetwrap{position:fixed;inset:0;z-index:30;display:grid;align-items:end;justify-items:center}
+.scrim{position:absolute;inset:0;background:rgba(10,12,30,.55)}
+.sheet{position:relative;width:min(640px,100%);max-height:88vh;overflow:auto;background:var(--bg);border-radius:18px 18px 0 0;
+  padding:10px var(--gutter-r) calc(18px + env(safe-area-inset-bottom,0px)) var(--gutter-l);animation:rise .22s ease-out}
+@keyframes rise{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 10px}
+.frame{border:2px solid var(--red);outline:1px solid var(--gold);outline-offset:4px;margin:6px;padding:14px;background:var(--surface);display:grid;gap:12px}
+.frame h2{margin:0;text-align:center;font:italic 700 1.5rem var(--display);color:var(--ink)}
+.frame > .sub{text-align:center;margin-top:-6px}
+.gitem{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+.gitem svg.ic{width:22px;height:22px;stroke:var(--red)}
+.gitem b{display:block;font-weight:600}
+.gitem .st{font-size:.82rem;color:var(--muted)}
+.gitem .st.done{color:var(--ok)}
+.gitem .st.part{color:var(--warn)}
+.gform{display:grid;gap:10px}
+.sheetfoot{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:12px}
+.nameline{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.nameline h2{min-width:0;flex:1}
+.jumpdir{position:relative;flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:none;padding:0;cursor:pointer}
+.jumpdir .ic{stroke:var(--red);width:18px;height:18px}
+.jumpdir::after{content:"";position:absolute;inset:-5px}
+.linkbtn.showtext{position:relative}
+.linkbtn.showtext::after{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:44px;transform:translateY(-50%)}
+.readtext .lead{color:var(--muted);font-style:italic}
+.detour{display:inline-block;font:600 .7rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-text);border:1px solid var(--gold);border-radius:99px;padding:3px 8px;margin:0 6px 4px 0;vertical-align:2px}
+.partline{margin:0;font:italic 600 .92rem var(--display);color:var(--gold-text);border-top:1px solid var(--gold-soft);border-bottom:1px solid var(--gold-soft);padding:6px 0}
+#steplist li.parthead{list-style:none;cursor:default;display:flex;flex-direction:column;gap:2px;background:none;border:0;padding:14px 4px 6px;font:italic 600 1.05rem var(--display);color:var(--ink)}
+#steplist li.parthead b{color:var(--red);font:600 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase}
+#steplist li.parthead i{font:italic 700 1.15rem var(--display)}
+#steplist li.parthead span{font:.8rem var(--body);color:var(--muted);font-style:normal}
+.direction.flash{animation:dirflash 1.4s ease-out}
+@keyframes dirflash{0%,30%{box-shadow:0 0 0 6px var(--gold)}100%{box-shadow:0 0 0 0 transparent}}
+.linkbtn{border:0;background:none;color:var(--red);text-decoration:underline dotted;cursor:pointer;font-size:.84rem;padding:4px}
+.pagesel{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:6px 10px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.tile{display:grid;gap:6px;min-width:0}
+.tile img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--surface-2);max-width:100%}
+.tile select{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:5px 6px;font-size:.85rem}
+.tile.skip img{opacity:.35}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:20px;z-index:45;font-size:.9rem;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+ <defs>
+  <mask id="skymask" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="60">
+   <g fill="#fff" stroke="#fff">
+    <path d="M0 60 V50 H18 V46 H30 V60Z" stroke="none"/><path d="M40 60 L52 8 L64 60Z" stroke="none"/><path d="M66 60 V48 H76 V60Z" stroke="none"/>
+    <path d="M80 60 V42 H108 V60Z M82 42 A12 12 0 0 1 106 42Z" stroke="none"/><rect x="92" y="22" width="4" height="8" stroke="none"/><path d="M94 22 V15 M91.5 17.5 H96.5" fill="none" stroke-width="1.2"/>
+    <rect x="129" y="18" width="12" height="42" stroke="none"/><path d="M127 18 L135 2 L143 18Z" stroke="none"/><path d="M141 60 V44 H150 V40 H154 V44 H168 V40 H172 V44 H178 V60Z" stroke="none"/>
+    <circle cx="208" cy="30" r="23" fill="none" stroke-width="2"/><circle cx="208" cy="30" r="2.5" stroke="none"/><path d="M208 7 V53 M185 30 H231 M192 14 L224 46 M224 14 L192 46" fill="none" stroke-width=".8"/><path d="M200 60 L208 30 L216 60" fill="none" stroke-width="2"/>
+    <g stroke="none"><circle cx="208" cy="7" r="1.8"/><circle cx="231" cy="30" r="1.8"/><circle cx="208" cy="53" r="1.8"/><circle cx="185" cy="30" r="1.8"/><circle cx="224.3" cy="13.7" r="1.8"/><circle cx="224.3" cy="46.3" r="1.8"/><circle cx="191.7" cy="13.7" r="1.8"/><circle cx="191.7" cy="46.3" r="1.8"/></g>
+    <path d="M238 60 V46 H246 V60Z" stroke="none"/><path d="M250 60 C248 36 252 18 258 12 C264 18 268 36 266 60Z" stroke="none"/>
+    <rect x="290" y="22" width="11" height="38" stroke="none"/><path d="M289 22 L295.5 12 L302 22Z" stroke="none"/><rect x="337" y="22" width="11" height="38" stroke="none"/><path d="M336 22 L342.5 12 L349 22Z" stroke="none"/>
+    <path d="M301 27 H337 M301 30 H337" fill="none" stroke-width="1.6"/><path d="M276 50 Q288 34 295 26 M342 26 Q350 34 362 50 M301 48 H337" fill="none" stroke-width="1.6"/>
+    <rect x="370" y="14" width="6" height="46" stroke="none"/><rect x="367" y="20" width="12" height="3" stroke="none"/><rect x="367" y="26" width="12" height="3" stroke="none"/><path d="M382 60 V48 H400 V60Z" stroke="none"/>
+   </g>
+   <g fill="#000" stroke="#000" stroke-width=".7">
+    <path d="M52 13 L45 60 M52 13 L59 60 M52 13 V60" fill="none"/><path d="M47 38 H57 M45.5 48 H58.5" fill="none" stroke-width=".5"/>
+    <path d="M86 30.5 Q88 36 87 42 M94 30 V42 M102 30.5 Q100 36 101 42" fill="none"/><path d="M80 45 H108" fill="none"/>
+    <path d="M84 47 V58 M88 47 V58 M92 47 V58 M96 47 V58 M100 47 V58 M104 47 V58" fill="none" stroke-width="1"/><rect x="93" y="24" width="2" height="4" stroke="none"/>
+    <circle cx="135" cy="25" r="4.4" stroke="none"/><path d="M129 20 H141 M129 31 H141 M129 44 H141" fill="none"/>
+    <path d="M132 35 V41 M135 35 V41 M138 35 V41" fill="none" stroke-width="1.1"/><path d="M131.5 48 V57 M135 48 V57 M138.5 48 V57" fill="none" stroke-width="1.1"/>
+    <path d="M145 48 V56 M149 48 V56 M153 48 V56 M157 48 V56 M161 48 V56 M165 48 V56 M169 48 V56 M173 48 V56" fill="none" stroke-width=".8"/>
+    <path d="M250 50 L264 22 M249 38 L262 14 M252 60 L266 34 M257 60 L267 46 M266 50 L252 22 M267 38 L254 14 M264 60 L250 34 M259 60 L249 46" fill="none" stroke-width=".7"/>
+    <path d="M293 32 a2.5 2.5 0 0 1 5 0 V40 H293Z M340 32 a2.5 2.5 0 0 1 5 0 V40 H340Z" stroke="none"/><path d="M292.5 60 V54 a3 3 0 0 1 6 0 V60Z M339.5 60 V54 a3 3 0 0 1 6 0 V60Z" stroke="none"/>
+    <path d="M290 24 H301 M337 24 H348 M290 44 H301 M337 44 H348" fill="none" stroke-width=".6"/><path d="M370 34 H376 M370 40 H376 M370 46 H376 M370 52 H376" fill="none" stroke-width=".6"/>
+   </g>
+   <circle cx="135" cy="25" r="3.1" fill="#fff"/>
+   <path d="M135 25 V22.6 M135 25 L136.8 25.8" fill="none" stroke="#000" stroke-width=".7" stroke-linecap="round"/>
+  </mask>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5.5c3-1.3 6-1.3 9 .5 3-1.8 6-1.8 9-.5V19c-3-1.3-6-1.3-9 .5-3-1.8-6-1.8-9-.5Z"/><path d="M12 6v13.5"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 5h1.5v3M4 8h3M4 11.5c.4-.6 1-1 1.6-1 .8 0 1.4.5 1.4 1.2 0 .9-1.3 1.6-3 2.8h3M4 17.2c.5-.4 1-.6 1.6-.6.8 0 1.3.4 1.3 1s-.5 1-1.3 1c.8 0 1.4.4 1.4 1.1 0 .6-.6 1.1-1.5 1.1-.6 0-1.1-.2-1.5-.6"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 17 5-5 4 4 3-3 4 4"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5Z"/><path d="M15 4v4h4M8 12h8M8 15.5h8M8 9h4"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></symbol>
+  <symbol id="i-voice" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4Z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+  <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5Z"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5c-.6 1 .6 1.5 0 2.5M12 3.5c-.6 1 .6 1.5 0 2.5"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-walker" viewBox="0 0 16 18"><circle cx="9.2" cy="2.3" r="1.9" fill="currentColor" stroke="none"/><path d="M8.6 5 6.8 10.2 9.3 12.6 10 17M6.8 10.2 4.6 16.8M8.6 5.4 11.6 8.4 13.4 8.6M8.2 5.6 5.4 7.4 4.4 9.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ </defs>
+</svg>
+
+<header class="top">
+ <div class="wrap">
+  <div class="banner" id="banner" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Choose a walk or part">
+   <svg class="sky" viewBox="0 0 400 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><rect width="400" height="60" mask="url(#skymask)"/></svg>
+   <div class="titlewrap"><div class="kick"><span id="bkick">Walk 1</span><span class="chev" aria-hidden="true">▾</span></div><h1 id="btitle">Splendid London Walks</h1><div class="rule"></div></div>
+  </div>
+  <div class="row">
+   <div class="search">
+    <input id="q" type="search" placeholder="Search stops, streets, people…" autocomplete="off" aria-label="Search this walk">
+    <button type="button" class="cupbtn" id="cupbtn" aria-label="Show good coffee stops" title="Good coffee on this walk">☕</button>
+    <button type="button" class="clearq" id="clearq" aria-label="Clear search">×</button>
+    <div class="results" id="results" hidden></div>
+   </div>
+   <button type="button" class="guidebtn" id="guidebtn" aria-label="Settings: guide text, photos and voice" title="Settings"><svg class="ic" style="width:20px;height:20px"><use href="#i-gear"/></svg><span class="dot" id="guidedot" hidden></span></button>
+  </div>
+  <div class="switch" role="tablist" aria-label="View">
+   <button role="tab" id="tab-map" aria-selected="true" data-view="map"><svg class="ic"><use href="#i-map"/></svg>Map</button>
+   <button role="tab" id="tab-steps" aria-selected="false" data-view="steps"><svg class="ic"><use href="#i-list"/></svg>Steps</button>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+  <section id="view-map">
+    <div class="mapgrid">
+      <div>
+        <div class="mapbox" id="mapbox">
+          <div class="tiles" id="tiles" aria-hidden="true"></div>
+          <svg id="mapsvg" role="img" aria-label="Sketch map of the walk with numbered stops"></svg>
+          <div class="maphint" id="maphint" aria-live="polite"></div>
+          <div class="north" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4 L16 15 L12 12.5 L8 15 Z"/></svg><b>N</b></div>
+          <div class="zoom">
+            <button id="zin" aria-label="Zoom in">+</button>
+            <button id="zout" aria-label="Zoom out">−</button>
+            <button id="zfit" aria-label="Show whole walk">⤢</button>
+            <button id="zme" aria-label="Show where I am"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg></button>
+          </div>
+          <button type="button" class="nearchip" id="nearchip" hidden></button>
+          <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a></div>
+        </div>
+        <div class="mapnote">Red pins are numbered stops, salmon signs are pubs, the blue dot is you. Use two fingers to move the map. “Route in Google Maps” on any stop opens turn-by-turn directions.</div>
+      </div>
+      <div id="mapcard" class="mapside"></div>
+    </div>
+  </section>
+
+  <section id="view-steps" hidden>
+    <div class="meta" id="meta"></div>
+    <div class="continue" id="continue"></div>
+    <ol class="steps" id="steplist"></ol>
+  </section>
+</main>
+
+<div class="nowbar" id="nowbar" role="region" aria-label="Now playing" hidden></div>
+<nav class="stepbar" id="stepbar" aria-label="Step navigation" hidden></nav>
+
+<div class="sheetwrap" id="walksheet" hidden>
+ <div class="scrim" data-act="closewalks"></div>
+ <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="walksheettitle">
+  <div class="grab"></div>
+  <div class="frame">
+   <h2 id="walksheettitle">Choose a walk</h2>
+   <p class="sub">Splendid London Walks · pick up at the start of any part</p>
+   <div class="wl" id="walklist"></div>
+   <div class="sheetfoot"><button class="btn small" data-act="closewalks">Done</button></div>
+  </div>
+ </section>
+</div>
+<div class="sheetwrap" id="guidesheet" hidden>
+ <div class="scrim" id="guidescrim"></div>
+ <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="guidetitle">
+  <div class="grab"></div>
+  <div class="frame">
+   <h2 id="guidetitle">Your guide</h2>
+   <p class="sub">Add your own text and photos from the chapter. They're saved only on this phone.</p>
+
+   <div class="gitem">
+    <svg class="ic"><use href="#i-text"/></svg>
+    <div><b>Guide text</b><span class="st" id="textstatus"></span></div>
+    <button class="btn small primary" id="bookbtn">Add</button>
+   </div>
+   <div id="bookform" class="gform" hidden>
+    <label class="label" for="bookpaste">Paste the whole chapter here</label>
+    <textarea id="bookpaste" style="min-height:180px" placeholder="Copy everything from your document and paste it here. The app finds each stop by its name in capitals (THE RITZ, JOHN MURRAY…) and gives each stop its part of the text."></textarea>
+    <div class="btnrow">
+     <button class="btn red" id="booksort">Sort into stops</button>
+     <button class="btn" id="bookcancel">Cancel</button>
+    </div>
+   </div>
+   <div class="notice" id="bookresult" hidden></div>
+
+   <div class="gitem">
+    <svg class="ic"><use href="#i-photo"/></svg>
+    <div><b>Guide photos</b><span class="st" id="photostatus"></span></div>
+    <button class="btn small primary" id="photobtn">Add</button>
+   </div>
+   <div id="photoform" class="gform" hidden>
+    <div class="sub">Choose a screenshot of one of the guide's photo pages (the pages with a grid of pictures). The app cuts out each picture and matches it to its stop.</div>
+    <div class="btnrow" style="align-items:center">
+     <label class="btn primary" for="photofile">Choose screenshot</label>
+     <input type="file" id="photofile" accept="image/*" hidden>
+     <label class="sub" for="photopage">Guide page</label>
+     <select id="photopage" class="pagesel"></select>
+     <button class="btn" id="photocancel">Close</button>
+    </div>
+    <div id="photomsg" class="sub"></div>
+    <div class="tiles" id="phototiles"></div>
+    <div class="btnrow" id="photoactions" hidden>
+     <button class="btn red" id="photoadd">Add to stops</button>
+    </div>
+   </div>
+
+   <div class="gitem">
+    <svg class="ic"><use href="#i-voice"/></svg>
+    <div><b>Voice</b><span class="st" id="voicestatus"></span></div>
+    <button class="btn small primary" id="voicebtn">Options</button>
+   </div>
+   <div id="voiceform" class="gform" hidden>
+    <div class="vspeed">
+     <label class="label" for="vrate">Speed</label>
+     <input type="range" id="vrate" min="0.7" max="1.3" step="0.05">
+     <span class="sub" id="vrateval"></span>
+    </div>
+    <div class="btnrow"><button type="button" class="vprev" id="vpreview" aria-label="Preview the voice"><svg class="ic"><use href="#i-play"/></svg>Preview</button></div>
+    <div class="notice" style="display:grid;gap:4px">
+     <span>Listen uses the voice set on your device. To change it:</span>
+     <span><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → English, then choose a voice under English (UK).</span>
+     <span><b>Mac:</b> System Settings → Accessibility → Spoken Content → System voice.</span>
+    </div>
+   </div>
+   <div class="gitem">
+    <svg class="ic"><use href="#i-map"/></svg>
+    <div><b>Offline map</b><span class="st" id="offstatus">Save this walk's map for when there's no signal.</span></div>
+    <button class="btn small primary" id="offbtn">Save</button>
+   </div>
+  </div>
+  <div class="sheetfoot">
+   <button class="linkbtn" id="bookclear" hidden>Remove all guide text</button>
+   <button class="linkbtn" id="photoclear" hidden>Remove all guide photos</button>
+   <button class="btn small" id="guideclose">Done</button>
+  </div>
+ </section>
+</div>
+
+<script>
+/* On-phone storage with the small document API the app was written against (doc / collection / onSnapshot).
+   Everything lives in this browser's IndexedDB; nothing is sent anywhere. */
+(function(){
+  let dbp=null;
+  const idb=()=>dbp||(dbp=new Promise((res,rej)=>{ const r=indexedDB.open('splendid-walks',1); r.onupgradeneeded=()=>r.result.createObjectStore('docs'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }));
+  const run=(mode,fn)=>idb().then(d=>new Promise((res,rej)=>{ const t=d.transaction('docs',mode), st=t.objectStore('docs'); let out; fn(st,v=>{out=v;}); t.oncomplete=()=>res(out); t.onerror=()=>rej(t.error); t.onabort=()=>rej(t.error||new Error('aborted')); }));
+  const quota=e=>{ if(e && (e.name==='QuotaExceededError' || /quota/i.test(e.message||''))){ const x=new Error('Storage is full'); x.code='quota_exceeded'; return x; } return e; };
+  const snap=(path,v)=>({id:path.split('/').pop(), exists:v!==undefined, data:()=>v, metadata:{fromCache:false}});
+  const docSubs=new Map(), colSubs=new Map();
+  const getDoc=path=>run('readonly',(st,set)=>{ const r=st.get(path); r.onsuccess=()=>set(r.result); });
+  const listCol=prefix=>run('readonly',(st,set)=>{ const out=[]; const r=st.openCursor(IDBKeyRange.bound(prefix+'/',prefix+'/￿')); r.onsuccess=()=>{ const c=r.result; if(c){ if(c.key.slice(prefix.length+1).indexOf('/')<0) out.push(snap(c.key,c.value)); c.continue(); } else set(out); }; });
+  // Each listener gets results strictly in the order the reads were started, so an older read can never overwrite a newer one.
+  function deliver(o,read){ const n=++o.asked; read().then(v=>{ if(n>o.shown){ o.shown=n; o.f(v); } },e=>o.err&&o.err(e)); }
+  function notify(path){
+    (docSubs.get(path)||[]).forEach(o=>deliver(o,()=>getDoc(path).then(v=>snap(path,v))));
+    const parent=path.slice(0,path.lastIndexOf('/'));
+    (colSubs.get(parent)||[]).forEach(o=>deliver(o,()=>listCol(parent).then(docs=>({docs}))));
+  }
+  const sub=(m,k,o)=>{ if(!m.has(k)) m.set(k,[]); m.get(k).push(o); return ()=>{ const a=m.get(k)||[]; const i=a.indexOf(o); if(i>=0) a.splice(i,1); }; };
+  const db={
+    doc(path){ return {
+      get:async()=>snap(path,await getDoc(path)),
+      set:async v=>{ try{ await run('readwrite',st=>st.put(JSON.parse(JSON.stringify(v)),path)); }catch(e){ throw quota(e); } notify(path); },
+      update:async v=>{ const cur=(await getDoc(path))||{}; await db.doc(path).set({...cur,...v}); },
+      delete:async()=>{ await run('readwrite',st=>st.delete(path)); notify(path); },
+      onSnapshot(next,err){ const o={f:next,err,asked:0,shown:0}; deliver(o,()=>getDoc(path).then(v=>snap(path,v))); return sub(docSubs,path,o); }
+    }; },
+    collection(path){ return {
+      doc:id=>db.doc(path+'/'+id),
+      get:async()=>({docs:await listCol(path)}),
+      onSnapshot(next,err){ const o={f:next,err,asked:0,shown:0}; deliver(o,()=>listCol(path).then(docs=>({docs}))); return sub(colSubs,path,o); }
+    }; }
+  };
+  try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
+  window.claude={ use: async name => name==='db' ? (window.indexedDB?db:null) : name==='user' ? {id:async()=>'me', isOwner:()=>true, canEdit:()=>true} : null };
+})();
+</script>
+<script>
+/* ---------- Walk data ---------- */
+const WALKS = [{
+  id:1,
+  title:"A Splendid Walk from St James's towards Whitehall", short:"St James's to Whitehall",
+  pages:"16–33", start:"Green Park station", end:"The Ship and Shovell, Craven Passage",
+  theme:"Old shops, gentlemen's clubs, royal St James's and Whitehall",
+  gaps:[{after:"34", text:"Pages 27–28 weren't in the screenshots. The walk picks up again at the Admiralty pub; check the book here in case there's a direction in between."},
+        {after:"40", text:"Page 30 wasn't in the screenshots (probably photos). Text continues on page 31."}],
+  stops:[
+   {k:"1",name:"The Ritz",page:16,lat:51.50708,lng:-0.14163,tags:"hotel Charlie Chaplin Arlington Street window Piccadilly",note:"Starting point by Green Park station. Charlie Chaplin waved to crowds of fans from the corner window above the sign on Arlington Street during his 1921 visit."},
+   {k:"2",name:"John Murray (50 Albemarle St)",page:16,lat:51.50798,lng:-0.14107,photo:22,tags:"publisher Byron memoirs fireplace",note:"Home of the John Murray publishing family from 1768. Lord Byron's scandalous memoirs were burnt in the fireplace upstairs."},
+   {k:"3",name:"The Albemarle Club (13 Albemarle St)",page:16,lat:51.50910,lng:-0.14185,tags:"Oscar Wilde Queensberry",note:"An early club for men and women. The Marquess of Queensberry's insulting card left here for Oscar Wilde led to Wilde's downfall."},
+   {k:"4",name:"Brown's Hotel",page:16,lat:51.50913,lng:-0.14211,tags:"hotel Alexander Graham Bell telephone Kipling Jungle Book",note:"Opened in 1837. Scene of London's first phone call; Kipling is said to have finished The Jungle Book here."},
+   {k:"5",name:"The Royal Institution",page:16,lat:51.50991,lng:-0.14251,tags:"science Faraday Christmas Lectures one-way street",note:"Founded 1799. Home of Faraday and the Christmas Lectures, and the reason for London's first one-way street."},
+   {k:"6",name:"Churchill and Roosevelt statue",page:16,lat:51.51046,lng:-0.14257,photo:22,tags:"Allies bench New Bond Street Grafton Street selfie",note:"The bench sculpture on New Bond Street. Look for the leg braces on Roosevelt."},
+   {k:"7",name:"Henry Poole & Co",page:18,lat:51.51121,lng:-0.14030,tags:"Savile Row tailor tuxedo dinner jacket",note:"Savile Row tailors credited with the dinner jacket, the 'tuxedo' in America."},
+   {k:"8",name:"Huntsman",page:18,lat:51.51090,lng:-0.14016,tags:"Savile Row tailor Kingsman film",note:"The tailor's shop used for the Kingsman films. Look out for torch snuffers outside the houses (Street Furniture Challenge)."},
+   {k:"9",name:"Apple Records (3 Savile Row)",page:18,lat:51.51047,lng:-0.13959,tags:"Beatles rooftop concert blue plaque",note:"Where the Beatles played their last live show, on the roof. Also the source of the Japanese word for a suit."},
+   {k:"10",name:"Royal Academy of Arts (Burlington Gardens)",page:18,lat:51.51008,lng:-0.14002,tags:"Burlington House University of London statues",note:"Former University of London building, lined with statues of great thinkers."},
+   {k:"11",name:"Burlington Arcade",page:18,lat:51.50996,lng:-0.14044,tags:"beadles no whistling Paul McCartney Cavendish Hancocks Swaine Adeney Brigg",note:"Early covered arcade, patrolled by beadles in top hats. Famous rule: no whistling. Look for Swaine Adeney Brigg and Hancocks inside."},
+   {k:"12",name:"Fortnum & Mason",page:18,lat:51.50837,lng:-0.13831,tags:"shop Piccadilly Scotch egg candles Easter eggs",note:"Founded 1707 by a royal footman selling used candles. Use the Duke Street St James's side entrance for the staircase."},
+   {k:"13",name:"Piccadilly Arcade",page:18,lat:51.50812,lng:-0.13895,photo:22,tags:"arcade shops",note:"Almost opposite Burlington Arcade; the author's favourite of the two."},
+   {k:"14",name:"Beau Brummell statue",page:20,lat:51.50776,lng:-0.13879,tags:"dandy Prince Regent Jermyn Street",note:"The original dandy and friend of the Prince Regent, at the Jermyn Street end of the arcade."},
+   {k:"15",name:"Boodle's (28 St James's St)",page:20,lat:51.50698,lng:-0.13930,tags:"club Ian Fleming James Bond Blades Dukes Bar Vesper martini",note:"Gentlemen's club that inspired Bond's club, Blades. Dukes Bar, said to be the home of the Vesper Martini, is just off the street."},
+   {k:"16",name:"James J. Fox (19 St James's St)",page:20,lat:51.50639,lng:-0.13889,photo:22,tags:"cigars Churchill chair museum",note:"Cigar merchants for over 200 years. Ask to see the little museum and Churchill's chair."},
+   {k:"17",name:"John Lobb",page:22,lat:51.50587,lng:-0.13842,tags:"shoes bootmaker Wellington boot",note:"Royal bootmakers; the prototype Wellington boot is kept here."},
+   {k:"18",name:"Lock & Co. Hatters",page:22,lat:51.50573,lng:-0.13822,photo:22,tags:"hats bowler Wellington Nelson Oddjob",note:"Historic hatters, said to be where the bowler hat was invented, and maker of Oddjob's hat for Goldfinger."},
+   {k:"19",name:"Pickering Place",page:22,lat:51.50566,lng:-0.13800,photo:22,tags:"square passage duel gas lamps",note:"Through the panelled passage: London's smallest square and site of its last duel. Gas lamps make it magical at night."},
+   {k:"20",name:"Berry Bros. & Rudd",page:22,lat:51.50553,lng:-0.13812,tags:"wine shop Texas Legation Titanic telegram scales",note:"London's oldest wine merchant. Look for the Texas Legation plaque, the old coffee scales and the Titanic telegram."},
+   {k:"21",name:"St James's Palace",page:22,lat:51.50478,lng:-0.13840,tags:"Tudor gatehouse Charles I palace",note:"Tudor gatehouse opposite. Charles I spent his last night here before his execution."},
+   {k:"redlion",pub:true,name:"The Red Lion (Crown Passage)",page:22,lat:51.50572,lng:-0.13772,tags:"pub drink alley",note:"Old pub in a narrow 18th-century-style alley. A good first drinks stop."},
+   {k:"22",name:"Number 79 Pall Mall",page:25,lat:51.50572,lng:-0.13599,photo:25,tags:"Nell Gwynne Charles II freehold Crown Estate",note:"The only property on the south side of Pall Mall not on Crown land, thanks to Nell Gwynne's bargaining with Charles II."},
+   {k:"23",name:"St James's Park",page:25,lat:51.50370,lng:-0.13560,photo:25,tags:"park pelicans lake ducks Birdcage Walk",note:"Royal deer park turned public park. Look for the pelicans, descendants of a 1664 gift."},
+   {k:"24",name:"George VI and the Queen Mother statues",page:25,lat:51.50516,lng:-0.13372,tags:"King's Speech statues The Mall Carlton House Terrace Nash",note:"Statues on The Mall beside John Nash's grand Carlton House Terrace."},
+   {k:"25",name:"Duke of York Column",page:25,lat:51.50615,lng:-0.13170,tags:"grand old Duke of York steps nursery rhyme",note:"The grand old Duke of York of the nursery rhyme, perched high above the steps."},
+   {k:"26",name:"Giro's grave ('Nazi dog memorial')",page:25,lat:51.50633,lng:-0.13188,photo:25,tags:"dog tombstone German Embassy Carlton House Terrace",note:"At the top of the steps on the left, behind railings under a tree: the little grave of the German ambassador's dog."},
+   {k:"27",name:"Captain Scott statue",page:26,lat:51.50690,lng:-0.13190,tags:"Waterloo Place South Pole explorer",note:"In Waterloo Place, on your right among the statues."},
+   {k:"28",name:"The Athenaeum Club",page:26,lat:51.50684,lng:-0.13264,tags:"club Waterloo Place Duke of Wellington",note:"One of a facing pair of grand clubs. Wellington was a member."},
+   {k:"29",name:"Institute of Directors",page:26,lat:51.50721,lng:-0.13190,tags:"United Service Club Wellington mounting blocks",note:"Formerly the United Service Club. Spot the mounting blocks on the kerb, put there for Wellington."},
+   {k:"30",name:"Theatre Royal Haymarket",page:26,lat:51.50853,lng:-0.13155,tags:"theatre break a leg Samuel Foote",note:"Up the road on the left; the story behind 'break a leg' is told in the book."},
+   {k:"31",name:"King George III statue",page:26,lat:51.50781,lng:-0.13052,tags:"Mad King George Cockspur Street",note:"Equestrian statue on Cockspur Street."},
+   {k:"32",name:"Trafalgar Square",page:26,lat:51.50776,lng:-0.12792,photo:25,tags:"Nelson's Column lions Landseer fourth plinth George Ryan",note:"Nelson's Column and Landseer's lions (check their paws). Look for George Ryan on the south bronze relief."},
+   {k:"33",name:"Smallest police station",page:26,lat:51.50770,lng:-0.12718,photo:25,tags:"police box lamp south-east corner",note:"The round stone box with a lamp on top, on the square's south-east corner."},
+   {k:"34",name:"National Gallery",page:26,lat:51.50893,lng:-0.12830,tags:"art museum free Mary Poppins Walt Disney",note:"Free and full of famous paintings, on the north side of the square."},
+   {k:"admiralty",pub:true,name:"The Admiralty",page:29,lat:51.50730,lng:-0.12885,tags:"pub",note:"Pub on Trafalgar Square; the route goes past it back towards The Mall."},
+   {k:"35",name:"Admiralty Citadel",page:29,lat:51.50577,lng:-0.12947,photo:25,tags:"bunker ivy Captain Cook Ministry of Defence lawn roof",note:"The ivy-covered wartime bunker to the right of Captain Cook's statue, with a lawn on its roof."},
+   {k:"36",name:"Admiralty Arch (and the nose)",page:29,lat:51.50679,lng:-0.12866,photo:32,tags:"arch nose Seven Noses of Soho Rick Buckley hotel",note:"Walk under the arch and look for the small nose poking out of the wall."},
+   {k:"37",name:"King Charles I statue",page:29,lat:51.50734,lng:-0.12765,photo:32,tags:"equestrian statue centre of London Charing Cross distances",note:"South side of Trafalgar Square. The point all distances to London are measured from."},
+   {k:"38",name:"Charing Cross Station (Eleanor Cross)",page:29,lat:51.50843,lng:-0.12530,tags:"cross Eleanor of Castile station replica",note:"A replica of the medieval Charing Cross stands outside the station."},
+   {k:"clarence",pub:true,name:"The Clarence",page:29,lat:51.50617,lng:-0.12674,tags:"pub Whitehall",note:"Pub on Whitehall at the corner of Great Scotland Yard."},
+   {k:"39",name:"Great Scotland Yard",page:29,lat:51.50631,lng:-0.12589,tags:"police Harry Potter Ministry of Magic horses",note:"Former Met Police base, and a Harry Potter filming location."},
+   {k:"40",name:"Banqueting House",page:29,lat:51.50459,lng:-0.12601,tags:"Whitehall Palace Charles I execution",note:"The only surviving part of Whitehall Palace. Charles I was executed outside in 1649."},
+   {k:"41",name:"Household Cavalry Museum (Horse Guards)",page:31,lat:51.50478,lng:-0.12705,tags:"guards horses 4pm inspection clock Horse Guards Parade",note:"Mounted guards at the entrance. Daily 4 p.m. inspection; look at the clock's 'II'."},
+   {k:"42",name:"Duke of Devonshire statue",page:31,lat:51.50486,lng:-0.12615,tags:"Horse Guards Avenue Harry Potter lavatory",note:"Down Horse Guards Avenue; a Deathly Hallows filming spot just behind it."},
+   {k:"43",name:"Ministry of Defence (Queen Mary's Steps)",page:31,lat:51.50462,lng:-0.12409,photo:32,tags:"stairs to nowhere Whitehall Palace river Queen Mary",note:"At the end by the green: an isolated flight of steps, a survivor of Whitehall Palace's river frontage."},
+   {k:"44",name:"Whitehall Gardens",page:33,lat:51.50514,lng:-0.12357,tags:"garden Bazalgette embankment",note:"Small garden on land reclaimed from the river when the Embankment was built."},
+   {k:"45",name:"Cabmen's Shelter",page:33,lat:51.50678,lng:-0.12296,tags:"green hut taxi coffee tea Embankment Place Playhouse",note:"One of London's surviving green cabmen's shelters. You can buy a takeaway tea or coffee."},
+   {k:"sherlock",pub:true,name:"The Sherlock Holmes",page:33,lat:51.50737,lng:-0.12518,photo:32,tags:"pub Northumberland Street Holmes study",note:"Pub with a recreation of Holmes's study upstairs. An alternative finish."},
+   {k:"ship",pub:true,name:"The Ship and Shovell",page:33,lat:51.50761,lng:-0.12473,photo:32,tags:"pub finish Craven Passage Cloudesley Shovell",note:"The finish line, under the arches by Charing Cross. Cheers!"}
+  ],
+  steps:[
+   {to:"1",t:"Leave Green Park station by the exit on the park side of Piccadilly and walk east, about 90 metres. The Ritz is the long arcaded building ending at Arlington Street. Before you cross, look up at the corner window above the Ritz sign."},
+   {to:"2",t:"Cross Piccadilly at the lights and walk up Albemarle Street, almost opposite the Ritz. Number 50 is about 50 metres up on your left."},
+   {to:"3",t:"Keep going up Albemarle Street, about 120 metres, until you reach Brown's Hotel on your left. Number 13 is directly opposite it, on your right. There's no sign of the club today, so look for the number on the door."},
+   {to:"4",t:"That's Brown's Hotel across the street, at number 33."},
+   {to:"5",t:"Walk on about 90 metres towards the top of the street. The Royal Institution is on your left: the building with the long row of tall columns."},
+   {to:"6",t:"At the top of Albemarle Street turn right into Grafton Street, then left into New Bond Street, about 60 metres in all. The bronze bench with Churchill and Roosevelt is right there as you turn."},
+   {to:"7",t:"Walk a few steps further along New Bond Street and turn right into Clifford Street. Follow it about 170 metres to the end, where it meets Savile Row. Henry Poole & Co, number 15, is on the corner."},
+   {to:"8",t:"Turn right down Savile Row. Huntsman, number 11, is about 35 metres along on your right."},
+   {to:"9",t:"Keep going about 60 metres to number 3, near the bottom of Savile Row on your right. Look for the blue plaque."},
+   {to:"10",t:"At the bottom of Savile Row turn right into Burlington Gardens. The grand stone building on your left, with statues along its front, is part of the Royal Academy."},
+   {to:"11",t:"Walk on about 40 metres. The entrance to Burlington Arcade is on your left. Walk all the way through it, about 180 metres, to Piccadilly. No whistling!"},
+   {to:"12",t:"Come out onto Piccadilly, cross at the nearest lights and turn left. Fortnum & Mason is about 100 metres along on that side, under its big clock. The side entrance on Duke Street St James's is the way in to see the staircase."},
+   {to:"13",t:"Turn back and walk west along Piccadilly on the same side, about 50 metres. Piccadilly Arcade is on your left, almost opposite Burlington Arcade."},
+   {to:"14",t:"Walk through Piccadilly Arcade, about 40 metres. At the far end, on Jermyn Street, is the statue of Beau Brummell."},
+   {to:"15",t:"Turn right along Jermyn Street, about 80 metres, then left at the end into St James's Street. Boodle's, number 28, is about 30 metres down on your left."},
+   {to:"16",t:"Carry on down the left-hand side of St James's Street, about 70 metres, to James J. Fox at number 19."},
+   {to:"17",t:"Keep going down towards the palace gatehouse, about 65 metres. John Lobb, the bootmaker at number 9, is on your left."},
+   {to:"18",t:"Two doors along on the left is Lock & Co. Hatters, at number 6."},
+   {to:"19",t:"A few steps further, on your left, is a narrow wood-panelled passage. Go through it into Pickering Place. You'll come back out the same way.",d:1},
+   {to:"20",t:"Come back out of the passage. Berry Bros. & Rudd, at number 3, is right beside it."},
+   {to:"21",t:"Look across the bottom of the street: St James's Palace and its Tudor gatehouse with the clock are right opposite.",v:1},
+   {to:"redlion",t:"Time for a drink. Turn left into Pall Mall and walk about 70 metres. Crown Passage, a narrow alley, is on your left, and the Red Lion is a few steps up it. You'll come back out onto Pall Mall.",d:1},
+   {to:"22",t:"Come back down Crown Passage the way you came in, towards Pall Mall, not out of the far end into King Street. On Pall Mall turn left and walk about 120 metres. Number 79 is across the road on your right. It's a plain building with no sign, so look for the number by the door."},
+   {to:"23",t:"Walk back along Pall Mall, about 100 metres, and turn left into Marlborough Road, which runs down beside the palace. Follow it about 200 metres to The Mall and turn left. St James's Park is across The Mall on your right. No need to go in: just enjoy it as you walk.",v:1},
+   {to:"24",t:"Stay on the left-hand pavement of The Mall and walk about 250 metres. The statues of George VI and the Queen Mother stand on your left, raised above the road."},
+   {to:"25",t:"Keep going about 180 metres. On your left is a very wide flight of steps with a tall column at the top: the Duke of York Column. Climb the steps."},
+   {to:"26",t:"At the top of the steps, look to your left. Behind the low railings, at the foot of a tree, is a tiny grey headstone at ground level. It's easy to miss, so look down."},
+   {to:"27",t:"Walk past the column into Waterloo Place, about 60 metres. Among the statues, Captain Scott is on your right: the figure in polar clothing holding a ski stick. Sir John Franklin faces him on the left."},
+   {to:"28",t:"Stay by Scott. The two big cream-coloured buildings on either side of this part of Waterloo Place are gentlemen's clubs. Facing Pall Mall, the one on your left, with a gold statue above its entrance, is the Athenaeum."},
+   {to:"29",t:"The one on your right is the Institute of Directors. Look for the stone mounting blocks on the kerb outside it, and on the Athenaeum side too."},
+   {to:"30",t:"Turn right along Pall Mall towards Trafalgar Square, about 100 metres, to where Haymarket goes off to the left. Look up Haymarket: the Theatre Royal, with its row of columns, is a short way up on the right.",v:1},
+   {to:"31",t:"Carry straight on along Pall Mall East, about 100 metres. King George III on his horse stands on the island where the roads meet."},
+   {to:"32",t:"Keep going about 150 metres into Trafalgar Square, with Nelson's Column in the middle."},
+   {to:"33",t:"Cross to the south-east corner of the square, the corner nearest the Strand. The tiny police box is built into the round stone lamp post there."},
+   {to:"34",t:"Turn round and look across to the north side of the square. The National Gallery fills it, up the steps beyond the fountains.",v:1},
+   {to:"admiralty",t:"Walk to the south-west corner of the square, about 150 metres. The Admiralty pub is there, just before Admiralty Arch."},
+   {to:"35",t:"Walk through Admiralty Arch onto The Mall. Ahead is the statue of Captain Cook, and beside it the ivy-covered bunker of the Admiralty Citadel. You'll come back through the arch.",d:1},
+   {to:"36",t:"Walk back towards the arch. Inside the left-hand arch as you face Trafalgar Square, about head height and a bit above, look for the small nose on the wall."},
+   {to:"37",t:"Go through the arch and cross to the island at the top of Whitehall, on the south side of Trafalgar Square. Charles I on horseback stands there."},
+   {to:"38",t:"From the statue, look east along the Strand. The tall stone spire in front of Charing Cross Station, about 200 metres away, is the replica Eleanor Cross.",v:1},
+   {to:"clarence",t:"Walk south down Whitehall on the left-hand side, about 130 metres. The Clarence pub is on the corner of Great Scotland Yard."},
+   {to:"39",t:"Turn left at the Clarence into Great Scotland Yard and walk about 60 metres."},
+   {to:"40",t:"Turn right into Scotland Place, then right again into Whitehall Place, and back out onto Whitehall. Turn left and walk about 80 metres, past Horse Guards Avenue. The Banqueting House is the pale stone building on your side."},
+   {to:"41",t:"Look across Whitehall: the mounted guards in their boxes are outside Horse Guards, home of the Household Cavalry Museum.",v:1},
+   {to:"42",t:"Walk back about 30 metres and turn right into Horse Guards Avenue, towards the river. The statue of the Duke of Devonshire is on the corner."},
+   {to:"43",t:"Continue along Horse Guards Avenue, about 150 metres, with the huge Ministry of Defence building on your right. At the end, by the green opening, find the old stone steps that lead nowhere."},
+   {to:"44",t:"Cross Horse Guards Avenue into Whitehall Gardens, the narrow park beside the Embankment."},
+   {to:"45",t:"Walk north through the gardens, about 180 metres, towards the Playhouse Theatre. The green cabmen's shelter is on your right, by Embankment Place."},
+   {to:"sherlock",t:"Walk up Craven Street towards the Strand, past Benjamin Franklin's house at number 36, then turn left into Northumberland Street. The Sherlock Holmes is a few steps along.",d:1},
+   {to:"ship",t:"Or finish, as the author does: go back to Craven Street and into Craven Passage, the narrow lane opposite. The Ship and Shovell is on both sides of it."}
+  ],
+  parts:[{from:0,title:"Mayfair and St James's",km:1.7},{from:22,title:"The Mall and Trafalgar Square",km:1.5},{from:35,title:"Whitehall to the river",km:1.6}],
+  route:[[51.50693,-0.14288],[51.50716,-0.14175],[51.5074,-0.14105],[51.508,-0.14112],[51.5091,-0.14198],[51.5099,-0.1425],[51.5103,-0.1428],[51.5105,-0.14252],[51.5107,-0.14255],[51.51128,-0.14045],[51.5109,-0.1402],[51.51045,-0.13965],[51.5103,-0.1395],[51.5101,-0.14],[51.50998,-0.14042],[51.50815,-0.13958],[51.50805,-0.1394],[51.5083,-0.1384],[51.50815,-0.13895],[51.50776,-0.13879],[51.50715,-0.13965],[51.50698,-0.1394],[51.50639,-0.13897],[51.50587,-0.1385],[51.50573,-0.13832],[51.50562,-0.13818],[51.505,-0.1385],[51.5054,-0.1378],[51.50572,-0.13772],[51.5054,-0.1378],[51.50595,-0.136],[51.5054,-0.1373],[51.50365,-0.1368],[51.505,-0.13345],[51.5058,-0.13165],[51.5063,-0.1318],[51.5069,-0.1321],[51.50705,-0.1323],[51.5075,-0.1311],[51.50781,-0.13045],[51.50835,-0.12925],[51.50776,-0.12792],[51.5077,-0.12725],[51.50775,-0.128],[51.50735,-0.1288],[51.5068,-0.12866],[51.5064,-0.1292],[51.5068,-0.12866],[51.50734,-0.12765],[51.50617,-0.1269],[51.50628,-0.126],[51.5063,-0.12575],[51.50545,-0.12565],[51.50535,-0.12665],[51.50455,-0.12645],[51.50482,-0.1264],[51.50486,-0.126],[51.5048,-0.1243],[51.50505,-0.1237],[51.5064,-0.1234],[51.50678,-0.123],[51.507,-0.1236],[51.50765,-0.1248],[51.50737,-0.12518],[51.50765,-0.1248],[51.50761,-0.12473]]
+}];
+const COMING = 19;
+/* Coffee: a quiet line on the few stops where good cafés cluster (4.5+ on Google when checked, Nov 2026). Links open live Google Maps. */
+const COFFEE = {1:{
+  "13":{t:"Good coffee right here", at:[51.5082,-0.1388]},
+  "30":{t:"Good coffee nearby", at:[51.5079,-0.1328]},
+  "34":{t:"Last good coffee before Whitehall", at:[51.5095,-0.1276]},
+  "45":{t:"Good coffee right here", at:[51.5070,-0.1229]}
+}};
+const coffeeFor = k => (COFFEE[walk.id]||{})[k];
+
+/* ---------- Background sketch streets (fitted to Google place positions, Nov 2026; simplified) ---------- */
+const STREETS = [
+ ["Piccadilly",[[51.5058,-0.1452],[51.5072,-0.1416],[51.5085,-0.1383],[51.5100,-0.1344]],4],
+ ["Albemarle St",[[51.5075,-0.1409],[51.5091,-0.1420],[51.5103,-0.1428]]],
+ ["Dover St",[[51.5072,-0.1420],[51.5100,-0.1437]]],
+ ["Old Bond St",[[51.5077,-0.1404],[51.5099,-0.1414]]],
+ ["New Bond St",[[51.5099,-0.1414],[51.5105,-0.1425],[51.5130,-0.1440]]],
+ ["Grafton St",[[51.5103,-0.1428],[51.5105,-0.1425]]],
+ ["Clifford St",[[51.5107,-0.1425],[51.5113,-0.1404]]],
+ ["Savile Row",[[51.5125,-0.1410],[51.5113,-0.1403],[51.5103,-0.1395]]],
+ ["Burlington Gdns",[[51.5103,-0.1395],[51.5099,-0.1414]]],
+ ["Burlington Arcade",[[51.5100,-0.1404],[51.5082,-0.1396]],1],
+ ["Regent St",[[51.5100,-0.1344],[51.5125,-0.1395]],3],
+ ["Jermyn St",[[51.5071,-0.1397],[51.5078,-0.1388],[51.5093,-0.1350]]],
+ ["Piccadilly Arcade",[[51.5081,-0.1390],[51.5078,-0.1388]],1],
+ ["St James's St",[[51.5076,-0.1401],[51.5064,-0.1390],[51.5057,-0.1384],[51.5049,-0.1385]],3],
+ ["Crown Passage",[[51.5054,-0.1378],[51.5062,-0.1378]],1],
+ ["Pall Mall",[[51.5049,-0.1388],[51.5054,-0.1378],[51.5060,-0.1358],[51.5069,-0.1326],[51.5075,-0.1311]],3],
+ ["Pall Mall East",[[51.5075,-0.1311],[51.5083,-0.1293]]],
+ ["Marlborough Rd",[[51.5054,-0.1373],[51.5036,-0.1368]]],
+ ["The Mall",[[51.5016,-0.1412],[51.5036,-0.1368],[51.5049,-0.1335],[51.5058,-0.1316],[51.5066,-0.1288]],4],
+ ["Waterloo Pl",[[51.5062,-0.1318],[51.5072,-0.1322],[51.5090,-0.1333]]],
+ ["Haymarket",[[51.5075,-0.1311],[51.5101,-0.1320]]],
+ ["Cockspur St",[[51.5075,-0.1311],[51.5073,-0.1289]]],
+ ["Whitehall",[[51.5073,-0.1275],[51.5061,-0.1270],[51.5047,-0.1265],[51.5020,-0.1260]],4],
+ ["Gt Scotland Yd",[[51.5061,-0.1269],[51.5064,-0.1250]]],
+ ["Scotland Pl",[[51.5063,-0.1257],[51.5054,-0.1256]],1],
+ ["Whitehall Pl",[[51.5053,-0.1267],[51.5055,-0.1240]]],
+ ["Horse Guards Ave",[[51.5048,-0.1264],[51.5049,-0.1232]]],
+ ["Northumberland Ave",[[51.5073,-0.1271],[51.5054,-0.1226]]],
+ ["Northumberland St",[[51.5070,-0.1258],[51.5077,-0.1249]],1],
+ ["Craven St",[[51.5083,-0.1259],[51.5070,-0.1235]]],
+ ["Strand",[[51.5081,-0.1268],[51.5087,-0.1253],[51.5105,-0.1215]],3],
+ ["Victoria Embankment",[[51.5010,-0.1236],[51.5049,-0.1231],[51.5075,-0.1221],[51.5095,-0.1196]],3],
+ ["Horse Guards Rd",[[51.5062,-0.1296],[51.5020,-0.1293]]]
+];
+const AREAS = [
+ ["park","Green Park",[[51.5069,-0.1430],[51.5070,-0.1414],[51.5032,-0.1405],[51.5016,-0.1412],[51.5040,-0.1475],[51.5058,-0.1452]]],
+ ["park","St James's Park",[[51.5034,-0.1366],[51.5047,-0.1334],[51.5056,-0.1316],[51.5061,-0.1297],[51.5020,-0.1295],[51.5010,-0.1340],[51.5014,-0.1410]]],
+ ["park","Whitehall Gdns",[[51.5050,-0.1239],[51.5068,-0.1236],[51.5066,-0.1228],[51.5050,-0.1232]]],
+ ["water","River Thames",[[51.5010,-0.1229],[51.5049,-0.1224],[51.5075,-0.1213],[51.5100,-0.1185],[51.5100,-0.1150],[51.5010,-0.1150]]]
+];
+
+/* ---------- Helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){return d} },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
+
+let walk = WALKS[0];
+let view = 'map';
+let selected = store.get('sel:'+walk.id, "1");
+let walkIdx = store.get('walkstep:'+walk.id, 0);
+if(walk.steps[walkIdx]) selected = walk.steps[walkIdx].to;
+let autoRead = store.get('autoread', false);
+const stopBy = k => walk.stops.find(s=>s.k===k);
+const stepFor = k => walk.steps.findIndex(s=>s.to===k);
+const label = s => s.pub ? 'P' : s.k;
+
+/* ---------- Storage (db) ---------- */
+let db=null, user=null, uid=null;
+
+/* ---------- Book text (private to the signed-in viewer) ---------- */
+let book = store.get('book:w'+1, {});   // {stopKey: text}
+const bookRef = () => (db && uid) ? db.doc(`data/users/${uid}/book-w${walk.id}`) : null;
+function loadBook(){
+  const ref=bookRef(); if(!ref){ renderAll(); return; }
+  ref.onSnapshot(snap=>{ const v=snap.exists?snap.data():null; if(v && v.sections && typeof v.sections==='object'){ book={...v.sections}; store.set('book:w'+walk.id, book); } else if(!snap.metadata.fromCache && Object.keys(book).length){ saveBook(); } renderAll(); }, ()=>{});
+}
+let bookWrite=Promise.resolve(), bookTimer=null;
+function saveBook(){
+  store.set('book:w'+walk.id, book);
+  const ref=bookRef(); if(!ref) return Promise.resolve();
+  bookWrite=bookWrite.then(()=>ref.set({sections:book, updated:Date.now()})).catch(()=>toast("Couldn't save book text to your account; it's kept on this device."));
+  return bookWrite;
+}
+const bookFor = k => (book[k]||'').trim();
+
+/* ---------- Walk progress (kept on this device and in the viewer's account) ---------- */
+const progRef = () => (db && uid) ? db.doc(`data/users/${uid}/progress-w${walk.id}`) : null;
+let progTimer=null, progReady=false;
+function saveProgress(){
+  store.set('walkstep:'+walk.id,walkIdx); store.set('sel:'+walk.id,selected); store.set('progat:'+walk.id,Date.now());
+  const ref=progRef(); if(!ref||!progReady) return;
+  clearTimeout(progTimer); progTimer=setTimeout(()=>{ ref.set({idx:walkIdx, sel:selected, at:Date.now()}).catch(()=>{}); },700);
+}
+async function loadProgress(){
+  const ref=progRef(); if(!ref){ progReady=true; return; }
+  try{ const snap=await ref.get(); const v=snap.exists?snap.data():null;
+    if(v && Number.isInteger(v.idx) && v.idx>=0 && v.idx<walk.steps.length && (v.at||0)>store.get('progat:'+walk.id,0)){
+      walkIdx=v.idx; selected=(typeof v.sel==='string' && stopBy(v.sel))?v.sel:walk.steps[v.idx].to;
+      store.set('walkstep:'+walk.id,walkIdx); store.set('sel:'+walk.id,selected); store.set('progat:'+walk.id,v.at);
+      renderAll(); try{ centerOn(selected); }catch(e){}
+    }
+  }catch(e){}
+  progReady=true;
+}
+
+/* ---------- Book photos (private to the signed-in viewer) ---------- */
+const BOOK_PHOTO_PAGES = {1:{22:["2","6","13","16","18","19"],25:["22","23","26","32","33","35"],32:["36","36","37","43","sherlock","ship"]}};
+let bphotos = {};   // {stopKey: [{src, page}]}
+const photoDocId = k => `bphoto-w${walk.id}-${k}`;
+function loadPhotos(){
+  if(!db||!uid) return;
+  db.collection(`data/users/${uid}`).onSnapshot(snap=>{
+    const next={}, pre=`bphoto-w${walk.id}-`;
+    snap.docs.forEach(d=>{ if(!d.id.startsWith(pre)) return; const v=d.data(); if(v && Array.isArray(v.imgs) && v.imgs.length) next[d.id.slice(pre.length)]=v.imgs; });
+    bphotos=next; renderAll();
+  }, ()=>{});
+}
+let photoWrite=Promise.resolve();
+function savePhotos(k){
+  if(!db||!uid){ toast("Couldn't save on this phone."); return Promise.resolve(false); }
+  const imgs=bphotos[k]||[];
+  const ref=db.doc(`data/users/${uid}/${photoDocId(k)}`);
+  photoWrite=photoWrite.then(()=> imgs.length ? ref.set({walk:walk.id, stop:k, imgs}) : ref.delete()).then(()=>true).catch(e=>{ toast(e&&e.code==='quota_exceeded'?'Storage is full.':"Couldn't save a book photo. Try again."); return false; });
+  return photoWrite;
+}
+/* Find the photo rectangles on a book photo page. Input: RGBA pixels (downscaled). Output: boxes in those pixels, reading order. */
+function detectPhotoBoxes(px, w, h){
+  const N=w*h, mask=new Uint8Array(N);
+  for(let i=0;i<N;i++){ const r=px[i*4],g=px[i*4+1],b=px[i*4+2]; mask[i] = Math.min(r,g,b) < 242 ? 1 : 0; }
+  const dil=mask;
+  const seen=new Uint8Array(N), boxes=[], raw=[], stack=new Int32Array(N);
+  for(let s=0;s<N;s++){ if(!dil[s]||seen[s]) continue;
+    let top=0; stack[top++]=s; seen[s]=1; let x0=w,y0=h,x1=0,y1=0,n=0;
+    while(top){ const p=stack[--top]; const x=p%w, y=(p/w)|0; n++;
+      if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y;
+      if(x>0){const q=p-1; if(dil[q]&&!seen[q]){seen[q]=1;stack[top++]=q;}}
+      if(x<w-1){const q=p+1; if(dil[q]&&!seen[q]){seen[q]=1;stack[top++]=q;}}
+      if(y>0){const q=p-w; if(dil[q]&&!seen[q]){seen[q]=1;stack[top++]=q;}}
+      if(y<h-1){const q=p+w; if(dil[q]&&!seen[q]){seen[q]=1;stack[top++]=q;}} }
+    raw.push({x0,y0,x1,y1,n});
+  }
+  // Merge pieces whose boxes overlap (a photo with pale patches splits into pieces that overlap).
+  let merged=true;
+  while(merged){ merged=false;
+    for(let i=0;i<raw.length && !merged;i++) for(let j=i+1;j<raw.length;j++){ const a=raw[i], c=raw[j];
+      if(a.x0<=c.x1 && c.x0<=a.x1 && a.y0<=c.y1 && c.y0<=a.y1){ raw[i]={x0:Math.min(a.x0,c.x0),y0:Math.min(a.y0,c.y0),x1:Math.max(a.x1,c.x1),y1:Math.max(a.y1,c.y1),n:a.n+c.n}; raw.splice(j,1); merged=true; break; } } }
+  // Trim mostly-white edges (the strip holding a number badge under a photo).
+  const rowFill=(y,xa,xb)=>{ let c=0; for(let x=xa;x<=xb;x++) c+=mask[y*w+x]; return c/(xb-xa+1); };
+  const colFill=(x,ya,yb)=>{ let c=0; for(let y=ya;y<=yb;y++) c+=mask[y*w+x]; return c/(yb-ya+1); };
+  for(const r of raw){
+    if(r.x1-r.x0<8 || r.y1-r.y0<8) continue;
+    while(r.y1>r.y0+4 && rowFill(r.y1,r.x0,r.x1)<0.6) r.y1--;
+    while(r.y0<r.y1-4 && rowFill(r.y0,r.x0,r.x1)<0.6) r.y0++;
+    while(r.x1>r.x0+4 && colFill(r.x1,r.y0,r.y1)<0.6) r.x1--;
+    while(r.x0<r.x1-4 && colFill(r.x0,r.y0,r.y1)<0.6) r.x0++;
+  }
+  for(const {x0,y0,x1,y1,n} of raw){
+    const bw=x1-x0+1, bh=y1-y0+1, ar=bw/bh, fill=n/(bw*bh);
+    if(bw<0.07*w || bh<0.09*h) continue;          // too small: text, badges, buttons
+    if(bw>0.6*w) continue;                          // full-width bars
+    if(ar<0.45 || ar>2.4) continue;                 // lines of text
+    if(fill<0.55) continue;                         // paragraphs of text
+    if(y0>0.84*h) continue;                         // page-preview thumbnail in the corner
+    boxes.push({x:x0+1,y:y0+1,w:bw-2,h:bh-2});
+  }
+  // Reading order: rows (by vertical overlap), then left to right.
+  boxes.sort((a,b)=>a.y-b.y);
+  const rows=[];
+  boxes.forEach(b=>{ const r=rows.find(r=>Math.abs(r[0].y-b.y)<r[0].h*0.5); r?r.push(b):rows.push([b]); });
+  return rows.flatMap(r=>r.sort((a,b)=>a.x-b.x));
+}
+
+/* Book-text splitter: shared by the page and the local test. */
+const BOOK_MARKS = {1:{
+ "1":"THE RITZ","2":"JOHN MURRAY","3":"ALBEMARLE CLUB","4":"BROWN'S","5":"ROYAL INSTITUTION","6":"ROOSEVELT",
+ "7":"HENRY POOLE","8":"HUNTSMAN","9":"APPLE RECORDS","10":"ROYAL ACADEMY OF ARTS","11":"BURLINGTON ARCADE",
+ "12":"FORTNUM & MASON","13":"PICCADILLY ARCADE","14":"BEAU BRUMMEL","15":"BOODLE'S","16":"JAMES J. FOX",
+ "17":"JOHN LOBB","18":"LOCK & CO","19":"PICKERING PLACE","20":"BERRY BROS","21":"ST JAMES'S PALACE",
+ "redlion":"Red Lion","22":"NUMBER 79","23":"ST JAMES'S PARK","24":"KING GEORGE VI","25":"DUKE OF YORK",
+ "26":"NAZI DOG MEMORIAL","27":"CAPTAIN SCOTT","28":"ATHENAEUM CLUB","29":"INSTITUTE OF DIRECTORS",
+ "30":"THEATRE ROYAL HAYMARKET","31":"KING GEORGE III","32":"TRAFALGAR SQUARE","33":"SMALLEST POLICE STATION",
+ "34":"NATIONAL GALLERY","admiralty":"Admiralty pub","35":"ADMIRALTY CITADEL","36":"ADMIRALTY ARCH",
+ "37":"KING CHARLES I","38":"CHARING CROSS STATION","clarence":"Clarence","39":"GREAT SCOTLAND YARD",
+ "40":"BANQUETING HOUSE","41":"HOUSEHOLD CAVALRY MUSEUM","42":"DUKE OF DEVONSHIRE","43":"MINISTRY OF DEFENCE",
+ "44":"WHITEHALL GARDENS","45":"CABMEN'S SHELTER","sherlock":"Sherlock Holmes","ship":"Ship and Shovell"
+}};
+const DIR_START = /^(Turn|Now|Walk|Head|Continue|Cross|Keep|Soon|Next|Just|Still|A little|At the|On your|Right opposite|Down at|Back|You|This is|Okay|Gosh|Up the|Further|Carry|Go|Quite near)\b/;
+
+function splitBook(raw, order, marks){
+  // Normalise apostrophes and spaces without changing length, so indexes match the original.
+  const text = raw.replace(/\r\n?/g, "\n");
+  const norm = text.replace(/[‘’ʼ]/g, "'").replace(/ /g, " ");
+  // Sentence / paragraph starts
+  const starts = [0];
+  const re = /(?:[.!?…]+['"”)]*|\))\s+(?=['"‘“(]?[A-Z0-9])|(?<=[a-z][.!?])(?=[A-Z][a-z])|\n+/g; let m;
+  while ((m = re.exec(norm))) { starts.push(m.index + m[0].length); if (!m[0].length) re.lastIndex++; }
+  const sentStart = pos => { let s = 0; for (const x of starts) { if (x <= pos) s = x; else break; } return s; };
+  const sentList = starts;
+  const found = {}, missing = [];
+  let from = 0;
+  for (const k of order) {
+    const mk = (marks[k] || "").replace(/[‘’]/g, "'");
+    if (!mk) { missing.push(k); continue; }
+    let i = norm.indexOf(mk, from);
+    if (i < 0) i = norm.toLowerCase().indexOf(mk.toLowerCase(), from);
+    if (i < 0) { missing.push(k); continue; }
+    found[k] = i; from = i + mk.length;
+  }
+  const keys = order.filter(k => k in found);
+  // Boundary = start of the sentence holding the marker, pulled back over short direction sentences.
+  const bounds = keys.map((k, idx) => {
+    if (idx === 0) return 0;
+    let b = sentStart(found[k]);
+    for (let n = 0; n < 3; n++) {
+      const pi = sentList.indexOf(b); if (pi <= 0) break;
+      const pb = sentList[pi - 1], prev = norm.slice(pb, b).trim();
+      if (pb <= found[keys[idx - 1]]) break;
+      if (prev.length < 170 && DIR_START.test(prev)) b = pb; else break;
+    }
+    return b;
+  });
+  for (let i = 1; i < bounds.length; i++) if (bounds[i] < bounds[i - 1]) bounds[i] = bounds[i - 1];
+  const out = {};
+  for (let i = 0; i < keys.length; i++) {
+    // stops whose boundary equals the previous one share the same passage
+    let a = i; while (a > 0 && bounds[a - 1] === bounds[i]) a--;
+    let z = i + 1; while (z < keys.length && bounds[z] === bounds[i]) z++;
+    const end = z < keys.length ? bounds[z] : text.length;
+    out[keys[i]] = text.slice(bounds[i], end).replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  return { sections: out, missing };
+}
+
+
+async function initCaps(){
+  try{
+    db = await claude.use("db");
+    user = await claude.use("user");
+    uid = user ? await user.id() : null;
+  }catch(e){ db=null; }
+  loadBook();
+  loadPhotos();
+  renderAll();
+  loadProgress();
+}
+
+
+/* ---------- Read aloud ---------- */
+let voice=null;   // always the device's own voice: we only ask for British English
+let speechRate = Number(store.get('rate', 0.98)) || 0.98;
+function pickVoice(){ voice=null; renderVoiceStatus(); }
+function renderVoiceStatus(){
+  const st=$('#voicestatus'); if(!st) return;
+  if(!('speechSynthesis' in window)){ st.textContent="Read-aloud isn't available in this browser"; st.className='st'; return; }
+  st.textContent="Your device's voice"; st.className='st done';
+}
+function renderVoiceList(){ $('#vrate').value=speechRate; $('#vrateval').textContent=speechRate.toFixed(2).replace(/0$/,'')+'×'; }
+function previewVoice(){
+  if(!('speechSynthesis' in window)) return;
+  if(audio && audio.status==='playing') pauseAudio(); else speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance("Welcome to Splendid London Walks. Our first stop is the Ritz, a few steps from Green Park station.");
+  u.lang='en-GB'; u.rate=speechRate; speechSynthesis.speak(u);
+}
+
+/* Audio guide engine: speaks in sentence-sized chunks, remembers where it got to,
+   only counts as finished when the last sentence has really been spoken, and only stops when asked. */
+let audio=null;            // {k, chunks, body:[start,count], idx, status, lastStart, endedLast, beat}
+let audioToken=0;
+let guideOn=false;         // true once Play is pressed; Next then plays the next stop
+const resumeAt={};         // stopKey -> chunk index to resume from
+function splitSentences(text){
+  const out=[]; let cur='';
+  String(text).replace(/\s+([,.;:!?])/g,'$1').split(/(?<=[.!?…])\s+/).forEach(sn=>{ if(!sn.trim()) return; if((cur+' '+sn).length>220 && cur){ out.push(cur); cur=sn; } else cur=cur?cur+' '+sn:sn; });
+  if(cur) out.push(cur);
+  return out;
+}
+/* Leading direction sentences of a stop's guide text: already spoken as the previous stop's "Next:", so not read again. */
+function leadInLen(k, bt){
+  if(!bt || stepFor(k)<=0) return 0;
+  const mk=((BOOK_MARKS[walk.id]||{})[k]||'').toLowerCase().replace(/[‘’]/g,"'");
+  // sentences, not split after initials or short abbreviations ("James J. Fox", "St. James's")
+  const sents=[]; const re=/[^.!?]+[.!?]+['"’”)]*\s*/g; let m, cur='';
+  while((m=re.exec(bt))){ cur+=m[0]; if(/(?:\b[A-Z]|\b(?:St|Mr|Mrs|Dr|Co|No))\.\s*$/.test(cur)) continue; sents.push(cur); cur=''; }
+  if(cur) sents.push(cur);
+  let len=0, n=0;
+  for(const raw of sents){ if(n>=3) break; const t=raw.replace(/[‘’]/g,"'").trim();
+    if(t.length>120 || !DIR_START.test(t) || (mk && t.toLowerCase().includes(mk))) break;
+    len+=raw.length; n++; }
+  return len>=bt.length-20 ? 0 : len;
+}
+function bookParts(k){ const bt=bookFor(k), n=leadInLen(k,bt); return {lead:bt.slice(0,n).trim(), rest:bt.slice(n).trim()}; }
+/* An earlier stop whose guide text is exactly the same passage (two stops described together). */
+function sharedWith(k){ const bt=bookFor(k), i=stepFor(k); if(!bt||i<=0) return null;
+  for(let j=i-1;j>=0;j--){ const o=walk.steps[j].to; if(o!==k && bookFor(o)===bt) return stopBy(o); } return null; }
+function buildChunks(k){
+  const s=stopBy(k), i=stepFor(k), bt=bookFor(k), sh=sharedWith(k);
+  const pt=partOf(i);
+  const chunks=[(i===pt.from && pt.n>1?`Part ${pt.n}: ${pt.title}. `:'')+(s.pub?'Pub: ':'Stop '+s.k+': ')+s.name+'.'];
+  const bodyStart=chunks.length; let body=[];
+  if(sh) chunks.push(`You heard about this with ${sh.name}, a moment ago.`);
+  else { body=splitSentences(bt ? bookParts(k).rest : s.note); chunks.push(...body); }
+  const nx=walk.steps[i+1];
+  if(nx && i===pt.to) chunks.push(`That's the end of part ${pt.n}. A good moment for a break. When you're ready, next: `+nx.t+' Press Next when you arrive.');
+  else if(nx) chunks.push('Next: '+nx.t+' Press Next when you arrive.');
+  else chunks.push("That's the end of the walk. Mine's a large one. Cheers!");
+  return {chunks, body:[bodyStart, body.length]};
+}
+function minutesFor(k){ const w=buildChunks(k).chunks.join(' ').split(/\s+/).length; return Math.max(1, Math.round(w/(165*speechRate))); }
+let wakeLock=null;
+async function keepAwake(on){
+  try{
+    if(on && !wakeLock && 'wakeLock' in navigator){ wakeLock=await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release',()=>{ wakeLock=null; }); }
+    if(!on && wakeLock){ const w=wakeLock; wakeLock=null; await w.release(); }
+  }catch(e){ wakeLock=null; }
+}
+function finishAudio(){ if(!audio) return; delete resumeAt[audio.k]; audio=null; keepAwake(false); syncAudioUI(); }
+function playFrom(i){
+  const tok=++audioToken, a=audio; a.status='playing'; a.idx=i; a.lastStart=-1; a.endedLast=false; a.beat=Date.now();
+  speechSynthesis.cancel();
+  for(let j=i;j<a.chunks.length;j++){
+    const u=new SpeechSynthesisUtterance(a.chunks[j]); if(voice) u.voice=voice; u.lang=voice?voice.lang:'en-GB'; u.rate=speechRate;
+    u.onstart=()=>{ if(tok!==audioToken) return; a.idx=j; a.lastStart=j; a.beat=Date.now(); syncAudioUI(); };
+    u.onend=()=>{ if(tok!==audioToken) return; a.beat=Date.now();
+      if(j===a.chunks.length-1 && a.lastStart===j){ a.endedLast=true; finishAudio(); } };   // genuinely finished; otherwise stay on this sentence until the next one starts
+    u.onerror=e=>{ if(tok!==audioToken) return; if(e && (e.error==='interrupted'||e.error==='canceled')) return; pauseAudio(); };
+    speechSynthesis.speak(u);
+  }
+  keepAwake(true); syncAudioUI();
+}
+function speakStop(k, withDir=true, from){
+  if(!('speechSynthesis' in window)){ toast("Read-aloud isn't supported in this browser."); return; }
+  const built=buildChunks(k,withDir);
+  const start = from!=null ? from : (resumeAt[k]||0);
+  audio={k, chunks:built.chunks, body:built.body, idx:0, status:'playing'};
+  guideOn=true;
+  playFrom(Math.min(start, built.chunks.length-1));
+}
+function pauseAudio(){
+  if(!audio) return;
+  audioToken++; speechSynthesis.cancel();
+  audio.status='paused'; resumeAt[audio.k]=audio.idx; keepAwake(false); syncAudioUI();
+}
+function resumeAudio(){ if(audio){ guideOn=true; playFrom(audio.idx); } }
+function stopSpeaking(){
+  // Full stop: silence, hide the strip, end guide mode, but remember the place.
+  if(!('speechSynthesis' in window)) return;
+  audioToken++; speechSynthesis.cancel();
+  if(audio){ resumeAt[audio.k]=audio.idx; audio=null; }
+  guideOn=false; keepAwake(false); syncAudioUI();
+}
+function startOver(k){ delete resumeAt[k]; speakStop(k, true, 0); }
+// Watchdog: if the phone goes quiet on its own, show it as paused instead of losing the strip.
+setInterval(()=>{
+  if(!audio || audio.status!=='playing' || !('speechSynthesis' in window)) return;
+  if(speechSynthesis.speaking || speechSynthesis.pending) { audio.beat=Date.now(); return; }
+  if(Date.now()-audio.beat < 1800) return;
+  if(audio.endedLast) finishAudio(); else pauseAudio();
+},1000);
+document.addEventListener('visibilitychange',()=>{ if(document.hidden && audio && audio.status==='playing') pauseAudio(); });
+function audioState(k){ if(audio && audio.k===k) return audio.status; return resumeAt[k]>0 ? 'resume' : 'idle'; }
+function pct(k){ const a=audio&&audio.k===k?audio:null; if(a) return Math.round(a.idx/a.chunks.length*100); const n=buildChunks(k).chunks.length; return Math.round((resumeAt[k]||0)/n*100); }
+function bodyIndex(k){ // which sentence of the text is (or was) being read
+  if(audio && audio.k===k){ const [st,n]=audio.body, r=audio.idx-st; return r>=0&&r<n ? r : -1; }
+  if(resumeAt[k]>0){ const [st,n]=buildChunks(k).body, r=resumeAt[k]-st; return r>=0&&r<n ? r : -1; }
+  return -1;
+}
+const openGuideText=new Set();
+function playBtnHTML(st){ return st==='playing'?'<svg class="ic"><use href="#i-pause"/></svg>Pause':(st==='paused'||st==='resume')?'<svg class="ic"><use href="#i-play"/></svg>Resume':'<svg class="ic"><use href="#i-play"/></svg>Listen'; }
+function readBtnHTML(on){ return on?'Hide the text':'Show the text'; }
+function subHTML(k){ const st=audioState(k);
+  if(st==='playing') return `Playing · ${pct(k)}%`;
+  if(st==='paused'||st==='resume') return `Paused at ${pct(k)}% · <button type="button" class="linkbtn mini" data-act="startover" data-k="${esc(k)}">Start over</button>`;
+  return `About ${minutesFor(k)} min${bookFor(k)?'':' · directions and summary'}`; }
+function textHTML(k){ const hi=bodyIndex(k), {lead,rest}=bookParts(k); return (lead?`<span class="lead">${esc(lead)}</span> `:'')+splitSentences(rest).map((c,i)=>`<span data-ci="${i}" class="${i===hi?'now':''}">${esc(c)}</span>`).join(' '); }
+function syncAudioUI(){
+  document.querySelectorAll('[data-act="listen"]').forEach(b=>{ const st=audioState(b.dataset.k); b.classList.toggle('on',st==='playing'); b.setAttribute('aria-pressed',st==='playing'); b.innerHTML=playBtnHTML(st); });
+  document.querySelectorAll('.playsub[data-k]').forEach(sm=>{ const k=sm.dataset.k; sm.classList.toggle('live',audioState(k)==='playing'); sm.innerHTML=subHTML(k); });
+  document.querySelectorAll('.readtext[data-k]').forEach(el=>{ const hi=bodyIndex(el.dataset.k); el.querySelectorAll('span[data-ci]').forEach(sp=>sp.classList.toggle('now', +sp.dataset.ci===hi)); });
+  const ak = audio ? audio.k : null;
+  svg.querySelectorAll('.pin').forEach(g=>g.classList.toggle('speaking', g.dataset.k===ak));
+  document.querySelectorAll('#steplist li').forEach(li=>li.classList.toggle('speaking', li.dataset.k===ak));
+  renderNowBar();
+}
+function renderNowBar(){
+  const nb=$('#nowbar'); if(!nb) return;
+  if(!audio){ nb.hidden=true; document.body.classList.remove('has-now'); return; }
+  const s=stopBy(audio.k), playing=audio.status==='playing';
+  nb.hidden=false; document.body.classList.add('has-now');
+  nb.innerHTML=`<div class="inner">
+    <button type="button" class="nbinfo" data-act="gotoaudio" data-k="${esc(audio.k)}"><svg class="ic"><use href="#i-voice"/></svg><span><b>${playing?'Listening':'Paused'} · ${esc(s.name)}</b><small>${pct(audio.k)}% · tap to view stop</small></span></button>
+    <button type="button" class="nbbtn" data-act="${playing?'pauseaudio':'resumeaudio'}" aria-label="${playing?'Pause':'Resume'}"><svg class="ic"><use href="#i-${playing?'pause':'play'}"/></svg>${playing?'Pause':'Resume'}</button>
+    <button type="button" class="nbbtn" data-act="stopaudio" aria-label="Stop"><svg class="ic"><use href="#i-stop"/></svg>Stop</button>
+  </div>`;
+  const bar=$('#stepbar'); nb.style.bottom = (!bar.hidden ? bar.offsetHeight : 0)+'px'; nb.style.setProperty('--np-safe', bar.hidden ? 'env(safe-area-inset-bottom, 0px)' : '0px');
+}
+
+/* ---------- Parts and the multi-stop Google Maps route ---------- */
+function partOf(i){ const ps=walk.parts||[{from:0,title:walk.title,km:0}]; let n=0; ps.forEach((p,ix)=>{ if(i>=p.from) n=ix; });
+  const p=ps[n], to=(ps[n+1]?ps[n+1].from:walk.steps.length)-1; return {...p, n:n+1, total:ps.length, to}; }
+function partMinutes(pt){ let m=Math.round((pt.km||0)*13); for(let i=pt.from;i<=pt.to;i++) m+=minutesFor(walk.steps[i].to); return Math.round(m/5)*5; }
+function routeInfo(i){ // from this stop on: up to 10 walk-to stops in this part (view-only stops left out)
+  const pt=partOf(i), pts=[]; let last=i;
+  for(let j=i;j<=pt.to && pts.length<10;j++){ const st=walk.steps[j]; if(st.v) continue; const s=stopBy(st.to); pts.push(`${s.lat},${s.lng}`); last=j; }
+  if(!pts.length){ const s=stopBy(walk.steps[i].to); pts.push(`${s.lat},${s.lng}`); }
+  const dest=pts.pop(), wps=pts.join('|');
+  const url=`https://www.google.com/maps/dir/?api=1&destination=${dest}${wps?'&waypoints='+encodeURIComponent(wps):''}&travelmode=walking`;
+  return {url, a:i+1, b:last+1, n:pts.length+1};
+}
+
+/* ---------- Stop card ---------- */
+function stopCard(k, opts={}){
+  const s=stopBy(k); if(!s) return ''; const cx=opts.ctx||'m';
+  const i=stepFor(k); const step=walk.steps[i];
+  const ri=i>=0?routeInfo(i):null, pt=i>=0?partOf(i):null;
+  return `<article class="card" data-k="${esc(k)}">
+    <div class="head"><span class="badge ${s.pub?'pub':''}">${esc(s.pub?'pub':s.k)}</span>
+      <div class="nameline"><h2>${esc(s.name)}</h2>${step?`<button type="button" class="jumpdir" data-act="jumpdir" data-k="${esc(k)}" aria-label="How to get there" title="How to get there"><svg class="ic"><use href="#i-route"/></svg></button>`:''}</div></div>
+    <p class="summary">${esc(s.note)}</p>
+    ${(()=>{ const bt=bookFor(k), open=!!bt && openGuideText.has(k), st=audioState(k);
+      return `<div class="audiobox">
+      <button type="button" class="playbig ${st==='playing'?'on':''}" data-act="listen" data-k="${esc(k)}" aria-pressed="${st==='playing'}">${playBtnHTML(st)}</button>
+      <div class="playsub ${st==='playing'?'live':''}" data-k="${esc(k)}">${subHTML(k)}</div>
+      ${bt?`<button type="button" class="linkbtn showtext" data-act="readtoggle" data-k="${esc(k)}" aria-expanded="${open}">${readBtnHTML(open)}</button>
+      <div class="gbbody" ${open?'':'hidden'}>
+        <div class="readtext" data-k="${esc(k)}">${textHTML(k)}</div>
+        <button type="button" class="linkbtn mini" data-act="edittext" data-k="${esc(k)}">Edit text</button>
+        <div class="editwrap" hidden><textarea id="${cx}-book-${esc(k)}" data-book="${esc(k)}" aria-label="Guide text for ${esc(s.name)}">${esc(bt)}</textarea><span class="saved" hidden>Saved</span></div>
+      </div>`:`<p class="gbnote">Add the guide text in Settings to hear the full story here.</p>`}
+    </div>`; })()}
+    ${(bphotos[k]||[]).length?`<div class="bphotos">${bphotos[k].map((im,ix)=>`<figure class="bph"><button class="bphbtn" data-act="bzoom" data-k="${esc(k)}" data-i="${ix}" aria-label="Enlarge guide photo"><img src="${im.src}" alt="Guide photo of ${esc(s.name)}"></button><figcaption><span>Guide photo${im.page?` · p.${im.page}`:''}</span><button class="rm" data-act="brm" data-k="${esc(k)}" data-i="${ix}">Remove</button></figcaption></figure>`).join('')}</div>`:''}
+    ${step?`<div class="direction"><p class="t">${step.d?'<span class="detour">Short detour</span> ':''}<b>How to get there ·</b>${esc(step.t)}</p><a class="dirlink" href="${ri.url}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-route"/></svg><span>Route in Google Maps</span><small>${ri.n>1?`Steps ${ri.a}–${ri.b}`:'This stop'}</small><svg class="ic" style="stroke:var(--muted);width:14px;height:14px"><use href="#i-out"/></svg></a></div>`:''}
+    ${coffeeFor(k)?`<a class="coffeerow" href="https://www.google.com/maps/search/coffee/@${coffeeFor(k).at[0]},${coffeeFor(k).at[1]},18z" target="_blank" rel="noopener"><span class="cupdisc"><svg class="ic"><use href="#i-coffee"/></svg></span><span class="ct">${esc(coffeeFor(k).t)}</span><small>Opens Maps</small><svg class="ic out"><use href="#i-out"/></svg></a>`:''}
+  </article>`;
+}
+
+/* ---------- Map ---------- */
+const svg=$('#mapsvg');
+const allPts = walk.route.concat(walk.stops.map(s=>[s.lat,s.lng]));
+/* Web Mercator, in pixels at zoom 17: the same grid map tiles use, so tiles and pins line up exactly. */
+const MW=256*2**17;
+const P = ([lat,lng]) => { const s=Math.sin(lat*Math.PI/180); return [ (lng+180)/360*MW, (0.5-Math.log((1+s)/(1-s))/(4*Math.PI))*MW ]; };
+const M_PER_UNIT = lat => 156543.03392*Math.cos(lat*Math.PI/180)/2**17;
+let fitBox, vb;
+const mapAR = () => { const r=svg.getBoundingClientRect(); return (r.width>0&&r.height>0) ? r.width/r.height : 4/3; };
+function computeFit(){
+  const xs=allPts.map(p=>P(p)[0]), ys=allPts.map(p=>P(p)[1]);
+  const pad=40; let x0=Math.min(...xs)-pad, x1=Math.max(...xs)+pad, y0=Math.min(...ys)-pad, y1=Math.max(...ys)+pad;
+  let w=x1-x0, h=y1-y0; const ar=mapAR();
+  if(w/h<ar){ const nw=h*ar; x0-=(nw-w)/2; w=nw; } else { const nh=w/ar; y0-=(nh-h)/2; h=nh; }
+  fitBox={x:x0,y:y0,w,h};
+}
+computeFit(); vb={...fitBox};
+const upp = () => vb.w / (svg.getBoundingClientRect().width || 1);   // map units per screen pixel
+function setVB(){
+  svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  const u=upp();
+  // Pins and labels keep a fixed on-screen size (about 22px pins) at every zoom.
+  svg.querySelectorAll('.pin').forEach(g=>{ const [x,y]=g.dataset.xy.split(',').map(Number); g.setAttribute('transform',`translate(${x} ${y}) scale(${u})`); });
+  svg.querySelectorAll('.slbl').forEach(t=>{ t.setAttribute('font-size',10*u); t.setAttribute('dy',-6*u); t.style.display = u>2.6 ? 'none' : ''; });
+  svg.querySelectorAll('.albl').forEach(t=>t.setAttribute('font-size',12*u));
+  updateMe(); renderMapTiles();
+}
+function pts(arr){ return arr.map(p=>P(p).join(',')).join(' '); }
+function drawMap(){
+  let h='';
+  h+=`<g class="sketch"><rect x="${fitBox.x-2000}" y="${fitBox.y-2000}" width="${fitBox.w+4000}" height="${fitBox.h+4000}" fill="var(--block)"/>`;
+  AREAS.forEach(([t,n,poly])=>{ h+=`<polygon points="${pts(poly)}" fill="var(--${t})"/>`; });
+  STREETS.forEach(([n,line,w])=>{ h+=`<polyline points="${pts(line)}" fill="none" stroke="var(--street)" stroke-width="${(w||2)*2.2}" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>`; });
+  STREETS.forEach(([n,line])=>{ const a=P(line[0]), b=P(line[line.length-1]); const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2; let ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI; if(ang>90)ang-=180; if(ang<-90)ang+=180;
+    h+=`<text x="${mx}" y="${my}" transform="rotate(${ang} ${mx} ${my})" class="slbl" text-anchor="middle" dy="-8" font-size="11" fill="var(--label)" font-family="var(--body)" letter-spacing=".5">${esc(n.toUpperCase())}</text>`; });
+  AREAS.forEach(([t,n,poly])=>{ const c=poly.map(P); const cx=c.reduce((a,p)=>a+p[0],0)/c.length, cy=c.reduce((a,p)=>a+p[1],0)/c.length; h+=`<text x="${cx}" y="${cy}" class="albl" text-anchor="middle" font-size="13" font-style="italic" fill="var(--label)" font-family="var(--display)">${esc(n)}</text>`; });
+  h+=`</g>`;
+  h+=`<polyline points="${pts(walk.route)}" fill="none" stroke="var(--route)" stroke-width="3.5" vector-effect="non-scaling-stroke" stroke-dasharray="9 6" stroke-linecap="round" stroke-linejoin="round"/>`;
+  walk.stops.forEach(s=>{ const [x,y]=P([s.lat,s.lng]);
+    h+= s.pub
+      ? `<g class="pin" data-k="${esc(s.k)}" data-xy="${x},${y}" tabindex="0" role="button" aria-label="${esc(s.name)}"><path d="M-13 -13 H13 M-9 -13 V-8 M9 -13 V-8" stroke="var(--ink)" stroke-width="1.6" fill="none"/><rect class="sign" x="-14" y="-8" width="28" height="17" rx="4" fill="var(--salmon)" stroke="var(--ink)" stroke-width="1.5"/><text y="4" text-anchor="middle" fill="var(--salmon-ink)" style="font-style:italic;font-size:10px">pub</text></g>`
+      : `<g class="pin" data-k="${esc(s.k)}" data-xy="${x},${y}" tabindex="0" role="button" aria-label="Stop ${esc(s.k)}: ${esc(s.name)}"><circle class="disc" r="12" fill="var(--red)" stroke="var(--surface)" stroke-width="2"/><text y="4" text-anchor="middle" fill="var(--red-ink)">${esc(s.k)}</text><g class="spk" transform="translate(-11.5 11.5)"><circle r="7.5" fill="var(--navy)" stroke="var(--gold)" stroke-width="1.2"/><path d="M-3.6 -1.4h1.6l2.2-1.8v6.4l-2.2-1.8h-1.6Z M1.6 -1.6a2.6 2.6 0 0 1 0 3.6" fill="none" stroke="#F3EEE3" stroke-width="1" stroke-linejoin="round"/></g>${coffeeFor(s.k)?`<g class="cupbadge" transform="translate(11.5 -11.5)"><circle r="7.5" fill="var(--gold)" stroke="var(--surface)" stroke-width="1.5"/><path d="M-3.6 -2.2 h6 v3.2 a3 3 0 0 1 -6 0 Z M2.4 -1.3 h1 a1.5 1.5 0 0 1 0 3 h-1" fill="none" stroke="var(--navy)" stroke-width="1.2" stroke-linejoin="round"/></g>`:''}</g>`;
+  });
+  h+=`<g id="me" hidden><circle class="acc" r="10"/><g class="medot"><circle r="11" class="halo"/><circle r="7" class="core"/></g></g>`;
+  svg.innerHTML=h; setVB(); markPins();
+}
+function markPins(filter){
+  svg.querySelectorAll('.pin').forEach(g=>{ g.classList.toggle('sel',g.dataset.k===selected); g.classList.toggle('dim', !!filter && !filter.has(g.dataset.k)); });
+  const sel=svg.querySelector('.pin.sel'); if(sel) sel.parentNode.appendChild(sel);
+}
+function tapAt(clientX,clientY){
+  const [sx,sy]=(()=>{ const r=svg.getBoundingClientRect(); return [vb.x+(clientX-r.left)/r.width*vb.w, vb.y+(clientY-r.top)/r.height*vb.h]; })();
+  const u=upp(), reach=16*u;
+  const near=walk.stops.map(s=>{ const [x,y]=P([s.lat,s.lng]); return {s,d:Math.hypot(x-sx,y-sy)}; }).filter(o=>o.d<=reach).sort((a,b)=>a.d-b.d);
+  if(!near.length) return;
+  const crowded = near.filter(o=>o.d<=reach).length>1 && near[1].d - near[0].d < 10*u && u>0.9;
+  if(crowded){ zoomAt(2.6,sx,sy); toast('Zoomed in. Tap a number.'); return; }
+  selectStop(near[0].s.k); revealCard();
+}
+function zoomAt(f,cx,cy){ const nw=Math.min(fitBox.w*1.6,Math.max(fitBox.w/12,vb.w/f)); const k=nw/vb.w; if(cx==null){cx=vb.x+vb.w/2;cy=vb.y+vb.h/2;} vb={x:cx-(cx-vb.x)*k,y:cy-(cy-vb.y)*k,w:nw,h:nw/mapAR()}; setVB(); }
+function centerOn(k,zoom=3){ const s=stopBy(k); if(!s) return; const [x,y]=P([s.lat,s.lng]); const w=Math.min(vb.w,fitBox.w/zoom), h=w/mapAR(); vb={x:x-w/2,y:y-h/2,w,h}; setVB(); }
+$('#zin').onclick=()=>zoomAt(1.5); $('#zout').onclick=()=>zoomAt(1/1.5); $('#zfit').onclick=()=>{ computeFit(); vb={...fitBox}; setVB(); };
+if('ResizeObserver' in window){ let lastW=0; new ResizeObserver(()=>{ const r=svg.getBoundingClientRect(); if(!r.width||Math.abs(r.width-lastW)<1) return; const fresh=!lastW; lastW=r.width; const cx=vb.x+vb.w/2, cy=vb.y+vb.h/2, frac=vb.w/fitBox.w; computeFit(); if(fresh){ vb={...fitBox}; if(window.innerWidth<=820){ setVB(); centerOn(selected,2.4); return; } } else { const w=fitBox.w*frac, h=w/mapAR(); vb={x:cx-w/2,y:cy-h/2,w,h}; } setVB(); }).observe(svg); }
+(function panzoom(){
+  const toSvg=(cx,cy)=>{ const r=svg.getBoundingClientRect(); return [vb.x+(cx-r.left)/r.width*vb.w, vb.y+(cy-r.top)/r.height*vb.h]; };
+  const isMac=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);
+  let hintTimer=null;
+  function hint(msg){ const h=$('#maphint'); h.textContent=msg; h.classList.add('on'); clearTimeout(hintTimer); hintTimer=setTimeout(()=>h.classList.remove('on'),1600); }
+
+  /* Mouse and pen: drag to move, click to pick a pin. Touch is handled separately below. */
+  let mStart=null, mMoved=false;
+  svg.addEventListener('pointerdown',e=>{ if(e.pointerType==='touch') return; try{ svg.setPointerCapture(e.pointerId); }catch(_){} mStart={x:e.clientX,y:e.clientY,vb:{...vb}}; mMoved=false; });
+  svg.addEventListener('pointermove',e=>{ if(e.pointerType==='touch'||!mStart) return; const r=svg.getBoundingClientRect();
+    const dx=e.clientX-mStart.x, dy=e.clientY-mStart.y; if(Math.abs(dx)+Math.abs(dy)>4) mMoved=true;
+    if(mMoved){ vb={...mStart.vb,x:mStart.vb.x-dx/r.width*mStart.vb.w,y:mStart.vb.y-dy/r.height*mStart.vb.h}; setVB(); } });
+  svg.addEventListener('pointerup',e=>{ if(e.pointerType==='touch'||!mStart) return; const wasMove=mMoved; mStart=null; if(!wasMove) tapAt(e.clientX,e.clientY); });
+  svg.addEventListener('pointercancel',e=>{ if(e.pointerType!=='touch') mStart=null; });
+
+  /* Scroll wheel scrolls the page; Ctrl/⌘ + wheel (or a trackpad pinch) zooms the map. */
+  svg.addEventListener('wheel',e=>{
+    if(!(e.ctrlKey||e.metaKey)){ hint(isMac?'Hold ⌘ and scroll to zoom the map':'Hold Ctrl and scroll to zoom the map'); return; }
+    e.preventDefault(); const [cx,cy]=toSvg(e.clientX,e.clientY); zoomAt(Math.exp(-e.deltaY*0.0025),cx,cy);
+  },{passive:false});
+
+  /* Touch: one finger scrolls the page (and taps pins); two fingers move and zoom the map. */
+  let t0=null, two=null, hinted=false;
+  const mid=(a,b)=>[(a.clientX+b.clientX)/2,(a.clientY+b.clientY)/2], dist=(a,b)=>Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
+  svg.addEventListener('touchstart',e=>{
+    if(e.touches.length===1){ const t=e.touches[0]; t0={x:t.clientX,y:t.clientY,time:Date.now(),moved:false}; two=null; hinted=false; }
+    else if(e.touches.length===2){ e.preventDefault(); t0=null; const [a,b]=e.touches; two={m:mid(a,b),d:dist(a,b),vb:{...vb}}; }
+  },{passive:false});
+  svg.addEventListener('touchmove',e=>{
+    if(e.touches.length>=2 && two){ e.preventDefault(); const [a,b]=e.touches, r=svg.getBoundingClientRect();
+      const m=mid(a,b), d=dist(a,b);
+      vb={...two.vb}; const [cx,cy]=toSvg(two.m[0],two.m[1]); zoomAt(d/two.d,cx,cy);
+      vb.x-=(m[0]-two.m[0])/r.width*vb.w; vb.y-=(m[1]-two.m[1])/r.height*vb.h; setVB(); return; }
+    if(e.touches.length===1 && t0){ const t=e.touches[0], dx=t.clientX-t0.x, dy=t.clientY-t0.y;
+      if(Math.abs(dx)+Math.abs(dy)>8) t0.moved=true;
+      if(!hinted && Math.abs(dx)>14 && Math.abs(dx)>Math.abs(dy)*1.5){ hinted=true; hint('Use two fingers to move the map'); } }
+  },{passive:false});
+  svg.addEventListener('touchend',e=>{
+    if(two && e.touches.length<2){ two=null; t0=null; return; }
+    if(t0 && e.touches.length===0){ const ch=e.changedTouches[0]; const quick=Date.now()-t0.time<600;
+      if(!t0.moved && quick){ e.preventDefault(); tapAt(ch.clientX,ch.clientY); } t0=null; }
+  },{passive:false});
+  svg.addEventListener('touchcancel',()=>{ t0=null; two=null; });
+
+  svg.addEventListener('keydown',e=>{ const g=e.target.closest('.pin'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); selectStop(g.dataset.k); revealCard(); } });
+})();
+
+/* ---------- Street map tiles (CARTO basemaps from OpenStreetMap data) ---------- */
+const mapbox=$('#mapbox'), tileLayer=$('#tiles'), tileImgs=new Map();
+const darkNow=()=>{ const t=document.documentElement.dataset.theme; return t ? t==='dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
+const tileStyle=()=>darkNow()?'dark_all':'light_all';
+const tileURL=(z,x,y)=>`https://${'abcd'[(x+y)%4]}.basemaps.cartocdn.com/${tileStyle()}/${z}/${x}/${y}@2x.png`;
+let tileRAF=0;
+function renderMapTiles(){ if(tileRAF) return; tileRAF=requestAnimationFrame(()=>{ tileRAF=0; drawMapTiles(); }); }
+function drawMapTiles(){
+  const r=svg.getBoundingClientRect(); if(!r.width||!vb) return;
+  const sc=r.width/vb.w; let z=Math.round(17+Math.log2(sc)); z=Math.max(12,Math.min(19,z));
+  const ts=256*2**(17-z), want=new Set(), n=2**z;
+  const x0=Math.floor(vb.x/ts), x1=Math.floor((vb.x+vb.w)/ts), y0=Math.floor(vb.y/ts), y1=Math.floor((vb.y+vb.h)/ts);
+  let pending=0;
+  for(let x=x0;x<=x1;x++) for(let y=y0;y<=y1;y++){ if(x<0||y<0||x>=n||y>=n) continue;
+    const key=`${tileStyle()}/${z}/${x}/${y}`; want.add(key); let im=tileImgs.get(key);
+    if(!im){ im=new Image(); im.alt=''; im.draggable=false; im.decoding='async'; im.dataset.z=z;
+      im.onload=()=>{ im.classList.add('ok'); mapbox.classList.add('tiles-ok'); renderMapTiles(); };
+      im.onerror=()=>{ im.dataset.bad='1'; };
+      im.src=tileURL(z,x,y); tileImgs.set(key,im); tileLayer.appendChild(im); }
+    if(!im.classList.contains('ok') && !im.dataset.bad) pending++;
+    im.style.zIndex=2;
+  }
+  for(const [key,im] of tileImgs){
+    const [st,zz,xx,yy]=key.split('/'), z2=+zz, t2=256*2**(17-z2);
+    if(!want.has(key) && (pending===0 || z2===z || st!==tileStyle())){ im.remove(); tileImgs.delete(key); continue; }
+    if(!want.has(key)) im.style.zIndex=1;
+    im.style.transform=`translate(${(+xx*t2-vb.x)*sc}px,${(+yy*t2-vb.y)*sc}px)`;
+    im.style.width=im.style.height=`${t2*sc+0.6}px`;
+  }
+}
+try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ for(const im of tileImgs.values()) im.remove(); tileImgs.clear(); renderMapTiles(); }); }catch(e){}
+
+/* ---------- Where am I (the blue dot) ---------- */
+let me=null, meWatch=null, follow=false;
+const toRad=d=>d*Math.PI/180;
+function distM(a,b){ const R=6371000, dLat=toRad(b.lat-a.lat), dLng=toRad(b.lng-a.lng); const x=Math.sin(dLat/2)**2+Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLng/2)**2; return 2*R*Math.asin(Math.sqrt(x)); }
+function updateMe(){
+  const g=svg.querySelector('#me'); if(!g) return;
+  if(!me){ g.setAttribute('hidden',''); return; }
+  g.removeAttribute('hidden'); const [x,y]=P([me.lat,me.lng]), u=upp();
+  g.querySelector('.medot').setAttribute('transform',`translate(${x} ${y}) scale(${u})`);
+  const acc=g.querySelector('.acc'); acc.setAttribute('cx',x); acc.setAttribute('cy',y); acc.setAttribute('r',Math.max(me.acc,5)/M_PER_UNIT(me.lat));
+  g.parentNode.appendChild(g);
+}
+function nearText(){
+  if(!me) return null;
+  const cur=stopBy(walk.steps[walkIdx].to), nxS=walk.steps[walkIdx+1], nxt=nxS&&stopBy(nxS.to);
+  const tol=Math.max(20,Math.min(me.acc||20,40)), dc=distM(me,cur), dn=nxt?distM(me,nxt):Infinity;
+  const nm=s=>s.pub?s.name:`stop ${s.k}`;
+  if(me.acc>120) return {t:`Finding you… (±${Math.round(me.acc)} m)`};
+  if(nxt && dn<=tol && dn<dc) return {t:`You're at ${nm(nxt)} · tap for Next`, act:'next', on:true};
+  if(dc<=tol) return {t:`You're at ${nm(cur)}`, on:true};
+  const m=dc<1000?`${Math.round(dc/10)*10} m`:`${(dc/1000).toFixed(1)} km`;
+  return {t:`${nm(cur).replace(/^s/,'S')} is ${m} away`};
+}
+function renderNear(){ const c=$('#nearchip'), n=nearText(); if(!n){ c.hidden=true; return; } c.hidden=false; c.textContent=n.t; c.classList.toggle('on',!!n.on); c.dataset.act=n.act||''; }
+$('#nearchip').onclick=()=>{ if($('#nearchip').dataset.act==='next') goStep(1); else if(me){ follow=true; centerOnMe(); } };
+function centerOnMe(){ if(!me) return; const [x,y]=P([me.lat,me.lng]); vb={...vb,x:x-vb.w/2,y:y-vb.h/2}; setVB(); }
+function startLocating(centre){
+  if(!('geolocation' in navigator)){ toast("This phone can't share its location here."); return; }
+  if(centre) follow=true;
+  if(meWatch!=null){ if(centre) centerOnMe(); return; }
+  $('#zme').classList.add('busy');
+  meWatch=navigator.geolocation.watchPosition(p=>{
+    const first=!me; me={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy||50};
+    $('#zme').classList.remove('busy'); $('#zme').classList.add('on'); try{ localStorage.setItem('loc-ok','1'); }catch(e){}
+    updateMe(); renderNear(); if(follow||(first&&centre)) centerOnMe();
+  },err=>{ $('#zme').classList.remove('busy'); navigator.geolocation.clearWatch(meWatch); meWatch=null;
+    toast(err.code===1?'Location is off for this site. Turn it on in Settings › Privacy › Location Services › Safari Websites.':"Couldn't find your location just now."); },
+  {enableHighAccuracy:true, maximumAge:5000, timeout:20000});
+}
+$('#zme').onclick=()=>startLocating(true);
+svg.addEventListener('touchmove',e=>{ if(e.touches.length>=2) follow=false; },{passive:true});
+svg.addEventListener('pointerdown',e=>{ if(e.pointerType!=='touch') follow=false; });
+try{ if(localStorage.getItem('loc-ok')==='1') startLocating(false); }catch(e){}
+
+/* ---------- Views ---------- */
+function selectStop(k, center=false){ selected=k; const i=stepFor(k); if(i>=0){ walkIdx=i; } saveProgress(); if(center) centerOn(k); markPins(); renderMapCard(); renderNav(); }
+function revealCard(){
+  // On a phone the card sits below the map: scroll just enough to show its heading.
+  const card=$('#mapcard'); const r=card.getBoundingClientRect();
+  const head=document.querySelector('header').getBoundingClientRect().bottom;
+  const barH = $('#stepbar').hidden ? 0 : $('#stepbar').getBoundingClientRect().height;
+  if(r.top > window.innerHeight - barH - 140 || r.top < head){
+    window.scrollTo({top: window.scrollY + r.top - head - 8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  }
+}
+function goStep(delta){
+  walkIdx=Math.max(0,Math.min(walk.steps.length-1,walkIdx+delta)); saveProgress();
+  selected=walk.steps[walkIdx].to; store.set('sel:'+walk.id,selected);
+  if(view==='map') centerOn(selected);
+  markPins(); renderMapCard(); renderNav();
+  if(guideOn && delta>0) speakStop(selected, false, 0);
+  if(view==='map') window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+function renderMeta(){
+  const nStops=walk.stops.filter(s=>!s.pub).length, nPubs=walk.stops.filter(s=>s.pub).length;
+  $('#meta').innerHTML=`<span><b>Walk ${walk.id}</b> · guide pages ${walk.pages}</span><span>${nStops} stops + ${nPubs} pubs</span><span>Start: ${esc(walk.start)}</span><span>Finish: ${esc(walk.end)}</span>`;
+}
+function renderMapCard(){
+  const last=walk.steps.length-1;
+  $('#mapcard').innerHTML=`
+    <div class="cardtools"><span class="label">Step ${walkIdx+1} of ${walk.steps.length}</span></div>
+    ${stopCard(selected)}
+    ${walkIdx===last?'<p class="finish">Walk complete. Mine\'s a large one. Cheers!</p>':''}
+    ${walkIdx===last?'<button class="btn" data-act="restart" style="justify-self:center">Start again from step 1</button>':''}`;
+}
+function renderSteps(){
+  $('#steplist').innerHTML=walk.steps.map((st,i)=>{ const s=stopBy(st.to); const gap=walk.gaps.find(g=>g.after===st.to); const pt=partOf(i);
+    return (i===pt.from?`<li class="parthead"><b>Part ${pt.n} of ${pt.total}</b><i>${esc(pt.title)}</i><span>${pt.km} km · about ${partMinutes(pt)} min</span></li>`:'')+`<li data-i="${i}" class="${i===walkIdx?'current':''}${audio&&audio.k===s.k?' speaking':''}" data-act="open" data-k="${esc(s.k)}" tabindex="0" role="button" aria-label="Step ${i+1}: ${esc(s.name)}"><div class="stepno">${String(i+1).padStart(2,'0')}</div><div style="min-width:0"><div>${esc(st.t)}</div>
+      <div class="stopline"><span class="badge ${s.pub?'pub':''}">${esc(label(s))}</span><span class="stopname">${esc(s.name)}</span><span class="cam">p.${s.page}${st.d?' · short detour':''}${bookFor(s.k)?' · guide text':''}${(bphotos[s.k]||[]).length?' · photo':''}</span></div></div>
+      ${gap?`<div class="gap">${esc(gap.text)}</div>`:''}</li>`; }).join('');
+}
+function renderBanner(){ const pt=partOf(walkIdx); $('#bkick').textContent=`Walk ${walk.id} · Part ${pt.n} of ${pt.total}`; $('#btitle').textContent=pt.title; $('#banner').setAttribute('aria-label',`Walk ${walk.id}, part ${pt.n} of ${pt.total}: ${pt.title}. Choose a walk or part`); }
+function renderWalkList(){ const cur=partOf(walkIdx).n;
+  $('#walklist').innerHTML=WALKS.map(w=>`<div class="wk"><b>Walk ${w.id} · ${esc(w.short||w.title)}</b><small>${w.stops.filter(s=>!s.pub).length} stops and ${w.stops.filter(s=>s.pub).length} pubs · about ${(w.parts||[]).reduce((a,p)=>a+(p.km||0),0).toFixed(1)} km</small>
+    ${(w.parts||[]).map((p,ix)=>{ const pp=partOf(p.from); return `<button type="button" class="pt ${w.id===walk.id&&ix+1===cur?'on':''}" data-act="gopart" data-i="${p.from}"><span class="n">Part ${ix+1}</span><i>${esc(p.title)}</i><span class="m">${p.km} km · ${partMinutes(pp)} min</span></button>`; }).join('')}</div>`).join('')
+    + `<div class="soon">Walks 2–20 coming as you add each chapter.</div>`; }
+function openWalks(){ renderWalkList(); $('#walksheet').hidden=false; document.body.style.overflow='hidden'; setTimeout(()=>{ const on=document.querySelector('#walklist .pt.on'); (on||document.querySelector('#walklist .pt'))?.focus(); },50); }
+function closeWalks(){ $('#walksheet').hidden=true; document.body.style.overflow=''; $('#banner').focus(); }
+function renderNav(){
+  walkIdx=Math.max(0,Math.min(walk.steps.length-1,walkIdx)); renderBanner(); if(typeof renderNear==='function' && window.__mapReady) renderNear();
+  const last=walk.steps.length-1, st=stopBy(walk.steps[walkIdx].to), pct=last?walkIdx/last*100:100;
+  const bar=$('#stepbar');
+  bar.hidden = view!=='map';
+  bar.innerHTML=`<div class="inner">
+    <div class="track" aria-hidden="true"><span class="fill" style="width:${pct}%"></span><svg class="walker" style="left:${pct}%"><use href="#i-walker"/></svg></div>
+    <div class="barrow">
+      <button class="navbtn back" data-act="prev" ${walkIdx===0?'disabled':''} aria-label="Previous step"><svg class="ic"><use href="#i-left"/></svg><span class="wide">Back</span></button>
+      <button type="button" class="barinfo" data-act="openlist" aria-label="Step ${walkIdx+1} of ${walk.steps.length}, ${esc(st.name)}. Show all steps"><b><svg class="ic"><use href="#i-list"/></svg>Step ${walkIdx+1} of ${walk.steps.length}</b><small>${esc(st.name)}</small></button>
+      <button class="navbtn next" data-act="next" ${walkIdx===last?'disabled':''} aria-label="Next step"><span class="wide">Next</span><svg class="ic"><use href="#i-right"/></svg></button>
+    </div></div>`;
+  $('#continue').innerHTML=`<button class="btn red" data-act="continue">Continue from step ${walkIdx+1}<svg class="ic" style="stroke:#D2483F;width:16px;height:16px"><use href="#i-right"/></svg></button><span class="sub">${esc(st.name)}</span>`;
+  document.querySelectorAll('#steplist li[data-i]').forEach(li=>li.classList.toggle('current',+li.dataset.i===walkIdx));
+  renderNowBar();
+}
+let renderPending=false;
+function typing(){ const a=document.activeElement; return a && a.matches && a.matches('textarea[data-book],textarea[data-note]'); }
+function renderAll(){ if(typing()){ renderPending=true; return; } renderPending=false; renderMeta(); renderMapCard(); renderSteps(); renderNav(); renderBookStatus(); }
+document.addEventListener('focusout',()=>{ setTimeout(()=>{ if(renderPending && !typing()) renderAll(); },0); });
+function renderBookStatus(){
+  const total=walk.stops.length, n=walk.stops.filter(s=>bookFor(s.k)).length;
+  const np=walk.stops.filter(s=>(bphotos[s.k]||[]).length).length;
+  const pages=Object.keys(BOOK_PHOTO_PAGES[walk.id]||{}), donePages=pages.filter(pagesDone).length;
+  const ts=$('#textstatus'), ps=$('#photostatus');
+  ts.textContent = n ? (n===total?`On all ${total} stops`:`On ${n} of ${total} stops`) : 'Not added yet';
+  ts.className = 'st'+(n===total?' done':n?' part':'');
+  ps.textContent = pages.length ? (donePages===pages.length?`All ${pages.length} photo pages added · ${np} stops`:np?`${donePages} of ${pages.length} photo pages added`:'Not added yet') : (np?`On ${np} stops`:'Not added yet');
+  ps.className = 'st'+(pages.length && donePages===pages.length?' done':np?' part':'');
+  $('#bookclear').hidden = !n; $('#photoclear').hidden = !np;
+  $('#guidedot').hidden = n>0 && (!pages.length || donePages===pages.length);
+  syncPanelButtons();
+}
+function scrollToCurrentStep(){ requestAnimationFrame(()=>{ const li=document.querySelector('#steplist li.current'); if(li){ const head=document.querySelector('header.top').getBoundingClientRect().height; const y=li.getBoundingClientRect().top+window.scrollY-head-(window.innerHeight-head)/3; window.scrollTo({top:Math.max(0,y)}); } }); }
+function setView(v){ if(v==='walk') v='map'; const was=view; view=v; ['map','steps'].forEach(x=>{ $('#view-'+x).hidden = x!==v; $('#tab-'+x).setAttribute('aria-selected',x===v); }); store.set('view',v); if(location.hash!=='#'+v) history.replaceState(null,'','#'+v); renderNav(); renderNowBar(); if(v==='steps' && was!=='steps') scrollToCurrentStep(); }
+document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>{ setView(b.dataset.view); });
+
+/* ---------- Search ---------- */
+function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’']/g,''); }
+function search(q){
+  q=norm(q.trim()); if(!q) return [];
+  if(/^(coffee|cafe|cafes|coffees|☕)$/.test(q)) return walk.stops.filter(s=>coffeeFor(s.k));
+  const words=q.split(/\s+/);
+  return walk.stops.map(s=>{ const i=stepFor(s.k); const hay=norm([s.k,s.name,s.note,s.tags,i>=0?walk.steps[i].t:'',bookFor(s.k),coffeeFor(s.k)?'coffee cafe '+coffeeFor(s.k).t:''].join(' '));
+    if(!words.every(w=>hay.includes(w))) return null;
+    let score=0; if(s.k===q) score+=100; if(norm(s.name).includes(q)) score+=10; return {s,score}; }).filter(Boolean).sort((a,b)=>b.score-a.score).map(r=>r.s);
+}
+const qi=$('#q'), res=$('#results');
+qi.addEventListener('input',()=>{ const r=search(qi.value);
+  if(!qi.value.trim()){ res.hidden=true; markPins(); return; }
+  res.hidden=false;
+  res.innerHTML = r.length ? r.map(s=>`<button data-act="pick" data-k="${esc(s.k)}"><span class="badge ${s.pub?'pub':''}">${esc(label(s))}</span><span style="min-width:0">${esc(s.name)}<small>${/coff|caf/i.test(qi.value)&&coffeeFor(s.k)?'☕ '+esc(coffeeFor(s.k).t):esc(s.note.slice(0,80))+'…'}</small></span></button>`).join('') : `<div style="padding:10px 12px;color:var(--muted)">No stops match “${esc(qi.value)}”.</div>`;
+  markPins(new Set(r.map(s=>s.k)));
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const l=document.querySelector('.light'); if(l) l.remove(); } });
+qi.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=search(qi.value); if(r[0]) pick(r[0].k);} if(e.key==='Escape'){ clearSearch(); } });
+document.addEventListener('click',e=>{ if(!e.target.closest('.search')) res.hidden=true; });
+$('#clearq').onclick=()=>{ clearSearch(); qi.focus(); };
+$('#cupbtn').onclick=()=>{ qi.value='coffee'; qi.dispatchEvent(new Event('input')); };
+function clearSearch(){ qi.value=''; res.hidden=true; markPins(); }
+function pick(k){ clearSearch(); qi.blur(); setView('map'); selectStop(k,true); revealCard(); }
+
+/* ---------- Actions ---------- */
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return; const k=b.dataset.k; const a=b.dataset.act;
+  if(a==='speak') speakStop(k);
+  else if(a==='hush') stopSpeaking();
+  else if(a==='listen'){ const st=audioState(k); if(st==='playing') pauseAudio(); else if(st==='paused') resumeAudio(); else speakStop(k); }
+  else if(a==='startover'){ e.preventDefault(); startOver(k); }
+  else if(a==='pauseaudio') pauseAudio();
+  else if(a==='resumeaudio') resumeAudio();
+  else if(a==='stopaudio') stopSpeaking();
+  else if(a==='gotoaudio'){ setView('map'); selectStop(k,true); revealCard(); }
+  else if(a==='jumpdir'){ const box=b.closest('.card')?.querySelector('.direction'); if(box){ box.scrollIntoView({behavior:'smooth',block:'center'}); box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); } }
+  else if(a==='closewalks'){ closeWalks(); }
+  else if(a==='gopart'){ const i=+b.dataset.i; closeWalks(); setView('map'); walkIdx=i; selectStop(walk.steps[i].to,true); window.scrollTo({top:0}); }
+  else if(a==='readtoggle'){ const open=!openGuideText.has(k); open?openGuideText.add(k):openGuideText.delete(k);
+    const box=b.closest('.audiobox'); const body=box&&box.querySelector('.gbbody'); if(body){ body.hidden=!open; if(open){ const sp=body.querySelector('span.now'); if(sp) sp.scrollIntoView({block:'center'}); } }
+    b.setAttribute('aria-expanded',open); b.textContent=readBtnHTML(open); }
+  else if(a==='edittext'){ const w=b.parentNode.querySelector('.editwrap'); w.hidden=!w.hidden; b.textContent=w.hidden?'Edit text':'Done editing'; b.parentNode.querySelector('.readtext').hidden=!w.hidden; if(w.hidden){ const rt=b.parentNode.querySelector('.readtext'); rt.innerHTML=textHTML(k); } }
+  else if(a==='pick') pick(k);
+  else if(a==='open'){ setView('map'); selectStop(k,true); window.scrollTo({top:0}); }
+  else if(a==='onmap'){ setView('map'); selectStop(k,true); }
+  else if(a==='next'||a==='prev'){ goStep(a==='next'?1:-1); }
+  else if(a==='bzoom'){ const im=(bphotos[k]||[])[+b.dataset.i]; if(!im) return; const l=document.createElement('div'); l.className='light'; const img=new Image(); img.src=im.src; img.alt=''; l.appendChild(img); l.onclick=()=>l.remove(); document.body.appendChild(l); }
+  else if(a==='brm'){ if(!b.dataset.confirm){ b.dataset.confirm='1'; b.textContent='Tap to confirm'; setTimeout(()=>{ if(b.isConnected){ delete b.dataset.confirm; b.textContent='Remove'; } },3000); return; }
+    bphotos[k]=(bphotos[k]||[]).filter((_,ix)=>ix!==+b.dataset.i); if(!bphotos[k].length) delete bphotos[k]; renderAll(); savePhotos(k); }
+  else if(a==='restart'){ walkIdx=0; goStep(0); stopSpeaking(); }
+  else if(a==='openlist'){ setView('steps'); }
+  else if(a==='continue'){ setView('map'); selectStop(walk.steps[walkIdx].to,true); window.scrollTo({top:0}); }
+});
+document.addEventListener('keydown',e=>{ const li=e.target.closest && e.target.closest('ol.steps li[data-act]'); if(li && e.target===li && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); li.click(); } });
+document.addEventListener('change',e=>{ if(e.target.id==='autoread'||e.target.id==='autoread-map'){ autoRead=e.target.checked; store.set('autoread',autoRead); if(autoRead) speakStop(walk.steps[walkIdx].to); } });
+let noteTimers={};
+const flashSaved = el => { const s=el.parentNode.querySelector('.saved'); if(s){ s.hidden=false; setTimeout(()=>s.hidden=true,1200);} };
+document.addEventListener('input',e=>{
+  const d=e.target.dataset||{};
+  if(d.note){ const k=d.note; clearTimeout(noteTimers[k]); noteTimers[k]=setTimeout(()=>{ store.set(`note:${walk.id}:${k}`,e.target.value); flashSaved(e.target); },500); }
+  if(d.book){ const k=d.book; book[k]=e.target.value; clearTimeout(bookTimer); bookTimer=setTimeout(()=>{ saveBook().then(()=>flashSaved(e.target)); },900); }
+});
+
+
+/* ---------- Your guide sheet ---------- */
+function openGuide(){ $('#guidesheet').hidden=false; document.body.style.overflow='hidden'; fillPageSelect(); renderBookStatus(); pickVoice(); setTimeout(()=>$('#guideclose').focus(),50); }
+function closeGuide(){ $('#guidesheet').hidden=true; document.body.style.overflow=''; $('#guidebtn').focus(); }
+$('#guidebtn').onclick=openGuide;
+function syncPanelButtons(){
+  const n=walk.stops.filter(s=>bookFor(s.k)).length;
+  $('#bookbtn').textContent = !$('#bookform').hidden ? 'Hide' : (n?'Replace':'Add');
+  $('#photobtn').textContent = !$('#photoform').hidden ? 'Hide' : 'Add';
+  $('#voicebtn').textContent = !$('#voiceform').hidden ? 'Hide' : 'Options';
+}
+$('#voicebtn').onclick=()=>{ const f=$('#voiceform'); f.hidden=!f.hidden;
+  if(!f.hidden){ $('#bookform').hidden=true; $('#photoform').hidden=true; renderVoiceList(); }
+  else if('speechSynthesis' in window) speechSynthesis.cancel();
+  syncPanelButtons(); };
+$('#vpreview').onclick=previewVoice;
+$('#vrate').addEventListener('input',e=>{ speechRate=Number(e.target.value); store.set('rate',speechRate); $('#vrateval').textContent=speechRate.toFixed(2).replace(/0$/,'')+'×'; });
+$('#guideclose').onclick=closeGuide;
+$('#banner').onclick=openWalks;
+$('#banner').onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openWalks(); } };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#walksheet').hidden) closeWalks(); });
+$('#guidescrim').onclick=closeGuide;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#guidesheet').hidden && !document.querySelector('.light')) closeGuide(); });
+
+/* ---------- Guide text panel ---------- */
+$('#bookbtn').onclick=()=>{ const f=$('#bookform'); f.hidden=!f.hidden; if(!f.hidden){ $('#photoform').hidden=true; $('#voiceform').hidden=true; $('#bookpaste').focus(); } syncPanelButtons(); };
+$('#bookcancel').onclick=()=>{ $('#bookform').hidden=true; $('#bookpaste').value=''; syncPanelButtons(); };
+$('#booksort').onclick=async()=>{
+  const raw=$('#bookpaste').value; if(raw.trim().length<200){ toast('Paste the chapter text first.'); return; }
+  const order=walk.steps.map(s=>s.to);
+  const r=splitBook(raw, order, BOOK_MARKS[walk.id]||{});
+  const got=Object.keys(r.sections);
+  if(!got.length){ toast("Couldn't find any stop names in that text."); return; }
+  book={...book, ...r.sections};
+  $('#bookpaste').value=''; $('#bookform').hidden=true; syncPanelButtons();
+  await saveBook(); renderAll();
+  const miss=r.missing.map(k=>stopBy(k)).filter(Boolean);
+  const shared=order.filter((k,i)=>i>0 && r.sections[k] && r.sections[k]===r.sections[order[i-1]]).map(k=>stopBy(k).name);
+  const res=$('#bookresult'); res.hidden=false;
+  res.innerHTML=`Sorted the text into <b>${got.length}</b> of ${order.length} stops.`+
+    (miss.length?` Not found, so left empty: ${miss.map(s=>esc(s.name)).join(', ')}.`:'')+
+    (shared.length?` These share a passage with the stop before, because the book covers them in the same sentence: ${shared.map(esc).join(', ')}.`:'')+
+    ` Open any stop's <b>📖 Guide text</b> to check or edit its part.`;
+};
+$('#bookclear').onclick=async e=>{
+  const b=e.currentTarget;
+  if(!b.dataset.confirm){ b.dataset.confirm='1'; b.textContent='Tap again to remove all guide text'; setTimeout(()=>{ delete b.dataset.confirm; b.textContent='Remove all guide text'; },3000); return; }
+  book={}; await saveBook(); renderAll(); $('#bookresult').hidden=true; toast('Guide text removed.');
+};
+
+/* ---------- Guide photo panel ---------- */
+let pending=[];   // [{src, stop}]
+function stopOptions(sel){
+  return `<option value="">Skip this one</option>`+walk.stops.map(s=>`<option value="${esc(s.k)}" ${s.k===sel?'selected':''}>${esc(s.pub?'Pub':s.k)} · ${esc(s.name)}</option>`).join('');
+}
+function pagesDone(p){ const ks=(BOOK_PHOTO_PAGES[walk.id]||{})[p]||[]; return ks.length && ks.every(k=>(bphotos[k]||[]).some(im=>String(im.page)===String(p))); }
+function fillPageSelect(){
+  const pages=Object.keys(BOOK_PHOTO_PAGES[walk.id]||{});
+  const cur=$('#photopage').value;
+  $('#photopage').innerHTML=pages.map(p=>`<option value="${p}">p.${p}${pagesDone(p)?' (added)':''}</option>`).join('')+`<option value="other">Another page</option>`;
+  $('#photopage').value = cur || (pages.find(p=>!pagesDone(p)) || pages[0] || 'other');
+}
+function renderTiles(){
+  const p=$('#photopage').value, guess=(BOOK_PHOTO_PAGES[walk.id]||{})[p]||[];
+  $('#phototiles').innerHTML=pending.map((t,i)=>{ if(t.stop===undefined) t.stop=guess[i]||''; return `<div class="tile ${t.stop?'':'skip'}"><img src="${t.src}" alt="Picture ${i+1} from the page"><select data-tile="${i}" aria-label="Stop for picture ${i+1}">${stopOptions(t.stop)}</select></div>`; }).join('');
+  $('#photoactions').hidden=!pending.length;
+}
+function photoStatus(){
+  const n=walk.stops.filter(s=>(bphotos[s.k]||[]).length).length;
+  $('#photoclear').hidden=!n;
+  return n;
+}
+async function cutPhotos(file){
+  const bmp=await createImageBitmap(file);
+  const W=bmp.width, H=bmp.height, w=800, h=Math.round(H*w/W);
+  const c=document.createElement('canvas'); c.width=w; c.height=h;
+  const cx=c.getContext('2d',{willReadFrequently:true}); cx.drawImage(bmp,0,0,w,h);
+  const boxes=detectPhotoBoxes(cx.getImageData(0,0,w,h).data,w,h);
+  const k=W/w;
+  return boxes.map(b=>{
+    const sx=b.x*k, sy=b.y*k, sw=b.w*k, sh=b.h*k, sc=Math.min(1,720/Math.max(sw,sh));
+    const o=document.createElement('canvas'); o.width=Math.round(sw*sc); o.height=Math.round(sh*sc);
+    o.getContext('2d').drawImage(bmp,sx,sy,sw,sh,0,0,o.width,o.height);
+    let q=0.8, src=o.toDataURL('image/jpeg',q);
+    while(src.length>110000 && q>0.4){ q-=0.1; src=o.toDataURL('image/jpeg',q); }
+    return {src};
+  });
+}
+$('#photobtn').onclick=()=>{ const f=$('#photoform'); f.hidden=!f.hidden; if(!f.hidden){ $('#bookform').hidden=true; $('#voiceform').hidden=true; fillPageSelect(); } syncPanelButtons(); };
+$('#photocancel').onclick=()=>{ $('#photoform').hidden=true; pending=[]; renderTiles(); $('#photomsg').textContent=''; syncPanelButtons(); };
+$('#photopage').onchange=()=>{ pending.forEach(t=>delete t.stop); renderTiles(); };
+$('#photofile').addEventListener('change',async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  $('#photomsg').textContent='Finding the pictures…'; pending=[]; renderTiles();
+  try{ pending=await cutPhotos(f); }catch(err){ pending=[]; }
+  if(!pending.length){ $('#photomsg').textContent="Couldn't find any pictures in that screenshot. Use a screenshot of one of the guide's photo pages."; return; }
+  $('#photomsg').textContent=`Found ${pending.length} picture${pending.length>1?'s':''}. Check each one is matched to the right stop, then tap Add to stops.`;
+  renderTiles();
+});
+document.addEventListener('change',e=>{ const i=e.target.dataset&&e.target.dataset.tile; if(i===undefined) return; pending[i].stop=e.target.value; e.target.closest('.tile').classList.toggle('skip',!e.target.value); });
+$('#photoadd').onclick=async()=>{
+  const p=$('#photopage').value, page = p==='other' ? null : Number(p);
+  const groups={}; pending.forEach(t=>{ if(t.stop) (groups[t.stop]=groups[t.stop]||[]).push({src:t.src,page}); });
+  const ks=Object.keys(groups); if(!ks.length){ toast('Choose a stop for at least one picture.'); return; }
+  $('#photoadd').disabled=true;
+  let ok=0; const fin={};
+  for(const k of ks){
+    const keep=(bphotos[k]||[]).filter(im=> page===null || im.page!==page);
+    bphotos[k]=[...keep,...groups[k]]; fin[k]=bphotos[k];
+    if(await savePhotos(k)) ok++;
+  }
+  Object.assign(bphotos,fin);
+  $('#photoadd').disabled=false;
+  const n=pending.filter(t=>t.stop).length;
+  pending=[]; renderTiles(); $('#photopage').value=''; fillPageSelect(); renderAll();
+  $('#photomsg').textContent = ok ? `Added ${n} picture${n>1?'s':''} to ${ok} stop${ok>1?'s':''}. Choose the next photo page, or close.` : "The pictures couldn't be saved.";
+};
+$('#photoclear').onclick=async e=>{
+  const b=e.currentTarget;
+  if(!b.dataset.confirm){ b.dataset.confirm='1'; b.textContent='Tap again to remove all guide photos'; setTimeout(()=>{ delete b.dataset.confirm; b.textContent='Remove all guide photos'; },3000); return; }
+  const ks=Object.keys(bphotos); bphotos={};
+  for(const k of ks) await savePhotos(k);
+  renderAll(); fillPageSelect(); toast('Guide photos removed.');
+};
+
+/* ---------- Walk picker ---------- */
+
+/* ---------- Offline map: save this walk's tiles into the phone's cache ---------- */
+function walkTiles(){
+  // Zoom 14–17 for the whole walk; the most detailed zoom (18) only along the route and at the stops.
+  const xs=allPts.map(p=>P(p)[0]), ys=allPts.map(p=>P(p)[1]), pad=300, out=new Set();
+  for(let z=14;z<=17;z++){ const ts=256*2**(17-z);
+    for(let x=Math.floor((Math.min(...xs)-pad)/ts);x<=Math.floor((Math.max(...xs)+pad)/ts);x++)
+      for(let y=Math.floor((Math.min(...ys)-pad)/ts);y<=Math.floor((Math.max(...ys)+pad)/ts);y++) out.add(tileURL(z,x,y)); }
+  const ts=128, pts=[], r=walk.route.map(P);
+  for(let i=1;i<r.length;i++){ const [a,b]=[r[i-1],r[i]], n=Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/40)||1; for(let j=0;j<=n;j++) pts.push([a[0]+(b[0]-a[0])*j/n, a[1]+(b[1]-a[1])*j/n]); }
+  walk.stops.forEach(s=>pts.push(P([s.lat,s.lng])));
+  pts.forEach(([x,y])=>{ for(const dx of [-60,0,60]) for(const dy of [-60,0,60]) out.add(tileURL(18,Math.floor((x+dx)/ts),Math.floor((y+dy)/ts))); });
+  return [...out];
+}
+$('#offbtn').onclick=async()=>{
+  const btn=$('#offbtn'), st=$('#offstatus');
+  if(!('caches' in window)){ st.textContent="This browser can't save maps."; return; }
+  const list=walkTiles(); btn.disabled=true; let done=0, bad=0;
+  const cache=await caches.open('sw-tiles-v1');
+  for(const url of list){
+    try{ if(!(await cache.match(url))){ const r=await fetch(url,{mode:'no-cors'}); await cache.put(url,r); } }catch(e){ bad++; }
+    done++; if(done%10===0||done===list.length) st.textContent=`Saving map… ${done} of ${list.length}`;
+  }
+  btn.disabled=false; btn.textContent='Update';
+  st.textContent = bad ? `Saved ${list.length-bad} of ${list.length} map tiles. Try again with a better signal.` : `Map saved: ${list.length} tiles, ${darkNow()?'dark':'light'} style.`;
+  try{ localStorage.setItem('offmap-'+walk.id+'-'+tileStyle(),String(Date.now())); }catch(e){}
+};
+try{ if(localStorage.getItem('offmap-'+walk.id+'-'+tileStyle())){ $('#offstatus').textContent='Map saved for offline use.'; $('#offbtn').textContent='Update'; } }catch(e){}
+
+/* ---------- App shell for offline use ---------- */
+if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+window.__mapReady=true;
+
+/* ---------- Boot ---------- */
+drawMap(); renderAll();
+const startView = ['map','steps','walk'].includes(location.hash.slice(1)) ? location.hash.slice(1) : store.get('view','map');
+setView(startView);
+window.addEventListener('hashchange',()=>{ const v=location.hash.slice(1); if(['map','steps','walk'].includes(v)) setView(v); });
+if('speechSynthesis' in window) pickVoice();
+initCaps();
+</script>
+</body>
+</html>
