@@ -398,6 +398,7 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
   <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
   <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
   <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-backup" viewBox="0 0 24 24"><path d="M4 7h16v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M3 4h18v3H3Z"/><path d="M12 10v6M9.5 13.5 12 16l2.5-2.5"/></symbol>
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></symbol>
   <symbol id="i-voice" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4Z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
   <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5Z"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5c-.6 1 .6 1.5 0 2.5M12 3.5c-.6 1 .6 1.5 0 2.5"/></symbol>
@@ -480,7 +481,7 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
   <div class="grab"></div>
   <div class="frame">
    <h2 id="guidetitle">Your guide</h2>
-   <p class="sub">Add your own text and photos from the chapter. They're saved only on this phone.</p>
+   <p class="sub">Add your own text and photos from the chapter. They're saved only on this device.</p>
 
    <div class="gitem">
     <svg class="ic"><use href="#i-text"/></svg>
@@ -535,6 +536,21 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
      <span><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → English, then choose a voice under English (UK).</span>
      <span><b>Mac:</b> System Settings → Accessibility → Spoken Content → System voice.</span>
     </div>
+   </div>
+   <div class="gitem">
+    <svg class="ic"><use href="#i-backup"/></svg>
+    <div><b>Backup</b><span class="st" id="backupstatus">Move your text, photos and place to another phone or Mac.</span></div>
+    <button class="btn small primary" id="backupbtn">Options</button>
+   </div>
+   <div id="backupform" class="gform" hidden>
+    <div class="btnrow">
+     <button type="button" class="btn small primary" id="backupsave">Save a backup</button>
+     <button type="button" class="btn small" id="backupload">Load a backup</button>
+     <input type="file" id="backupfile" accept=".json,application/json" hidden>
+    </div>
+    <div id="backupconfirm" class="notice" hidden></div>
+    <p class="sub" id="backupmsg" aria-live="polite"></p>
+    <div class="notice">Save a backup on the device where you added your text and photos, send the file to the other device (AirDrop or iCloud Drive), then tap Load a backup there. On an iPhone, load it inside the app you added to your home screen. The file stays on your own devices.</div>
    </div>
   </div>
   <div class="sheetfoot">
@@ -1489,9 +1505,10 @@ function syncPanelButtons(){
   $('#bookbtn').textContent = !$('#bookform').hidden ? 'Hide' : (n?'Replace':'Add');
   $('#photobtn').textContent = !$('#photoform').hidden ? 'Hide' : 'Add';
   $('#voicebtn').textContent = !$('#voiceform').hidden ? 'Hide' : 'Options';
+  $('#backupbtn').textContent = !$('#backupform').hidden ? 'Hide' : 'Options';
 }
 $('#voicebtn').onclick=()=>{ const f=$('#voiceform'); f.hidden=!f.hidden;
-  if(!f.hidden){ $('#bookform').hidden=true; $('#photoform').hidden=true; renderVoiceList(); }
+  if(!f.hidden){ $('#bookform').hidden=true; $('#photoform').hidden=true; $('#backupform').hidden=true; renderVoiceList(); }
   else if('speechSynthesis' in window) speechSynthesis.cancel();
   syncPanelButtons(); };
 $('#vpreview').onclick=previewVoice;
@@ -1504,7 +1521,7 @@ $('#guidescrim').onclick=closeGuide;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#guidesheet').hidden && !document.querySelector('.light')) closeGuide(); });
 
 /* ---------- Guide text panel ---------- */
-$('#bookbtn').onclick=()=>{ const f=$('#bookform'); f.hidden=!f.hidden; if(!f.hidden){ $('#photoform').hidden=true; $('#voiceform').hidden=true; $('#bookpaste').focus(); } syncPanelButtons(); };
+$('#bookbtn').onclick=()=>{ const f=$('#bookform'); f.hidden=!f.hidden; if(!f.hidden){ $('#photoform').hidden=true; $('#voiceform').hidden=true; $('#backupform').hidden=true; $('#bookpaste').focus(); } syncPanelButtons(); };
 $('#bookcancel').onclick=()=>{ $('#bookform').hidden=true; $('#bookpaste').value=''; syncPanelButtons(); };
 $('#booksort').onclick=async()=>{
   const raw=$('#bookpaste').value; if(raw.trim().length<200){ toast('Paste the chapter text first.'); return; }
@@ -1567,7 +1584,7 @@ async function cutPhotos(file){
     return {src};
   });
 }
-$('#photobtn').onclick=()=>{ const f=$('#photoform'); f.hidden=!f.hidden; if(!f.hidden){ $('#bookform').hidden=true; $('#voiceform').hidden=true; fillPageSelect(); } syncPanelButtons(); };
+$('#photobtn').onclick=()=>{ const f=$('#photoform'); f.hidden=!f.hidden; if(!f.hidden){ $('#bookform').hidden=true; $('#voiceform').hidden=true; $('#backupform').hidden=true; fillPageSelect(); } syncPanelButtons(); };
 $('#photocancel').onclick=()=>{ $('#photoform').hidden=true; pending=[]; renderTiles(); $('#photomsg').textContent=''; syncPanelButtons(); };
 $('#photopage').onchange=()=>{ pending.forEach(t=>delete t.stop); renderTiles(); };
 $('#photofile').addEventListener('change',async e=>{
@@ -1605,6 +1622,61 @@ $('#photoclear').onclick=async e=>{
 };
 
 /* ---------- Walk picker ---------- */
+
+/* ---------- Backup: move guide text, photos and your place between devices (a file that stays on your own devices) ---------- */
+const BK_APP='splendid-london-walks';
+const bkMsg=t=>{ $('#backupmsg').textContent=t||''; };
+function bkSummary(docs){ const ids=Object.keys(docs); const book=ids.filter(i=>/^book-w\d+$/.test(i)).reduce((a,i)=>a+Object.keys((docs[i]&&docs[i].sections)||{}).length,0);
+  const ph=ids.filter(i=>/^bphoto-w/.test(i)).length; const pr=ids.find(i=>/^progress-w/.test(i));
+  return `guide text for ${book} stop${book===1?'':'s'}, photos for ${ph} stop${ph===1?'':'s'}${pr?`, and your place (step ${(docs[pr].idx||0)+1})`:''}`; }
+$('#backupbtn').onclick=()=>{ const f=$('#backupform'); f.hidden=!f.hidden; if(!f.hidden){ $('#bookform').hidden=true; $('#photoform').hidden=true; $('#voiceform').hidden=true; bkMsg(''); $('#backupconfirm').hidden=true; } syncPanelButtons(); };
+$('#backupsave').onclick=async()=>{
+  if(!db||!uid){ bkMsg("This browser can't store data, so there's nothing to back up."); return; }
+  bkMsg('Preparing…');
+  try{
+    const snap=await db.collection(`data/users/${uid}`).get(), docs={};
+    snap.docs.forEach(d=>{ if(d.exists) docs[d.id]=d.data(); });
+    if(!Object.keys(docs).length){ bkMsg('Nothing to back up yet: add the guide text or photos first.'); return; }
+    const day=new Date().toISOString().slice(0,10), name=`splendid-walks-backup-${day}.json`;
+    const blob=new Blob([JSON.stringify({app:BK_APP,version:1,saved:new Date().toISOString(),docs})],{type:'application/json'});
+    const file=new File([blob],name,{type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file],title:'Splendid Walks backup'}); bkMsg(`Backup ready: ${bkSummary(docs)}.`); return; }
+      catch(e){ if(e && e.name==='AbortError'){ bkMsg(''); return; } }
+    }
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },3000);
+    bkMsg(`Saved ${name} (${bkSummary(docs)}). It's in your Downloads.`);
+  }catch(e){ bkMsg("Couldn't make the backup. Try again."); }
+};
+let bkPending=null;
+$('#backupload').onclick=()=>{ $('#backupfile').value=''; $('#backupfile').click(); };
+$('#backupfile').onchange=async e=>{
+  const f=e.target.files&&e.target.files[0]; if(!f) return;
+  bkPending=null; $('#backupconfirm').hidden=true;
+  if(f.size>60*1024*1024){ bkMsg("That file is too big to be a backup from this app."); return; }
+  try{
+    const data=JSON.parse(await f.text());
+    if(!data || data.app!==BK_APP || typeof data.docs!=='object'){ bkMsg("That isn't a Splendid Walks backup file."); return; }
+    const docs={}; for(const [id,v] of Object.entries(data.docs)){ if(/^[a-z0-9-]+$/i.test(id) && v && typeof v==='object') docs[id]=v; }
+    if(!Object.keys(docs).length){ bkMsg('That backup is empty.'); return; }
+    bkPending=docs;
+    const when=data.saved?new Date(data.saved).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
+    $('#backupconfirm').innerHTML=`<p style="margin:0 0 8px">This backup${when?` from ${esc(when)}`:''} has ${esc(bkSummary(docs))}. Loading it replaces the guide text and photos on this device.</p><div class="btnrow"><button type="button" class="btn small primary" id="backupyes">Replace with this backup</button><button type="button" class="btn small" id="backupno">Cancel</button></div>`;
+    $('#backupconfirm').hidden=false; bkMsg('');
+    $('#backupno').onclick=()=>{ bkPending=null; $('#backupconfirm').hidden=true; };
+    $('#backupyes').onclick=async()=>{
+      if(!bkPending||!db||!uid) return; const docs=bkPending; bkPending=null; $('#backupconfirm').hidden=true; bkMsg('Loading…');
+      try{
+        const cur=await db.collection(`data/users/${uid}`).get();
+        for(const d of cur.docs) if(!(d.id in docs)) await db.doc(`data/users/${uid}/${d.id}`).delete();
+        for(const [id,v] of Object.entries(docs)) await db.doc(`data/users/${uid}/${id}`).set(v);
+        store.set('progat:'+walk.id,0); await loadProgress(); renderAll(); if(typeof renderBookStatus==='function') renderBookStatus();
+        bkMsg(`Loaded: ${bkSummary(docs)}.`);
+      }catch(err){ bkMsg(err && err.code==='quota_exceeded' ? "This device is out of storage space." : "Couldn't load the backup. Try again."); }
+    };
+  }catch(err){ bkMsg("That file couldn't be read as a backup."); }
+};
 
 /* ---------- App shell for offline use ---------- */
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
