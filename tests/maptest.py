@@ -29,7 +29,7 @@ with sync_playwright() as p:
         for i in range(25): pg.locator('.navbtn.next').click(); pg.wait_for_timeout(30)
         pg.evaluate('scrollTo(0,0)'); pg.wait_for_timeout(300)
         pg.locator('#zme').tap(); pg.wait_for_timeout(1500)
-        print(sch,'chip:',pg.locator('#nearchip').inner_text(),'| tiles loaded:',pg.locator('#tiles img.ok').count(),'| sketch hidden:',pg.evaluate("getComputedStyle(document.querySelector('.sketch')).display"))
+        print(sch,'chip:',pg.locator('#nearchip').inner_text(),'| tiles loaded:',pg.locator('#maptiles img.ok').count(),'| sketch hidden:',pg.evaluate("getComputedStyle(document.querySelector('.sketch')).display"))
         pg.screenshot(path=f'MP_{sch}.png')
         # move to stop 27 (Scott) -> should say at next stop
         ctx.set_geolocation({'latitude':51.50690,'longitude':-0.13190,'accuracy':10}); pg.wait_for_timeout(1500)
