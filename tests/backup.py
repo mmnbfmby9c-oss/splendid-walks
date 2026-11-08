@@ -18,7 +18,15 @@ with sync_playwright() as p:
     path=os.path.join(out,'backup.json'); d.value.save_as(path)
     B=b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True); pb=B.new_page(); pb.on('pageerror',lambda e:errs.append(str(e)))
     pb.goto('file://'+app); pb.wait_for_timeout(1000); pb.locator('#guidebtn').click(); pb.locator('#backupbtn').click()
-    pb.set_input_files('#backupfile', path); pb.wait_for_timeout(600); pb.locator('#backupyes').click(); pb.wait_for_timeout(1500)
+    pb.set_input_files('#backupfile', path); pb.wait_for_timeout(1800)
+    print('empty device loads without asking:', pb.locator('#backupconfirm').is_hidden())
     print('loaded:',pb.locator('#textstatus').inner_text(),'|',pb.locator('#photostatus').inner_text(),'|',pb.locator('.barinfo').inner_text().split('\n')[0])
     if 'Step 15' not in pb.locator('.barinfo').inner_text(): errs.append('place not restored')
+    # a device that already has data asks first, and the button is on screen
+    pb.locator('#bookbtn').click(); pb.locator('#bookpaste').fill('Something else entirely.'); pb.locator('#booksort').click(); pb.wait_for_timeout(500)
+    pb.locator('#backupbtn').click(); pb.evaluate("document.querySelector('#backupfile').value=''"); pb.set_input_files('#backupfile', path); pb.wait_for_timeout(1200)
+    on=pb.evaluate("(()=>{const b=document.querySelector('#backupyes'); if(!b) return false; const r=b.getBoundingClientRect(); return r.height>0 && r.top>=0 && r.bottom<=innerHeight})()")
+    print('device with data asks first, button on screen:', on); 
+    if not on: errs.append('confirm button not visible')
+    pb.locator('#backupyes').click(); pb.wait_for_timeout(1500); print('after replace:', pb.locator('#textstatus').inner_text())
     print('errors',errs); b.close()

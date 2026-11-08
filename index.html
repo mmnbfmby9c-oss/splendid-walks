@@ -1665,18 +1665,23 @@ $('#backupfile').onchange=async e=>{
     $('#backupconfirm').innerHTML=`<p style="margin:0 0 8px">This backup${when?` from ${esc(when)}`:''} has ${esc(bkSummary(docs))}. Loading it replaces the guide text and photos on this device.</p><div class="btnrow"><button type="button" class="btn small primary" id="backupyes">Replace with this backup</button><button type="button" class="btn small" id="backupno">Cancel</button></div>`;
     $('#backupconfirm').hidden=false; bkMsg('');
     $('#backupno').onclick=()=>{ bkPending=null; $('#backupconfirm').hidden=true; };
-    $('#backupyes').onclick=async()=>{
-      if(!bkPending||!db||!uid) return; const docs=bkPending; bkPending=null; $('#backupconfirm').hidden=true; bkMsg('Loading…');
+    $('#backupyes').onclick=()=>{ if(bkPending){ const d=bkPending; bkPending=null; bkApply(d); } };
+    const existing=await db.collection(`data/users/${uid}`).get();
+    if(!existing.docs.length){ bkPending=null; bkApply(docs); return; }   // nothing here yet: no need to ask
+    $('#backupconfirm').scrollIntoView({behavior:'smooth',block:'center'}); toast('Check the backup, then tap “Replace with this backup”.');
+  }catch(err){ bkMsg("That file couldn't be read as a backup."); }
+};
+async function bkApply(docs){
+      if(!db||!uid) return; $('#backupconfirm').hidden=true; bkMsg('Loading…');
       try{
         const cur=await db.collection(`data/users/${uid}`).get();
         for(const d of cur.docs) if(!(d.id in docs)) await db.doc(`data/users/${uid}/${d.id}`).delete();
         for(const [id,v] of Object.entries(docs)) await db.doc(`data/users/${uid}/${id}`).set(v);
         store.set('progat:'+walk.id,0); await loadProgress(); renderAll(); if(typeof renderBookStatus==='function') renderBookStatus();
-        bkMsg(`Loaded: ${bkSummary(docs)}.`);
+        bkMsg(`Loaded: ${bkSummary(docs)}.`); toast(`Backup loaded: ${bkSummary(docs)}.`);
+        $('#backupmsg').scrollIntoView({behavior:'smooth',block:'center'});
       }catch(err){ bkMsg(err && err.code==='quota_exceeded' ? "This device is out of storage space." : "Couldn't load the backup. Try again."); }
-    };
-  }catch(err){ bkMsg("That file couldn't be read as a backup."); }
-};
+}
 
 /* ---------- App shell for offline use ---------- */
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
