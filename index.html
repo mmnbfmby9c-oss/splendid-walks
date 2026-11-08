@@ -28,7 +28,7 @@ img{max-width:100%}
 [hidden]{display:none!important}
 /* Layout: Rather Splendid field guide. Navy skyline banner + search row + Map|Steps switch on top; map and stop card; step bar at the bottom. */
 :root{
-  --tilefilter:sepia(.22) saturate(.85);
+  --tilefilter:sepia(.3) saturate(.7) brightness(1.02);
   --navy:#232B5C; --navy-2:#2E3770; --navy-line:#3A4373; --on-navy:#F3EEE3; --on-navy-muted:#B9BCD3;
   --red:#A8322D; --red-ink:#F7F1E6; --gold:#B8975A; --gold-soft:#D9C39A; --salmon:#E9A99A; --salmon-ink:#1D2240;
   --bg:#F3EEE3; --surface:#FBF8F1; --surface-2:#EFE7D8; --ink:#1D2240; --muted:#6A6577; --line:#DED4C1;
@@ -39,13 +39,13 @@ img{max-width:100%}
   --gutter-l:max(16px, env(safe-area-inset-left,0px)); --gutter-r:max(16px, env(safe-area-inset-right,0px));
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --tilefilter:sepia(.15) hue-rotate(-8deg) brightness(1.05);
+  --tilefilter:invert(1) hue-rotate(180deg) sepia(.25) saturate(.6) brightness(.82) contrast(.95);
   --navy:#0B0E1E; --navy-2:#161A33; --navy-line:#2A3052; --on-navy:#ECE6D8; --on-navy-muted:#8E93B3;
   --red:#D2483F; --red-ink:#120E10; --gold:#C9A96A; --gold-soft:#8C7848; --salmon:#E9A99A; --salmon-ink:#121528;
   --bg:#121528; --surface:#1A1E36; --surface-2:#22274A; --ink:#ECE6D8; --muted:#9A9DB8; --line:#2E3458;
   --street:#2C3354; --block:#1A1E36; --park:#1E2E28; --water:#14253A; --label:#7F86AE; --route:#C9A96A;
   --ok:#7CC492; --warn:#E3B565; --focus:#E9A99A; --sky-op:.32; --gold-text:#C9A96A; --switch-on:#2B3266; --field:#121528; --field-ink:#ECE6D8; --field-hint:#9A9DB8; --field-line:var(--gold); color-scheme:dark }}
-:root[data-theme="dark"]{ --tilefilter:sepia(.15) hue-rotate(-8deg) brightness(1.05);
+:root[data-theme="dark"]{ --tilefilter:invert(1) hue-rotate(180deg) sepia(.25) saturate(.6) brightness(.82) contrast(.95);
   --navy:#0B0E1E; --navy-2:#161A33; --navy-line:#2A3052; --on-navy:#ECE6D8; --on-navy-muted:#8E93B3;
   --red:#D2483F; --red-ink:#120E10; --gold:#C9A96A; --gold-soft:#8C7848; --salmon:#E9A99A; --salmon-ink:#121528;
   --bg:#121528; --surface:#1A1E36; --surface-2:#22274A; --ink:#ECE6D8; --muted:#9A9DB8; --line:#2E3458;
@@ -444,7 +444,7 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
             <button id="zme" aria-label="Show where I am"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg></button>
           </div>
           <button type="button" class="nearchip" id="nearchip" hidden></button>
-          <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a></div>
+          <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></div>
         </div>
         <div class="mapnote">Red pins are numbered stops, salmon signs are pubs, the blue dot is you. Use two fingers to move the map. “Route in Google Maps” on any stop opens turn-by-turn directions.</div>
       </div>
@@ -535,11 +535,6 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
      <span><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → English, then choose a voice under English (UK).</span>
      <span><b>Mac:</b> System Settings → Accessibility → Spoken Content → System voice.</span>
     </div>
-   </div>
-   <div class="gitem">
-    <svg class="ic"><use href="#i-map"/></svg>
-    <div><b>Offline map</b><span class="st" id="offstatus">Save this walk's map for when there's no signal.</span></div>
-    <button class="btn small primary" id="offbtn">Save</button>
    </div>
   </div>
   <div class="sheetfoot">
@@ -1255,11 +1250,11 @@ if('ResizeObserver' in window){ let lastW=0; new ResizeObserver(()=>{ const r=sv
   svg.addEventListener('keydown',e=>{ const g=e.target.closest('.pin'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); selectStop(g.dataset.k); revealCard(); } });
 })();
 
-/* ---------- Street map tiles (CARTO basemaps from OpenStreetMap data) ---------- */
+/* ---------- Street map tiles (OpenStreetMap standard tiles; no key needed; attribution shown on the map) ---------- */
 const mapbox=$('#mapbox'), tileLayer=$('#tiles'), tileImgs=new Map();
 const darkNow=()=>{ const t=document.documentElement.dataset.theme; return t ? t==='dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
-const tileStyle=()=>darkNow()?'dark_all':'light_all';
-const tileURL=(z,x,y)=>`https://${'abcd'[(x+y)%4]}.basemaps.cartocdn.com/${tileStyle()}/${z}/${x}/${y}@2x.png`;
+const tileStyle=()=>'osm';   // one style; dark mode is a CSS tint of it
+const tileURL=(z,x,y)=>`https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
 let tileRAF=0;
 function renderMapTiles(){ if(tileRAF) return; tileRAF=requestAnimationFrame(()=>{ tileRAF=0; drawMapTiles(); }); }
 function drawMapTiles(){
@@ -1602,34 +1597,6 @@ $('#photoclear').onclick=async e=>{
 };
 
 /* ---------- Walk picker ---------- */
-
-/* ---------- Offline map: save this walk's tiles into the phone's cache ---------- */
-function walkTiles(){
-  // Zoom 14–17 for the whole walk; the most detailed zoom (18) only along the route and at the stops.
-  const xs=allPts.map(p=>P(p)[0]), ys=allPts.map(p=>P(p)[1]), pad=300, out=new Set();
-  for(let z=14;z<=17;z++){ const ts=256*2**(17-z);
-    for(let x=Math.floor((Math.min(...xs)-pad)/ts);x<=Math.floor((Math.max(...xs)+pad)/ts);x++)
-      for(let y=Math.floor((Math.min(...ys)-pad)/ts);y<=Math.floor((Math.max(...ys)+pad)/ts);y++) out.add(tileURL(z,x,y)); }
-  const ts=128, pts=[], r=walk.route.map(P);
-  for(let i=1;i<r.length;i++){ const [a,b]=[r[i-1],r[i]], n=Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/40)||1; for(let j=0;j<=n;j++) pts.push([a[0]+(b[0]-a[0])*j/n, a[1]+(b[1]-a[1])*j/n]); }
-  walk.stops.forEach(s=>pts.push(P([s.lat,s.lng])));
-  pts.forEach(([x,y])=>{ for(const dx of [-60,0,60]) for(const dy of [-60,0,60]) out.add(tileURL(18,Math.floor((x+dx)/ts),Math.floor((y+dy)/ts))); });
-  return [...out];
-}
-$('#offbtn').onclick=async()=>{
-  const btn=$('#offbtn'), st=$('#offstatus');
-  if(!('caches' in window)){ st.textContent="This browser can't save maps."; return; }
-  const list=walkTiles(); btn.disabled=true; let done=0, bad=0;
-  const cache=await caches.open('sw-tiles-v1');
-  for(const url of list){
-    try{ if(!(await cache.match(url))){ const r=await fetch(url,{mode:'no-cors'}); await cache.put(url,r); } }catch(e){ bad++; }
-    done++; if(done%10===0||done===list.length) st.textContent=`Saving map… ${done} of ${list.length}`;
-  }
-  btn.disabled=false; btn.textContent='Update';
-  st.textContent = bad ? `Saved ${list.length-bad} of ${list.length} map tiles. Try again with a better signal.` : `Map saved: ${list.length} tiles, ${darkNow()?'dark':'light'} style.`;
-  try{ localStorage.setItem('offmap-'+walk.id+'-'+tileStyle(),String(Date.now())); }catch(e){}
-};
-try{ if(localStorage.getItem('offmap-'+walk.id+'-'+tileStyle())){ $('#offstatus').textContent='Map saved for offline use.'; $('#offbtn').textContent='Update'; } }catch(e){}
 
 /* ---------- App shell for offline use ---------- */
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
