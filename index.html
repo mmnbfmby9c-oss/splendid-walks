@@ -149,7 +149,8 @@ a.coffee:hover{color:var(--ink)}
 .maptiles img{position:absolute;left:0;top:0;max-width:none;transform-origin:0 0;opacity:0;transition:opacity .25s;filter:var(--tilefilter)}
 .maptiles img.ok{opacity:1}
 .mapbox svg#mapsvg{position:relative}
-.mapbox.tiles-ok .sketch{display:none}
+#sketchsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.maptiles{z-index:0}
 #me .acc{fill:rgba(47,128,237,.14);stroke:rgba(47,128,237,.45);stroke-width:1;vector-effect:non-scaling-stroke}
 #me .halo{fill:#fff;opacity:.95}
 #me .core{fill:#2F80ED}
@@ -157,6 +158,8 @@ a.coffee:hover{color:var(--ink)}
 #zme.on svg{stroke:#2F80ED}
 #zme.busy svg{animation:pulse 1s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
+.tabwarn{position:fixed;left:0;right:0;top:0;z-index:60;margin:0;background:var(--red);color:#F3EEE3;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));box-shadow:0 2px 8px rgba(0,0,0,.25);font:.9rem/1.4 var(--body)}
+.tabwarn .linkbtn{color:#F3EEE3;text-decoration:underline;margin-left:6px}
 .nearchip{position:absolute;left:10px;top:10px;max-width:calc(100% - 70px);border:1px solid var(--gold);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 12px;font:600 .82rem var(--body);box-shadow:0 1px 4px rgba(15,18,40,.18);cursor:pointer;text-align:left}
 .nearchip.on{background:var(--switch-on);color:#F3EEE3}
 .attrib{position:absolute;right:6px;bottom:4px;font-size:.62rem;color:var(--muted);background:color-mix(in srgb,var(--surface) 75%,transparent);padding:1px 5px;border-radius:4px}
@@ -434,6 +437,7 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
     <div class="mapgrid">
       <div>
         <div class="mapbox" id="mapbox">
+          <svg id="sketchsvg" aria-hidden="true"></svg>
           <div class="maptiles" id="maptiles" aria-hidden="true"></div>
           <svg id="mapsvg" role="img" aria-label="Sketch map of the walk with numbered stops"></svg>
           <div class="maphint" id="maphint" aria-live="polite"></div>
@@ -463,6 +467,7 @@ body.has-now .toast{bottom:calc(170px + env(safe-area-inset-bottom,0px))}
 <div class="nowbar" id="nowbar" role="region" aria-label="Now playing" hidden></div>
 <nav class="stepbar" id="stepbar" aria-label="Step navigation" hidden></nav>
 
+<div class="tabwarn" id="tabwarn" hidden><b>You're in Safari, not the app.</b> Your guide text and photos are kept in the Splendid Walks app on your home screen. Open it from there. <button type="button" class="linkbtn" id="tabwarnx">OK</button></div>
 <div class="sheetwrap" id="walksheet" hidden>
  <div class="scrim" data-act="closewalks"></div>
  <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="walksheettitle">
@@ -1148,7 +1153,7 @@ function stopCard(k, opts={}){
         <div class="readtext" data-k="${esc(k)}">${textHTML(k)}</div>
         <button type="button" class="linkbtn mini" data-act="edittext" data-k="${esc(k)}">Edit text</button>
         <div class="editwrap" hidden><textarea id="${cx}-book-${esc(k)}" data-book="${esc(k)}" aria-label="Guide text for ${esc(s.name)}">${esc(bt)}</textarea><span class="saved" hidden>Saved</span></div>
-      </div>`:`<p class="gbnote">Add the guide text in Settings to hear the full story here.</p>`}
+      </div>`:`<p class="gbnote">No guide text on this device yet. <button type="button" class="linkbtn" data-act="loadbackup">Load your backup</button> or add the text in Settings.</p>`}
     </div>`; })()}
     ${(bphotos[k]||[]).length?`<div class="bphotos">${bphotos[k].map((im,ix)=>`<figure class="bph"><button class="bphbtn" data-act="bzoom" data-k="${esc(k)}" data-i="${ix}" aria-label="Enlarge guide photo"><img src="${im.src}" alt="Guide photo of ${esc(s.name)}"></button><figcaption><span>Guide photo${im.page?` · p.${im.page}`:''}</span><button class="rm" data-act="brm" data-k="${esc(k)}" data-i="${ix}">Remove</button></figcaption></figure>`).join('')}</div>`:''}
     ${step?`<div class="direction"><p class="t">${step.d?'<span class="detour">Short detour</span> ':''}<b>How to get there ·</b>${esc(step.t)}</p><a class="dirlink" href="${ri.url}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-route"/></svg><span>Route in Google Maps</span><small>${ri.n>1?`Steps ${ri.a}–${ri.b}`:'This stop'}</small><svg class="ic" style="stroke:var(--muted);width:14px;height:14px"><use href="#i-out"/></svg></a></div>`:''}
@@ -1159,6 +1164,7 @@ function stopCard(k, opts={}){
 /* ---------- Map ---------- */
 const svg=$('#mapsvg');
 const allPts = walk.route.concat(walk.stops.map(s=>[s.lat,s.lng]));
+const mapbox=document.getElementById('mapbox');
 /* Web Mercator, in pixels at zoom 17: the same grid map tiles use, so tiles and pins line up exactly. */
 const MW=256*2**17;
 const P = ([lat,lng]) => { const s=Math.sin(lat*Math.PI/180); return [ (lng+180)/360*MW, (0.5-Math.log((1+s)/(1-s))/(4*Math.PI))*MW ]; };
@@ -1175,12 +1181,12 @@ function computeFit(){
 computeFit(); vb={...fitBox};
 const upp = () => vb.w / (svg.getBoundingClientRect().width || 1);   // map units per screen pixel
 function setVB(){
-  svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`); $('#sketchsvg').setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
   const u=upp();
   // Pins and labels keep a fixed on-screen size (about 22px pins) at every zoom.
   svg.querySelectorAll('.pin').forEach(g=>{ const [x,y]=g.dataset.xy.split(',').map(Number); g.setAttribute('transform',`translate(${x} ${y}) scale(${u})`); });
-  svg.querySelectorAll('.slbl').forEach(t=>{ t.setAttribute('font-size',10*u); t.setAttribute('dy',-6*u); t.style.display = u>2.6 ? 'none' : ''; });
-  svg.querySelectorAll('.albl').forEach(t=>t.setAttribute('font-size',12*u));
+  mapbox.querySelectorAll('.slbl').forEach(t=>{ t.setAttribute('font-size',10*u); t.setAttribute('dy',-6*u); t.style.display = u>2.6 ? 'none' : ''; });
+  mapbox.querySelectorAll('.albl').forEach(t=>t.setAttribute('font-size',12*u));
   updateMe(); renderMapTiles();
 }
 function pts(arr){ return arr.map(p=>P(p).join(',')).join(' '); }
@@ -1193,6 +1199,7 @@ function drawMap(){
     h+=`<text x="${mx}" y="${my}" transform="rotate(${ang} ${mx} ${my})" class="slbl" text-anchor="middle" dy="-8" font-size="11" fill="var(--label)" font-family="var(--body)" letter-spacing=".5">${esc(n.toUpperCase())}</text>`; });
   AREAS.forEach(([t,n,poly])=>{ const c=poly.map(P); const cx=c.reduce((a,p)=>a+p[0],0)/c.length, cy=c.reduce((a,p)=>a+p[1],0)/c.length; h+=`<text x="${cx}" y="${cy}" class="albl" text-anchor="middle" font-size="13" font-style="italic" fill="var(--label)" font-family="var(--display)">${esc(n)}</text>`; });
   h+=`</g>`;
+  $('#sketchsvg').innerHTML=h; h='';
   h+=`<polyline points="${pts(walk.route)}" fill="none" stroke="var(--route)" stroke-width="3.5" vector-effect="non-scaling-stroke" stroke-dasharray="9 6" stroke-linecap="round" stroke-linejoin="round"/>`;
   walk.stops.forEach(s=>{ const [x,y]=P([s.lat,s.lng]);
     h+= s.pub
@@ -1267,7 +1274,7 @@ if('ResizeObserver' in window){ let lastW=0; new ResizeObserver(()=>{ const r=sv
 })();
 
 /* ---------- Street map tiles (OpenStreetMap standard tiles; no key needed; attribution shown on the map) ---------- */
-const mapbox=$('#mapbox'), tileLayer=$('#maptiles'), tileImgs=new Map();
+const tileLayer=$('#maptiles'), tileImgs=new Map();
 const darkNow=()=>{ const t=document.documentElement.dataset.theme; return t ? t==='dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
 const tileStyle=()=>'osm';   // one style; dark mode is a CSS tint of it
 const tileURL=(z,x,y)=>`https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
@@ -1468,6 +1475,7 @@ document.addEventListener('click',async e=>{
   else if(a==='stopaudio') stopSpeaking();
   else if(a==='gotoaudio'){ setView('map'); selectStop(k,true); revealCard(); }
   else if(a==='jumpdir'){ const box=b.closest('.card')?.querySelector('.direction'); if(box){ box.scrollIntoView({behavior:'smooth',block:'center'}); box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); } }
+  else if(a==='loadbackup'){ $('#backupfile').value=''; $('#backupfile').click(); }
   else if(a==='closewalks'){ closeWalks(); }
   else if(a==='gopart'){ const i=+b.dataset.i; closeWalks(); setView('map'); walkIdx=i; selectStop(walk.steps[i].to,true); window.scrollTo({top:0}); }
   else if(a==='readtoggle'){ const open=!openGuideText.has(k); open?openGuideText.add(k):openGuideText.delete(k);
@@ -1682,6 +1690,17 @@ async function bkApply(docs){
         $('#backupmsg').scrollIntoView({behavior:'smooth',block:'center'});
       }catch(err){ bkMsg(err && err.code==='quota_exceeded' ? "This device is out of storage space." : "Couldn't load the backup. Try again."); }
 }
+
+/* ---------- Opened in a Safari tab on an iPhone? Its storage is separate from the home-screen app's. ---------- */
+(function(){
+  const ios=/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  const standalone=navigator.standalone===true || matchMedia('(display-mode: standalone)').matches;
+  let seen=false; try{ seen=sessionStorage.getItem('tabwarn')==='1'; }catch(e){}
+  if(ios && !standalone && !seen) $('#tabwarn').hidden=false;
+  $('#tabwarnx').onclick=()=>{ $('#tabwarn').hidden=true; try{ sessionStorage.setItem('tabwarn','1'); }catch(e){} };
+})();
+/* The backup picker also works from the stop card; show the result where you are. */
+$('#backupfile').addEventListener('change',()=>{ if($('#guidesheet').hidden){ openGuide(); $('#backupform').hidden=false; syncPanelButtons(); } });
 
 /* ---------- App shell for offline use ---------- */
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
