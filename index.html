@@ -719,14 +719,80 @@ const WALKS = [{
   ],
   parts:[{from:0,title:"Mayfair and St James's",km:1.7},{from:22,title:"The Mall and Trafalgar Square",km:1.5},{from:35,title:"Whitehall to the river",km:1.6}],
   route:[[51.50693,-0.14288],[51.50716,-0.14175],[51.5074,-0.14105],[51.508,-0.14112],[51.5091,-0.14198],[51.5099,-0.1425],[51.5103,-0.1428],[51.5105,-0.14252],[51.5107,-0.14255],[51.51128,-0.14045],[51.5109,-0.1402],[51.51045,-0.13965],[51.5103,-0.1395],[51.5101,-0.14],[51.50998,-0.14042],[51.50815,-0.13958],[51.50805,-0.1394],[51.5083,-0.1384],[51.50815,-0.13895],[51.50776,-0.13879],[51.50715,-0.13965],[51.50698,-0.1394],[51.50639,-0.13897],[51.50587,-0.1385],[51.50573,-0.13832],[51.50562,-0.13818],[51.505,-0.1385],[51.5054,-0.1378],[51.50572,-0.13772],[51.5054,-0.1378],[51.50595,-0.136],[51.5054,-0.1373],[51.50365,-0.1368],[51.505,-0.13345],[51.5058,-0.13165],[51.5063,-0.1318],[51.5069,-0.1321],[51.50705,-0.1323],[51.5075,-0.1311],[51.50781,-0.13045],[51.50835,-0.12925],[51.50776,-0.12792],[51.5077,-0.12725],[51.50775,-0.128],[51.50735,-0.1288],[51.5068,-0.12866],[51.5064,-0.1292],[51.5068,-0.12866],[51.50734,-0.12765],[51.50617,-0.1269],[51.50628,-0.126],[51.5063,-0.12575],[51.50545,-0.12565],[51.50535,-0.12665],[51.50455,-0.12645],[51.50482,-0.1264],[51.50486,-0.126],[51.5048,-0.1243],[51.50505,-0.1237],[51.5064,-0.1234],[51.50678,-0.123],[51.507,-0.1236],[51.50765,-0.1248],[51.50737,-0.12518],[51.50765,-0.1248],[51.50761,-0.12473]]
+},{
+  id:2,
+  title:"A Tremendous Ramble from Charing Cross to Covent Garden", short:"Charing Cross to Covent Garden",
+  pages:"38–50", start:"Charing Cross station, top of Villiers Street", end:"The Salisbury, St Martin's Lane",
+  theme:"Riverside gardens, the Savoy, theatreland and Covent Garden",
+  gaps:[],
+  stops:[
+   {k:"1",name:"York Place (Formerly Of Alley)",page:38,lat:51.50854,lng:-0.12455,photo:42,tags:"Villiers Street alley street sign Duke of Buckingham George Villiers",note:"A tiny alley with a curious sign. The Duke of Buckingham wanted every word of his name in the local streets, right down to 'of'."},
+   {k:"2",name:"Gordon's Wine Bar",page:38,lat:51.50794,lng:-0.12331,photo:42,tags:"wine bar cellars Kipling Free Vintners Embankment",note:"Said to be London's oldest wine bar, in candlelit cellars that were once a riverside warehouse. Kipling lodged upstairs."},
+   {k:"3",name:"Old street sign",page:39,lat:51.50800,lng:-0.12318,tags:"sign before 1917",note:"A street sign from before 1917, still hanging next to the modern one."},
+   {k:"4",name:"York House Watergate",page:39,lat:51.50814,lng:-0.12289,photo:42,tags:"watergate 1626 Duke of Buckingham river Thames",note:"A 1620s gateway that once opened straight onto the Thames, before the Embankment pushed the river back."},
+   {k:"5",name:"Victoria Embankment Gardens",page:39,lat:51.50822,lng:-0.12180,tags:"gardens Bazalgette Great Stink sewers Robert Burns Imperial Camel Corps",note:"Gardens on land reclaimed when Bazalgette built the sewers after the Great Stink. Look for Robert Burns and the soldier on a camel."},
+   {k:"6",name:"Cleopatra's Needle",page:39,lat:51.50851,lng:-0.12031,photo:42,tags:"obelisk Egypt sphinxes time capsule shrapnel camel benches",note:"An Egyptian obelisk far older than Cleopatra, brought to London in 1878 after a deadly storm at sea. The sphinxes face the wrong way."},
+   {k:"7",name:"Carting Lane sewer gas lamp",page:42,lat:51.50972,lng:-0.12069,photo:42,tags:"lamp sewer gas Joseph Webb Farting Lane",note:"London's last sewer gas lamp, still burning 'residual bio-gas'. The author calls it Farting Lane."},
+   {k:"8",name:"Savoy Steps",page:42,lat:51.51036,lng:-0.11972,tags:"Bob Dylan Subterranean Homesick Blues video Savoy Hill chapel",note:"The dead end where Bob Dylan flipped his word cards for 'Subterranean Homesick Blues', one of the first pop videos."},
+   {k:"9",name:"The Savoy",page:42,lat:51.51055,lng:-0.12060,photo:49,tags:"hotel Kaspar cat 13 afternoon tea drive on the right taxi",note:"The grand hotel with Kaspar, a wooden cat who joins tables of 13, and the one street in Britain where traffic drives on the right."},
+   {k:"10",name:"Bull Inn Court",page:43,lat:51.51008,lng:-0.12251,tags:"alley Vaudeville Theatre ghost William Terriss Adelphi",note:"A narrow alley off the Strand, said to be haunted by a murdered actor from the Adelphi."},
+   {k:"nellgwynne",pub:true,name:"The Nell Gwynne",page:43,lat:51.51019,lng:-0.12279,tags:"pub tiny theatrical Bull Inn Court",note:"A tiny, characterful pub named after Charles II's favourite. Mind the steep steps down to the loo."},
+   {k:"11",name:"Rules",page:43,lat:51.51083,lng:-0.12317,tags:"restaurant oldest 1798 game Downton Abbey Edward VII Lillie Langtry Maiden Lane",note:"London's oldest restaurant (1798): game birds, film crews, and Edward VII's secret door for Lillie Langtry."},
+   {k:"12",name:"St Paul's Church (the Actors' Church)",page:44,lat:51.51160,lng:-0.12350,photo:49,tags:"church Inigo Jones street performers piazza Punch and Judy My Fair Lady",note:"Inigo Jones's Actors' Church. Its blocked-up front is the backdrop to the famous street-performer pitch."},
+   {k:"13",name:"Russell House (43 King Street)",page:44,lat:51.51213,lng:-0.12393,photo:49,tags:"oldest building 1716 Middle Earth Club Bowie Marc Bolan T-Rex",note:"The oldest building in Covent Garden (1716). In the 1960s its club hosted Bowie, Pink Floyd and T-Rex."},
+   {k:"14",name:"Night watchman's hut",page:44,lat:51.51160,lng:-0.12425,photo:49,tags:"churchyard blue hut grave robbers resurrection men John Thaw bench",note:"The little blue hut where a watchman guarded the graves from body snatchers."},
+   {k:"15",name:"4 Henrietta Street",page:45,lat:51.51127,lng:-0.12301,tags:"Lawrence of Arabia RAF Biggles W E Johns Jane Austen market sandwich",note:"Where Lawrence of Arabia tried to join the RAF under a false name and was turned away by the author of Biggles."},
+   {k:"16",name:"Theatre Royal Drury Lane",page:46,lat:51.51285,lng:-0.12037,tags:"theatre steal my thunder John Dennis Nell Gwynne Charles II",note:"Where 'steal my thunder' was born. Charles II waited for Nell Gwynne in the pub across the road."},
+   {k:"nellolddrury",pub:true,name:"The Nell of Old Drury",page:46,lat:51.51261,lng:-0.12059,tags:"pub tunnel Nell Gwynne Catherine Street",note:"The small pub opposite the theatre, linked by legend to Nell Gwynne's secret tunnel."},
+   {k:"17",name:"Royal Opera House",page:46,lat:51.51292,lng:-0.12205,photo:49,tags:"opera ballet balcony limelight Macready Margot Fonteyn",note:"Home of the Royal Ballet and Opera, with a public balcony over the piazza. The origin of 'in the limelight'."},
+   {k:"18",name:"Bow Street Magistrates' Court",page:46,lat:51.51339,lng:-0.12179,tags:"court Henry Fielding Bow Street Runners bobbies Peelers police museum",note:"The old court where Henry Fielding founded the Bow Street Runners. Now a hotel with a small police museum."},
+   {k:"lambflag",pub:true,name:"The Lamb & Flag",page:49,lat:51.51173,lng:-0.12568,photo:49,tags:"pub oldest Rose Street Bucket of Blood Dryden Earl of Rochester",note:"One of London's oldest pubs, once known for bare-knuckle fights. The poet Dryden was beaten up in the alley outside."},
+   {k:"19",name:"Garrick Club",page:49,lat:51.51143,lng:-0.12634,tags:"club actors David Garrick Winnie-the-Pooh A A Milne",note:"The actors' club founded in 1831, made rich by Winnie-the-Pooh."},
+   {k:"20",name:"Goodwin's Court",page:49,lat:51.51095,lng:-0.12642,tags:"alley bow windows gas lamps Mary Poppins Harry Potter",note:"A 17th-century passage of bow windows and gas lamps, much loved by film crews."},
+   {k:"salisbury",pub:true,name:"The Salisbury",page:49,lat:51.51093,lng:-0.12724,tags:"pub Victorian St Martin's Lane Sean Connery finish",note:"An unspoilt Victorian pub where a young Sean Connery used to drink. The finish line."},
+   {k:"foggs",pub:true,name:"Mr Fogg's Tavern",page:50,lat:51.51100,lng:-0.12689,tags:"pub tavern St Martin's Lane sing-along",note:"The quirky tavern across the lane: the other way to finish."}
+  ],
+  steps:[
+   {to:"1",t:"Start on the Strand outside Charing Cross station and turn down Villiers Street, the street on the station's east side that slopes down towards the river. About 50 metres down, on your left, is a tiny alley whose sign reads 'York Place, formerly Of Alley'."},
+   {to:"2",t:"Carry on down Villiers Street about 110 metres, almost to Embankment station. Gordon's Wine Bar is on your left, through a narrow doorway with steps down to its cellars."},
+   {to:"3",t:"Before you go down, look at the street signs on the wall by Gordon's: next to the modern sign is an older one from before 1917."},
+   {to:"4",t:"Go down the steps beside Gordon's and through its outdoor seating. On your right is an opening into the gardens: the carved stone gateway in front of you is York House Watergate."},
+   {to:"5",t:"Walk east into the gardens along the main path, about 80 metres. Look out for the statue of Robert Burns and, further on, the soldier on a camel."},
+   {to:"6",t:"Continue to the far (east) end of the gardens, then cross the Embankment road at the lights to the river side. Cleopatra's Needle is the tall stone obelisk between two bronze sphinxes. You'll cross back afterwards.",d:1},
+   {to:"7",t:"Cross back over the Embankment to the east end of the gardens. Carting Lane is the narrow lane heading uphill beside the Savoy, about 100 metres from the Needle. A few steps up, on your left, is a tall, thick-shafted lamppost: the sewer gas lamp."},
+   {to:"8",t:"Keep going up Carting Lane and turn right into Savoy Way, a short lane leading to Savoy Hill, about 100 metres in all. At the end is the little Savoy Chapel, and beside it the dead end called Savoy Steps."},
+   {to:"9",t:"Turn left at the end of Savoy Hill up to the Strand, then left along the Strand, about 100 metres. The Savoy is set back on your left, at the end of Savoy Court, the short street with the hotel's famous steel sign over the entrance."},
+   {to:"10",t:"Cross the Strand and walk west, towards Trafalgar Square, about 140 metres. Just past the Vaudeville Theatre, turn right into Bull Inn Court, a narrow alley."},
+   {to:"nellgwynne",t:"The Nell Gwynne is a few steps up the alley, on your left."},
+   {to:"11",t:"Carry on up the alley to Maiden Lane. Rules, at number 35, is just to your left."},
+   {to:"12",t:"Walk east along Maiden Lane, back past the alley, to the end (about 100 metres) and turn left up Southampton Street. At the top, cross into the piazza and head left to its far (west) side. The columned front of St Paul's Church, with the street performers below it, is in front of you."},
+   {to:"13",t:"Go round to the right-hand corner of the piazza and into King Street. Russell House, number 43, is the tall brick house on the corner."},
+   {to:"14",t:"Walk west along King Street, about 60 metres. Just before number 9, go through the gate on your left into the churchyard garden. The little blue watchman's hut is inside."},
+   {to:"15",t:"Leave the churchyard by the gate on the opposite side and turn left into Henrietta Street. Walk about 90 metres; number 4 is near the piazza end."},
+   {to:"16",t:"Go through the covered market to its far (east) side and carry on along Russell Street, about 250 metres. The Theatre Royal Drury Lane is the big columned theatre where Russell Street meets Catherine Street. You'll come back this way.",d:1},
+   {to:"nellolddrury",t:"The Nell of Old Drury is the small pub right across Catherine Street from the theatre."},
+   {to:"17",t:"Walk back along Russell Street towards the market, about 100 metres, and turn right up Bow Street. The Royal Opera House, with its tall columns, is on your left."},
+   {to:"18",t:"Look across Bow Street from the Opera House: the old magistrates' court is the stone building opposite, now a hotel with a small police museum.",v:1},
+   {to:"lambflag",t:"Turn left into Floral Street, which runs past the side of the Opera House, and follow it about 300 metres. Just before the end, turn left into Rose Alley; the Lamb & Flag is a few steps along. You'll come back out onto Floral Street.",d:1},
+   {to:"19",t:"Back on Floral Street, carry on to the end, where it meets Garrick Street. The Garrick Club is the grand building just to your left."},
+   {to:"20",t:"Walk down Garrick Street, turn right into New Row, then left into Bedfordbury, about 120 metres in all. Goodwin's Court is the narrow passage on your right, with old bow windows and gas lamps."},
+   {to:"salisbury",t:"Walk through Goodwin's Court to St Martin's Lane. The Salisbury is just across the road."},
+   {to:"foggs",t:"Or finish at Mr Fogg's Tavern, on the same side of St Martin's Lane as Goodwin's Court, a few doors along."}
+  ],
+  parts:[{from:0,title:"The river and the Savoy",km:1.0},{from:9,title:"Maiden Lane and the piazza",km:0.7},{from:16,title:"Drury Lane to St Martin's Lane",km:1.1}],
+  route:[[51.50890,-0.12500],[51.50854,-0.12455],[51.50800,-0.12345],[51.50795,-0.12318],[51.50806,-0.12293],[51.50822,-0.12180],[51.50850,-0.12090],[51.50835,-0.12050],[51.50851,-0.12031],[51.50865,-0.12060],[51.50930,-0.12090],[51.50972,-0.12069],[51.50995,-0.12060],[51.51005,-0.11995],[51.51036,-0.11972],[51.51060,-0.11960],[51.51135,-0.11960],[51.51090,-0.12070],[51.51055,-0.12060],[51.51090,-0.12070],[51.51008,-0.12251],[51.51019,-0.12265],[51.51060,-0.12285],[51.51080,-0.12317],[51.51060,-0.12285],[51.51043,-0.12215],[51.51110,-0.12240],[51.51150,-0.12265],[51.51160,-0.12340],[51.51205,-0.12360],[51.51210,-0.12390],[51.51195,-0.12455],[51.51165,-0.12440],[51.51160,-0.12425],[51.51125,-0.12430],[51.51127,-0.12301],[51.51165,-0.12250],[51.51200,-0.12170],[51.51230,-0.12120],[51.51280,-0.12045],[51.51261,-0.12059],[51.51230,-0.12120],[51.51245,-0.12185],[51.51292,-0.12205],[51.51330,-0.12218],[51.51177,-0.12601],[51.51168,-0.12595],[51.51173,-0.12568],[51.51168,-0.12595],[51.51177,-0.12601],[51.51172,-0.12630],[51.51143,-0.12634],[51.51125,-0.12645],[51.51118,-0.12660],[51.51095,-0.12650],[51.51097,-0.12695],[51.51093,-0.12724],[51.51100,-0.12689]]
 }];
-const COMING = 19;
+const COMING = 20 - WALKS.length;
 /* Coffee: a quiet line on the few stops where good cafés cluster (4.5+ on Google when checked, Nov 2026). Links open live Google Maps. */
 const COFFEE = {1:{
   "13":{t:"Good coffee right here", at:[51.5082,-0.1388]},
   "30":{t:"Good coffee nearby", at:[51.5079,-0.1328]},
   "34":{t:"Last good coffee before Whitehall", at:[51.5095,-0.1276]},
   "45":{t:"Good coffee right here", at:[51.5070,-0.1229]}
+}, 2:{
+  "1":{t:"Good coffee right here", at:[51.50847,-0.12472]},
+  "11":{t:"Good coffee just ahead", at:[51.51110,-0.12244]},
+  "19":{t:"Good coffee just ahead", at:[51.51116,-0.12652]}
 }};
 const coffeeFor = k => (COFFEE[walk.id]||{})[k];
 
@@ -764,11 +830,33 @@ const STREETS = [
  ["Craven St",[[51.5083,-0.1259],[51.5070,-0.1235]]],
  ["Strand",[[51.5081,-0.1268],[51.5087,-0.1253],[51.5105,-0.1215]],3],
  ["Victoria Embankment",[[51.5010,-0.1236],[51.5049,-0.1231],[51.5075,-0.1221],[51.5095,-0.1196]],3],
- ["Horse Guards Rd",[[51.5062,-0.1296],[51.5020,-0.1293]]]
+ ["Horse Guards Rd",[[51.5062,-0.1296],[51.5020,-0.1293]]],
+ ["Villiers St",[[51.5089,-0.1250],[51.5081,-0.1240],[51.5076,-0.1232]]],
+ ["Carting Ln",[[51.5086,-0.1206],[51.5103,-0.1203]],1],
+ ["Savoy Way",[[51.5100,-0.1203],[51.5101,-0.1197]],1],
+ ["Savoy Hill",[[51.5101,-0.1197],[51.5114,-0.1194]],1],
+ ["Savoy Ct",[[51.5110,-0.1207],[51.5105,-0.1206]],1],
+ ["Bull Inn Ct",[[51.5101,-0.1225],[51.5106,-0.1228]],1],
+ ["Maiden Ln",[[51.5108,-0.1235],[51.5104,-0.1222]]],
+ ["Southampton St",[[51.5104,-0.1222],[51.5115,-0.1226]]],
+ ["Henrietta St",[[51.5112,-0.1243],[51.5113,-0.1230]]],
+ ["King St",[[51.5120,-0.1250],[51.5121,-0.1236]]],
+ ["Russell St",[[51.5116,-0.1225],[51.5128,-0.1204]]],
+ ["Catherine St",[[51.5135,-0.1205],[51.5115,-0.1195]]],
+ ["Bow St",[[51.5125,-0.1215],[51.5140,-0.1220]]],
+ ["Floral St",[[51.5133,-0.1222],[51.5124,-0.1240],[51.5118,-0.1260],[51.5116,-0.1264]]],
+ ["Rose St",[[51.5118,-0.1260],[51.5117,-0.1257]],1],
+ ["Garrick St",[[51.5116,-0.1264],[51.5111,-0.1264],[51.5106,-0.1258]]],
+ ["New Row",[[51.5110,-0.1263],[51.5112,-0.1268]],1],
+ ["Bedfordbury",[[51.5112,-0.1268],[51.5096,-0.1264]],1],
+ ["Goodwin's Ct",[[51.5110,-0.1264],[51.5110,-0.1270]],1],
+ ["St Martin's Ln",[[51.5096,-0.1270],[51.5125,-0.1275]],3],
+ ["Covent Garden Piazza",[[51.5116,-0.1234],[51.5121,-0.1224]],1]
 ];
 const AREAS = [
  ["park","Green Park",[[51.5069,-0.1430],[51.5070,-0.1414],[51.5032,-0.1405],[51.5016,-0.1412],[51.5040,-0.1475],[51.5058,-0.1452]]],
  ["park","St James's Park",[[51.5034,-0.1366],[51.5047,-0.1334],[51.5056,-0.1316],[51.5061,-0.1297],[51.5020,-0.1295],[51.5010,-0.1340],[51.5014,-0.1410]]],
+ ["park","Victoria Embankment Gdns",[[51.5079,-0.1235],[51.5087,-0.1205],[51.5084,-0.1203],[51.5077,-0.1232]]],
  ["park","Whitehall Gdns",[[51.5050,-0.1239],[51.5068,-0.1236],[51.5066,-0.1228],[51.5050,-0.1232]]],
  ["water","River Thames",[[51.5010,-0.1229],[51.5049,-0.1224],[51.5075,-0.1213],[51.5100,-0.1185],[51.5100,-0.1150],[51.5010,-0.1150]]]
 ];
@@ -782,7 +870,7 @@ const store = {
 };
 function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
 
-let walk = WALKS[0];
+let walk = WALKS.find(w=>w.id===store.get('walkid',1)) || WALKS[0];
 let view = 'map';
 let selected = store.get('sel:'+walk.id, "1");
 let walkIdx = store.get('walkstep:'+walk.id, 0);
@@ -796,7 +884,7 @@ const label = s => s.pub ? 'P' : s.k;
 let db=null, user=null, uid=null;
 
 /* ---------- Book text (private to the signed-in viewer) ---------- */
-let book = store.get('book:w'+1, {});   // {stopKey: text}
+let book = store.get('book:w'+walk.id, {});   // {stopKey: text}
 const bookRef = () => (db && uid) ? db.doc(`data/users/${uid}/book-w${walk.id}`) : null;
 function loadBook(){
   const ref=bookRef(); if(!ref){ renderAll(); return; }
@@ -832,7 +920,7 @@ async function loadProgress(){
 }
 
 /* ---------- Book photos (private to the signed-in viewer) ---------- */
-const BOOK_PHOTO_PAGES = {1:{22:["2","6","13","16","18","19"],25:["22","23","26","32","33","35"],32:["36","36","37","43","sherlock","ship"]}};
+const BOOK_PHOTO_PAGES = {1:{22:["2","6","13","16","18","19"],25:["22","23","26","32","33","35"],32:["36","36","37","43","sherlock","ship"]},2:{42:["1","2","4","6","6","7"],49:["9","12","13","14","17","lambflag"]}};
 let bphotos = {};   // {stopKey: [{src, page}]}
 const photoDocId = k => `bphoto-w${walk.id}-${k}`;
 function loadPhotos(){
@@ -911,6 +999,12 @@ const BOOK_MARKS = {1:{
  "37":"KING CHARLES I","38":"CHARING CROSS STATION","clarence":"Clarence","39":"GREAT SCOTLAND YARD",
  "40":"BANQUETING HOUSE","41":"HOUSEHOLD CAVALRY MUSEUM","42":"DUKE OF DEVONSHIRE","43":"MINISTRY OF DEFENCE",
  "44":"WHITEHALL GARDENS","45":"CABMEN'S SHELTER","sherlock":"Sherlock Holmes","ship":"Ship and Shovell"
+}, 2:{
+ "1":"YORK PLACE","2":"GORDON'S WINE BAR","3":"OLD STREET SIGN","4":"YORK HOUSE WATERGATE","5":"VICTORIA EMBANKMENT GARDENS",
+ "6":"CLEOPATRA'S NEEDLE","7":"CARTING LANE","8":"SAVOY STEPS","9":"SAVOY HOTEL","10":"BULL INN COURT","nellgwynne":"Nell Gwynne",
+ "11":"RULES","12":"ST PAUL'S CHURCH","13":"RUSSELL HOUSE","14":"NIGHT WATCHMAN'S HUT","15":"4 HENRIETTA STREET",
+ "16":"THE THEATRE ROYAL DRURY LANE","nellolddrury":"Nell of Old Drury","17":"ROYAL OPERA HOUSE","18":"BOW STREET MAGISTRATES",
+ "lambflag":"Lamb and Flag","19":"GARRICK CLUB","20":"GOODWIN'S COURT","salisbury":"The Salisbury","foggs":"Mr Fogg's"
 }};
 const DIR_START = /^(Turn|Now|Walk|Head|Continue|Cross|Keep|Soon|Next|Just|Still|A little|At the|On your|Right opposite|Down at|Back|You|This is|Okay|Gosh|Up the|Further|Carry|Go|Quite near)\b/;
 
@@ -943,7 +1037,7 @@ function splitBook(raw, order, marks){
       const pi = sentList.indexOf(b); if (pi <= 0) break;
       const pb = sentList[pi - 1], prev = norm.slice(pb, b).trim();
       if (pb <= found[keys[idx - 1]]) break;
-      if (prev.length < 170 && DIR_START.test(prev)) b = pb; else break;
+      if (prev.length < 170 && DIR_START.test(prev) && (!/^(This is|You)\b/.test(prev) || /\b(left|right|opposite|across|ahead|corner|turn|walk|cross|here|along)\b/i.test(prev))) b = pb; else break;
     }
     return b;
   });
@@ -1397,8 +1491,8 @@ function renderSteps(){
 function renderBanner(){ const pt=partOf(walkIdx); $('#bkick').textContent=`Walk ${walk.id} · Part ${pt.n} of ${pt.total}`; $('#btitle').textContent=pt.title; $('#banner').setAttribute('aria-label',`Walk ${walk.id}, part ${pt.n} of ${pt.total}: ${pt.title}. Choose a walk or part`); }
 function renderWalkList(){ const cur=partOf(walkIdx).n;
   $('#walklist').innerHTML=WALKS.map(w=>`<div class="wk"><b>Walk ${w.id} · ${esc(w.short||w.title)}</b><small>${w.stops.filter(s=>!s.pub).length} stops and ${w.stops.filter(s=>s.pub).length} pubs · about ${(w.parts||[]).reduce((a,p)=>a+(p.km||0),0).toFixed(1)} km</small>
-    ${(w.parts||[]).map((p,ix)=>{ const pp=partOf(p.from); return `<button type="button" class="pt ${w.id===walk.id&&ix+1===cur?'on':''}" data-act="gopart" data-i="${p.from}"><span class="n">Part ${ix+1}</span><i>${esc(p.title)}</i><span class="m">${p.km} km · ${partMinutes(pp)} min</span></button>`; }).join('')}</div>`).join('')
-    + `<div class="soon">Walks 2–20 coming as you add each chapter.</div>`; }
+    ${(w.parts||[]).map((p,ix)=>{ const here=w.id===walk.id; const mins=here?partMinutes(partOf(p.from)):Math.round((p.km*13+((w.parts[ix+1]?w.parts[ix+1].from:w.steps.length)-p.from)*2)/5)*5; return `<button type="button" class="pt ${here&&ix+1===cur?'on':''}" data-act="gopart" data-w="${w.id}" data-i="${p.from}"><span class="n">Part ${ix+1}</span><i>${esc(p.title)}</i><span class="m">${p.km} km · ${here?'':'about '}${mins} min</span></button>`; }).join('')}</div>`).join('')
+    + (COMING>0?`<div class="soon">Walks ${WALKS.length+1}–20 coming as you add each chapter.</div>`:''); }
 function openWalks(){ renderWalkList(); $('#walksheet').hidden=false; document.body.style.overflow='hidden'; setTimeout(()=>{ const on=document.querySelector('#walklist .pt.on'); (on||document.querySelector('#walklist .pt'))?.focus(); },50); }
 function closeWalks(){ $('#walksheet').hidden=true; document.body.style.overflow=''; $('#banner').focus(); }
 function renderNav(){
@@ -1477,7 +1571,7 @@ document.addEventListener('click',async e=>{
   else if(a==='jumpdir'){ const box=b.closest('.card')?.querySelector('.direction'); if(box){ box.scrollIntoView({behavior:'smooth',block:'center'}); box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); } }
   else if(a==='loadbackup'){ $('#backupfile').value=''; $('#backupfile').click(); }
   else if(a==='closewalks'){ closeWalks(); }
-  else if(a==='gopart'){ const i=+b.dataset.i; closeWalks(); setView('map'); walkIdx=i; selectStop(walk.steps[i].to,true); window.scrollTo({top:0}); }
+  else if(a==='gopart'){ const i=+b.dataset.i, wid=+(b.dataset.w||walk.id); if(wid!==walk.id){ store.set('walkid',wid); store.set('walkstep:'+wid,i); store.set('sel:'+wid,WALKS.find(w=>w.id===wid).steps[i].to); store.set('progat:'+wid,Date.now()); store.set('view','map'); history.replaceState(null,'','#map'); location.reload(); return; } closeWalks(); setView('map'); walkIdx=i; selectStop(walk.steps[i].to,true); window.scrollTo({top:0}); }
   else if(a==='readtoggle'){ const open=!openGuideText.has(k); open?openGuideText.add(k):openGuideText.delete(k);
     const box=b.closest('.audiobox'); const body=box&&box.querySelector('.gbbody'); if(body){ body.hidden=!open; if(open){ const sp=body.querySelector('span.now'); if(sp) sp.scrollIntoView({block:'center'}); } }
     b.setAttribute('aria-expanded',open); b.textContent=readBtnHTML(open); }
