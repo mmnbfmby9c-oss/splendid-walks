@@ -1,7 +1,8 @@
 /* Splendid London Walks: keeps the app, and map tiles you've already looked at, available offline. */
-const APP = 'sw-app-v2';
+const APP = 'sw-app-v3';
 const TILES = 'sw-osm-v1';      // OpenStreetMap tiles you've viewed
 const TILEMETA = 'sw-osm-meta-v1';
+// Bump APP when the shell list changes; the page itself refreshes in the background on every open.
 const WEEK = 7 * 24 * 3600 * 1000;
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest',
@@ -45,8 +46,16 @@ self.addEventListener('fetch', e => {
   if (url.hostname === 'tile.openstreetmap.org') { e.respondWith(tile(req)); return; }
   if (url.origin !== location.origin) return;
   if (req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('index.html')) {
-    e.respondWith(fetch(req).then(r => { const copy = r.clone(); caches.open(APP).then(c => c.put('index.html', copy)); return r; })
-      .catch(() => caches.match('index.html')));
+    // The app page: open instantly from the phone's saved copy, and fetch any update in the background
+    // (it's used next time). Only wait for the network if there's no saved copy, and never more than 8 seconds.
+    e.respondWith((async () => {
+      const cache = await caches.open(APP);
+      const saved = await cache.match('index.html');
+      const update = fetch(req, { cache: 'no-cache' }).then(r => { if (r.ok) cache.put('index.html', r.clone()); return r; });
+      if (saved) { e.waitUntil(update.catch(() => {})); return saved; }
+      try { return await Promise.race([update, new Promise((_, rej) => setTimeout(() => rej(new Error('slow')), 8000))]); }
+      catch (err) { return (await cache.match('index.html')) || new Response('Offline and not saved yet. Open the app once with a connection.', { status: 503, headers: { 'Content-Type': 'text/plain' } }); }
+    })());
     return;
   }
   e.respondWith(caches.match(req).then(hit => hit || fetch(req)));
