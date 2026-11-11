@@ -942,7 +942,11 @@ function savePhotos(k){
 /* Find the photo rectangles on a book photo page. Input: RGBA pixels (downscaled). Output: boxes in those pixels, reading order. */
 function detectPhotoBoxes(px, w, h){
   const N=w*h, mask=new Uint8Array(N);
-  for(let i=0;i<N;i++){ const r=px[i*4],g=px[i*4+1],b=px[i*4+2]; mask[i] = Math.min(r,g,b) < 242 ? 1 : 0; }
+  // Page colour = the commonest colour (white or sepia Kindle themes); anything clearly different is ink or photo.
+  const hist=new Map(); for(let i=0;i<N;i+=7){ const key=(px[i*4]>>3)<<10|(px[i*4+1]>>3)<<5|(px[i*4+2]>>3); hist.set(key,(hist.get(key)||0)+1); }
+  let bk=0,bn=-1; hist.forEach((n,k)=>{ if(n>bn){bn=n;bk=k;} });
+  const br=((bk>>10)&31)*8+4, bg=((bk>>5)&31)*8+4, bb=(bk&31)*8+4;
+  for(let i=0;i<N;i++){ const r=px[i*4],g=px[i*4+1],b=px[i*4+2]; mask[i] = (Math.min(r,g,b) < 242 && Math.max(Math.abs(r-br),Math.abs(g-bg),Math.abs(b-bb)) > 14) ? 1 : 0; }  // white panels behind photos count as page too
   const dil=mask;
   const seen=new Uint8Array(N), boxes=[], raw=[], stack=new Int32Array(N);
   for(let s=0;s<N;s++){ if(!dil[s]||seen[s]) continue;
