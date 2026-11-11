@@ -1728,9 +1728,10 @@ $('#photoclear').onclick=async e=>{
 /* ---------- Backup: move guide text, photos and your place between devices (a file that stays on your own devices) ---------- */
 const BK_APP='splendid-london-walks';
 const bkMsg=t=>{ $('#backupmsg').textContent=t||''; };
-function bkSummary(docs){ const ids=Object.keys(docs); const book=ids.filter(i=>/^book-w\d+$/.test(i)).reduce((a,i)=>a+Object.keys((docs[i]&&docs[i].sections)||{}).length,0);
-  const ph=ids.filter(i=>/^bphoto-w/.test(i)).length; const pr=ids.find(i=>/^progress-w/.test(i));
-  return `guide text for ${book} stop${book===1?'':'s'}, photos for ${ph} stop${ph===1?'':'s'}${pr?`, and your place (step ${(docs[pr].idx||0)+1})`:''}`; }
+function bkSummary(docs){ const ids=Object.keys(docs);
+  const parts=WALKS.map(w=>{ const t=Object.keys((docs['book-w'+w.id]&&docs['book-w'+w.id].sections)||{}).length, ph=ids.filter(i=>i.startsWith('bphoto-w'+w.id+'-')).length;
+    return (t||ph) ? `Walk ${w.id}: text for ${t} stop${t===1?'':'s'}, photos for ${ph}` : `Walk ${w.id}: nothing`; });
+  return parts.join(' · '); }
 $('#backupbtn').onclick=()=>{ const f=$('#backupform'); f.hidden=!f.hidden; if(!f.hidden){ $('#bookform').hidden=true; $('#photoform').hidden=true; $('#voiceform').hidden=true; bkMsg(''); $('#backupconfirm').hidden=true; } syncPanelButtons(); };
 $('#backupsave').onclick=async()=>{
   if(!db||!uid){ bkMsg("This browser can't store data, so there's nothing to back up."); return; }
