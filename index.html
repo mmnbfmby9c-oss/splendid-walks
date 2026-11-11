@@ -1696,7 +1696,7 @@ $('#photopage').onchange=()=>{ pending.forEach(t=>delete t.stop); renderTiles();
 $('#photofile').addEventListener('change',async e=>{
   const f=e.target.files[0]; e.target.value=''; if(!f) return;
   $('#photomsg').textContent='Finding the pictures…'; pending=[]; renderTiles();
-  try{ pending=await cutPhotos(f); }catch(err){ pending=[]; }
+  try{ pending=await cutPhotos(f); }catch(err){ pending=[]; $('#photomsg').textContent="Couldn't open that picture. If it's stored in iCloud, it may not have downloaded: open it in Photos or Files first (wait for it to download fully), then try again."; return; }
   if(!pending.length){ $('#photomsg').textContent="Couldn't find any pictures in that screenshot. Use a screenshot of one of the guide's photo pages."; return; }
   $('#photomsg').textContent=`Found ${pending.length} picture${pending.length>1?'s':''}. Check each one is matched to the right stop, then tap Add to stops.`;
   renderTiles();
